@@ -4,30 +4,60 @@ import 'package:flutter/material.dart';
 abstract class TextStyles{
 
   static const TextStyle titleInformation = TextStyle(
-    fontFamily: 'TypoRound',
+    fontFamily: 'SimplyRounded',
     fontSize: 16,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w300,
     color: ThemeColors.middleDarkGray
   );
 
   static const TextStyle titleData = TextStyle(
-    fontFamily: 'TypoRound',
-    fontSize: 20,
+    fontFamily: 'SimplyRounded',
+    fontSize: 25,
     fontWeight: FontWeight.w700,
     color: ThemeColors.darkGray
   );
 
   static const TextStyle principalContainerTitle = TextStyle(
-    fontFamily: 'TypoRound',
+    fontFamily: 'SimplyRounded',
     fontSize: 15,
     fontWeight: FontWeight.w700,
     color: Colors.white
   );
 
   static const TextStyle bodySubtitle = TextStyle(
-    fontFamily: 'TypoRound',
+    fontFamily: 'SimplyRounded',
     fontSize: 18,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
     color: ThemeColors.darkGray
+  );
+
+  static const TextStyle categoryTitle = TextStyle(
+    fontFamily: 'SimplyRounded',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: ThemeColors.containerWhite
+  );
+
+  static const TextStyle categorySubtitle = TextStyle(
+    fontFamily: 'SimplyRounded',
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: ThemeColors.containersGray
+  );
+
+
+  // Pet list styles
+  static const TextStyle petTitleList = TextStyle(
+    fontFamily: 'SimplyRounded',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: ThemeColors.black
+  );
+
+  static const TextStyle petSubtitleList = TextStyle(
+    fontFamily: 'SimplyRounded',
+    fontSize: 8,
+    fontWeight: FontWeight.w400,
+    color: ThemeColors.lightBlack
   );
 }
