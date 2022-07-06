@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:animals_adoption_flutter/utils/constants.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
+import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
+import 'package:animals_adoption_flutter/widgets/custom_category_container.dart';
+import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
 import 'package:flutter/material.dart';
 
 
@@ -28,12 +31,13 @@ class _HomePageState extends State<HomePage> {
     _categoriesController = PageController(
       initialPage: _currentPage, 
       viewportFraction: 1 / 3,
-    );
+    )..addListener(() {
+      _currentPage = _categoriesController!.page!.round();
+    });
     _petsController = PageController(
       initialPage: _currentPage, 
       viewportFraction: 1 / 3,
     );
-
     super.initState();
   }
 
@@ -86,17 +90,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     flex: 5,
-                    child: SizedBox(
-                      height: _size.height * 0.15,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text('Check all the pets available in our application', style: TextStyles.principalContainerTitle)
-                          ],
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text('Check all the pets available in our application', style: TextStyles.principalContainerTitle)
+                        ],
                       ),
                     ),
                   ),
@@ -121,59 +122,22 @@ class _HomePageState extends State<HomePage> {
               height: _size.height * 0.175,
               width: _size.width,
               child: PageView.builder(
+                scrollDirection: Axis.horizontal,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: categories.length,
                 controller: _categoriesController,
                 clipBehavior: Clip.none,
                 itemBuilder: (_, x){
                   
-                  final isSelected = _currentPage == x;
-                  final double widgetScale = isSelected  ? 1.10 : 0.85;
-
-                  return GestureDetector(
-                    onTap: () => _onPageChange(x),
-                    child: AnimatedScale(
-                      scale: widgetScale,
-                      duration: const Duration(milliseconds: 250),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        transform: Matrix4.identity()..translate(
-                          0,
-                          isSelected ? 0 : 35
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: ThemeColors.gradients[x].map((e) => e.withOpacity(0.35)).toList(),
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomRight
-                          ),
-                          borderRadius: BorderRadius.circular(25)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 20, right: 15, left: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(categories[x].name, style: TextStyles.categoryTitle),
-                              Text(categories[x].description, style: TextStyles.categorySubtitle),
-                              const Spacer(),
-                              Expanded(
-                                flex: 5,
-                                child: Row(
-                                  children: [
-                                    const Spacer(),
-                                    Image.asset(
-                                      categories[x].imagePath, 
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                  final bool isSelected = _currentPage == x;
+                  final double containerScale = isSelected  ? 1.10 : 0.8;
+                  
+                  return CategoryContainer(
+                    onTapFunction: () => _onPageChange(x),
+                    backgroundColors: ThemeColors.gradients[x].map((e) => e.withOpacity(0.35)).toList(), 
+                    category: categories[x], 
+                    scale: containerScale, 
+                    isSelected: isSelected
                   );
                 },
               ),
@@ -193,42 +157,10 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (_, x){
                   
                   final Color containerColor = ThemeColors.containersBackground[Random().nextInt(ThemeColors.containersBackground.length - 1)].withOpacity(0.25);
-                  return GestureDetector(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20, right: 5, left: 5),
-                      child: SizedBox(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: containerColor,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(animals[x].name, textAlign: TextAlign.center, style: TextStyles.petTitleList),
-                                    Text('${animals[x].location} (${animals[x].distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.petSubtitleList),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Divider(color: containerColor),
-                            Expanded(
-                              flex: 3,
-                              child: Image.network(
-                                animals[x].imagePath, 
-                                fit: BoxFit.contain,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                  
+                  return CustomAnimalContainer(
+                    animal: animals[x], 
+                    backgroundColor: containerColor
                   );
                 },
               ),
@@ -236,75 +168,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Container(
-          height: _size.height * 0.1,
-          width: _size.width,
-          transform: Matrix4.identity()..translate(0, -_size.height * 0.025),
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(25)
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.home, color: ThemeColors.lightBlack, size: 30),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.account_circle_rounded, color: ThemeColors.lightBlack, size: 30),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.location_on_rounded, color: ThemeColors.lightBlack, size: 30),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.message_rounded, color: ThemeColors.lightBlack, size: 30),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomNavigatorBar()
     );
   }
 }
