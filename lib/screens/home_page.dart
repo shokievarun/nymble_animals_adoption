@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     });
     _petsController = PageController(
       initialPage: _currentPage, 
-      viewportFraction: 1 / 3,
+      viewportFraction: 1 / 2,
     );
     super.initState();
   }
@@ -152,7 +152,9 @@ class _HomePageState extends State<HomePage> {
               child: PageView.builder(
                 physics: const BouncingScrollPhysics(),
                 controller: _petsController,
+                padEnds: false,
                 itemCount: animals.length,
+                scrollDirection: Axis.horizontal,
                 clipBehavior: Clip.none,
                 itemBuilder: (_, x){
                   

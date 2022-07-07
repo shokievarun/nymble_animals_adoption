@@ -13,6 +13,11 @@ abstract class ThemeColors{
   static const Color containerWhite = Color(0xFFFFFFFF);
   static const Color containersGray = Color(0xB6FFFFFF);
 
+  // Animals data containers
+  static const Color containerBackground1 = Color(0xffd4e8c1);
+  static const Color containerBackground2 = Color(0xfffee8c2);
+  static const Color containerBackground3 = Color(0xffc2ebfe);
+
   // Gradients
   static const LinearGradient blueGradient = LinearGradient(
     begin: Alignment.topCenter,

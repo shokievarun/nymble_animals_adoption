@@ -32,7 +32,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
   
   @override
   void initState() {
-    controller = AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    controller = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
     animation = Tween<double>(begin: 0, end: 10).animate(controller!)
     ..addListener(() {
       setState(() {
