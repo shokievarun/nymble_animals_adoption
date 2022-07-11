@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/utils/screen_utils.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:animals_adoption_flutter/widgets/custom_back_button.dart';
@@ -46,9 +45,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     final Size _size = MediaQuery.of(context).size;
-    final ScreenUtils _screenUtils = ScreenUtils(screenSize: _size);
 
-    final double targetAnimationValue = (_size.height * 0.45) - _screenUtils.bottomPadding;
+    final double targetAnimationValue = (_size.height * 0.45) - _responsive.bPadding;
     final double? dataContainerHeightValue = lerpDouble(_size.height, targetAnimationValue, _animation!.value);
     final double? dataContainerScaleValue = lerpDouble(0.7, 1, _animation!.value);
 
@@ -69,14 +67,14 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
           ),
 
           Positioned(
-            left: _screenUtils.sidesPadding,
-            top: _screenUtils.topPadding,
+            left: _responsive.sPadding,
+            top: _responsive.tPadding,
             child: const CustomBackButton()
           ),
 
           // Data container
           Padding(
-            padding: EdgeInsets.only(left: _screenUtils.sidesPadding, right: _screenUtils.sidesPadding),
+            padding: EdgeInsets.only(left: _responsive.sPadding, right: _responsive.sPadding),
             child: Transform.scale(
               scale: dataContainerScaleValue!,
               child: Transform.translate(

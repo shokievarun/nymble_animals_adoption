@@ -13,7 +13,7 @@ class CustomBottomNavigatorBar extends StatelessWidget {
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     return Padding(
-      padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.lPadding, right: _responsive.rPadding),
+      padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
       child: Opacity(
         opacity: 0.8,
         child: Container(

@@ -13,8 +13,7 @@ class ResponsiveUtil{
 
   late double _bottomPadding;
   late double _topPadding;
-  late double _leftPadding;
-  late double _rightPadding;
+  late double _sPadding;
 
   // Getters
   double get height => _height;
@@ -23,8 +22,7 @@ class ResponsiveUtil{
   // Paddings
   double get bPadding => _bottomPadding;
   double get tPadding => _topPadding;
-  double get lPadding => _leftPadding;
-  double get rPadding => _rightPadding;
+  double get sPadding => _sPadding;
 
   ResponsiveUtil({
     required BuildContext context
@@ -38,8 +36,7 @@ class ResponsiveUtil{
 
     _bottomPadding = bottomPaddingPercent * _height;
     _topPadding = topPaddingPercent * _height;
-    _leftPadding = sidesPaddingPercent * _width;
-    _rightPadding = sidesPaddingPercent * _width;
+    _sPadding = sidesPaddingPercent * _width;
   }
 
   factory ResponsiveUtil.of(BuildContext context) => ResponsiveUtil(context: context);
