@@ -1,5 +1,6 @@
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/screens/animal_details_page.dart';
+import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,8 @@ class CustomAnimalContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
     
     return GestureDetector(
       onTap: (){
@@ -42,8 +45,8 @@ class CustomAnimalContainer extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(animal.name, textAlign: TextAlign.center, style: TextStyles.petTitleList),
-                      Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.petSubtitleList),
+                      Text(animal.name, textAlign: TextAlign.center, style: TextStyles.blackw700(_responsive.dp(1.5))),
+                      Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw400(_responsive.dp(1))),
                     ],
                   ),
                 ),

@@ -1,7 +1,6 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:animals_adoption_flutter/models/animal_model.dart';
-import 'package:animals_adoption_flutter/constants/constants.dart';
+import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/screen_utils.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
@@ -44,6 +43,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
   @override
   Widget build(BuildContext context) {
     
+    final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
+
     final Size _size = MediaQuery.of(context).size;
     final ScreenUtils _screenUtils = ScreenUtils(screenSize: _size);
 
@@ -58,8 +59,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
             tag: widget.animal.imagePath,
             transitionOnUserGestures: false,
             child: SizedBox(
-              height: _size.height * 0.5,
-              width: _size.width,
+              height: _responsive.hp(50),
+              width: _responsive.width,
               child: Image.network(
                 widget.animal.imagePath,
                 fit: BoxFit.fill,                
@@ -81,11 +82,12 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
               child: Transform.translate(
                 offset: Offset(0, dataContainerHeightValue!),
                 child: Container(
-                  height: _size.height * 0.535,
-                  width: _size.width,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    color: ThemeColors.infoContainerBackgroundGray
+                  height: _responsive.hp(53),
+                  width: _responsive.width,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
+                    color: ThemeColors.infoContainerBackgroundGray,
+                    border: Border.all(color: ThemeColors.accent, width: _responsive.wp(0.25))
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
@@ -107,22 +109,19 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(widget.animal.name, style: TextStyles.titleData),
-                                    Text(widget.animal.location, style: TextStyles.lightGray14size),
+                                    Text(widget.animal.name, style: TextStyles.blackw700(_responsive.dp(3))),
+                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw300(_responsive.dp(1.5))),
                                   ],
                                 ),
                               ),
-                              const Expanded(
-                                flex: 2,
-                                child: CustomFavoriteButton()
-                              )
+                              const CustomFavoriteButton()
                             ],
                           ),
                         ),
             
                         // Data containers, sex, age and weight
                         Expanded(
-                          flex: 5,
+                          flex: 2,
                           child: Row(
                             children: [
                               Expanded(
@@ -130,34 +129,34 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text('Female', style: TextStyles.lightBlack18size),
-                                    Text('Sex', style: TextStyles.lightGray14size),
+                                  children: [
+                                    Text('Female', style: TextStyles.blackw500(_responsive.dp(2))),
+                                    Text('Sex', style: TextStyles.lightGrayw400(_responsive.dp(1))),
                                   ],
                                 ),
                               ),
-                              SizedBox(width: _size.width * 0.035),
+                              SizedBox(height: _responsive.hp(3.5)),
                               Expanded(
                                 flex: 1,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text('1 Years', style: TextStyles.lightBlack18size),
-                                    Text('Age', style: TextStyles.lightGray14size),
+                                  children: [
+                                    Text('1 Years', style: TextStyles.blackw500(_responsive.dp(2))),
+                                    Text('Age', style: TextStyles.lightGrayw400(_responsive.dp(1))),
                                   ],
                                 ),
                                 
                               ),
-                              SizedBox(width: _size.width * 0.035),
+                              SizedBox(height: _responsive.hp(3.5)),
                               Expanded(
                                 flex: 1,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text('15 Kg', style: TextStyles.lightBlack18size),
-                                    Text('Weight', style: TextStyles.lightGray14size),
+                                  children: [
+                                    Text('15 Kg', style: TextStyles.blackw500(_responsive.dp(2))),
+                                    Text('Weight', style: TextStyles.lightGrayw400(_responsive.dp(1))),
                                   ],
                                 ),
                               ),
@@ -172,43 +171,35 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const Expanded(
-                                flex: 1,
-                                child:  CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  child: Icon(Icons.account_circle_rounded, size: 40)
-                                )
-                              ),
-                              SizedBox(width: _size.width * 0.025),
                               Expanded(
                                 flex: 4,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Text('Francisco', style: TextStyles.lightBlack16size),
-                                    Text('${widget.animal.name} owner.', style: TextStyles.lightGray14size),
+                                    Text('Francisco', style: TextStyles.blackw500(_responsive.dp(2))),
+                                    Text('${widget.animal.name} owner.', style: TextStyles.lightGrayw400(_responsive.dp(1))),
                                   ],
                                 ),
                               ),
-                              const Expanded(
+                              SizedBox(height: _responsive.hp(2.5)),
+                              Expanded(
                                 flex: 1,
-                                child:  Icon(Icons.message_rounded, color: ThemeColors.accent, size: 20)
+                                child:  Icon(Icons.message_rounded, color: ThemeColors.accent, size: _responsive.dp(2))
                               ),
                             ],
                           )
                         ),
             
                         // Show description
-                        SizedBox(height: _size.height * 0.02),
+                        SizedBox(height: _responsive.hp(2)),
                         Expanded(
-                          flex: 8,
+                          flex: 4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text('Description:', style: TextStyles.lightBlack16size),
-                              Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGray14size),
+                            children: [
+                              Text('Description:', style: TextStyles.blackw500(_responsive.dp(2))),
+                              Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGrayw400(_responsive.dp(1))),
                             ],
                           )
                         )

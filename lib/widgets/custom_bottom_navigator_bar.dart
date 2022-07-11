@@ -1,4 +1,4 @@
-import 'package:animals_adoption_flutter/utils/screen_utils.dart';
+import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -10,16 +10,15 @@ class CustomBottomNavigatorBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Size _size = MediaQuery.of(context).size;
-    final ScreenUtils _screenUtils = ScreenUtils(screenSize: _size);
+    final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: _screenUtils.bottomPadding, left: _screenUtils.sidesPadding, right: _screenUtils.sidesPadding, top: _screenUtils.topPadding),
+      padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.lPadding, right: _responsive.rPadding),
       child: Opacity(
         opacity: 0.8,
         child: Container(
-          height: _size.height * 0.1,
-          width: _size.width,
+          height: _responsive.hp(10),
+          width: _responsive.width,
           decoration: BoxDecoration(
             color: ThemeColors.infoContainerBackgroundGray,
             borderRadius: BorderRadius.circular(25)
@@ -28,22 +27,22 @@ class CustomBottomNavigatorBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children: [
                 Expanded(
                   flex: 1,
-                  child: Icon(Icons.home, color: ThemeColors.accentForText, size: 25),
+                  child: Icon(Icons.home, color: ThemeColors.accentForText, size: _responsive.dp(2.5)),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Icon(Icons.account_circle_rounded, color: ThemeColors.black, size: 25),
+                  child: Icon(Icons.account_circle_rounded, color: ThemeColors.black, size: _responsive.dp(2.5)),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Icon(Icons.location_on_rounded, color: ThemeColors.black, size: 25),
+                  child: Icon(Icons.location_on_rounded, color: ThemeColors.black, size: _responsive.dp(2.5)),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Icon(Icons.message_rounded, color: ThemeColors.black, size: 25),
+                  child: Icon(Icons.message_rounded, color: ThemeColors.black, size: _responsive.dp(2.5)),
                 ),
               ],
             ),

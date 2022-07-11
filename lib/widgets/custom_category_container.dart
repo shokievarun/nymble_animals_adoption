@@ -1,4 +1,5 @@
 import 'package:animals_adoption_flutter/models/category_model.dart';
+import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +61,8 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
+
+    final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
     
     return GestureDetector(
       onTap: (){
@@ -84,8 +87,8 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.category.name, style: TextStyles.categoryTitle),
-                Text(widget.category.description, style: TextStyles.categorySubtitle),
+                Text(widget.category.name, style: TextStyles.whitew700(_responsive.dp(2))),
+                Text(widget.category.description, style: TextStyles.whitew400(_responsive.dp(0.9))),
                 const Spacer(),
                 Expanded(
                   flex: 5,
