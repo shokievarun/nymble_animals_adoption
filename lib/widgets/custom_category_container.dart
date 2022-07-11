@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:animals_adoption_flutter/models/category_model.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 
@@ -63,6 +66,11 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
+
+    double elevationQuantity = 0;
+    if(widget.isSelected){
+      elevationQuantity = lerpDouble(0, _responsive.hp(0.08), animation!.value)!;
+    }
     
     return GestureDetector(
       onTap: (){
@@ -74,6 +82,10 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
         duration: const Duration(milliseconds: 250),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
+          transform: Matrix4.identity()..translate(
+            0,
+            widget.isSelected ? elevationQuantity : _responsive.hp(5),
+          ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: widget.backgroundColors,
@@ -87,8 +99,8 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.category.name, style: TextStyles.whitew700(_responsive.dp(2))),
-                Text(widget.category.description, style: TextStyles.whitew400(_responsive.dp(0.9))),
+                Text(widget.category.name, style: TextStyles.whitew700(_responsive.dp(1.5))),
+                Text(widget.category.description, style: TextStyles.whitew600(_responsive.dp(0.9))),
                 const Spacer(),
                 Expanded(
                   flex: 5,

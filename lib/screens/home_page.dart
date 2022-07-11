@@ -68,11 +68,11 @@ class _HomePageState extends State<HomePage> {
             children: [
       
               // Header
-              Text('Location:', style: TextStyles.middleDarkGrayw300(_responsive.dp(1.5))),
+              Text('Location:', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Tijuana, BC MX', style: TextStyles.blackw700(_responsive.dp(3))),
+                  Text('Tijuana, BC MX', style: TextStyles.blackw900(_responsive.dp(3))),
                   const Spacer(),
                   Icon(Icons.search_rounded, size: _responsive.dp(3), color: ThemeColors.darkGray),
                   SizedBox(width: _responsive.wp(1)),
@@ -116,10 +116,10 @@ class _HomePageState extends State<HomePage> {
               
               // Body categories
               SizedBox(height: _responsive.hp(2.5)),
-              Text('Categories:', style: TextStyles.blackw700(_responsive.dp(2))),
+              Text('Categories:', style: TextStyles.blackw900(_responsive.dp(2))),
               SizedBox(height: _responsive.hp(2.5)),
               SizedBox(
-                height: _responsive.hp(17.5),
+                height: _responsive.hp(15),
                 width: _responsive.width,
                 child: PageView.builder(
                   scrollDirection: Axis.horizontal,
@@ -144,8 +144,8 @@ class _HomePageState extends State<HomePage> {
               ),
       
               // Pet list
-              SizedBox(height: _responsive.hp(2.5)),
-              Text('Pet list:', style: TextStyles.blackw700(_responsive.dp(2))),
+              SizedBox(height: _responsive.hp(3.5)),
+              Text('Pet list:', style: TextStyles.blackw900(_responsive.dp(2))),
               SizedBox(
                 height: _responsive.hp(20),
                 width: _responsive.width,

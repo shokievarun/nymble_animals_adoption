@@ -45,8 +45,8 @@ class CustomAnimalContainer extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(animal.name, textAlign: TextAlign.center, style: TextStyles.blackw700(_responsive.dp(1.5))),
-                      Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw400(_responsive.dp(1))),
+                      Text(animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.25))),
+                      Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
                     ],
                   ),
                 ),

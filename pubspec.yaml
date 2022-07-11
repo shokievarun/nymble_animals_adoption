@@ -78,6 +78,17 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Rocko
+      fonts:
+        - asset: assets/fonts/rocko/RockoFLF.ttf
+          weight: 400
+        - asset: assets/fonts/rocko/RockoFLF-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/rocko/RockoUltraFLF.ttf
+          weight: 700
+        - asset: assets/fonts/rocko/RockoUltraFLF-Bold.ttf
+          weight: 900
+
     - family: SimplyRounded
       fonts:
         - asset: assets/fonts/simply_rounded/Simply_Rounded.ttf

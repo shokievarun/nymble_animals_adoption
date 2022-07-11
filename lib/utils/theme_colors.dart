@@ -18,7 +18,7 @@ abstract class ThemeColors{
   static const Color containerBackground3 = Color(0xffc2ebfe);
 
   // New colors
-  static const Color infoContainerBackgroundGray = Color(0xFFEAEAEA);
+  static const Color infoContainerBackgroundGray = Color.fromARGB(255, 226, 226, 226);
   static const Color accent = Color(0xff8cbaf0);
   static const Color accentForText = Color(0xFF4A9BF8);
   static const Color redForBackground = Color(0xfff8cfdf);

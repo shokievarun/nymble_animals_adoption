@@ -40,6 +40,12 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
   }
 
   @override
+  void dispose() {
+    _animationController!.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
@@ -84,8 +90,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                   width: _responsive.width,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(50)),
-                    color: ThemeColors.infoContainerBackgroundGray,
-                    border: Border.all(color: ThemeColors.accent, width: _responsive.wp(0.25))
+                    color: ThemeColors.infoContainerBackgroundGray.withOpacity(0.8),
+                    border: Border.all(color: ThemeColors.accent, width: _responsive.wp(0.25)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
@@ -107,8 +113,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(widget.animal.name, style: TextStyles.blackw700(_responsive.dp(3))),
-                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw300(_responsive.dp(1.5))),
+                                    Text(widget.animal.name, style: TextStyles.blackw900(_responsive.dp(3))),
+                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                                   ],
                                 ),
                               ),
@@ -128,8 +134,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('Female', style: TextStyles.blackw500(_responsive.dp(2))),
-                                    Text('Sex', style: TextStyles.lightGrayw400(_responsive.dp(1))),
+                                    Text('Female', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                    Text('Sex', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
                                   ],
                                 ),
                               ),
@@ -140,8 +146,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('1 Years', style: TextStyles.blackw500(_responsive.dp(2))),
-                                    Text('Age', style: TextStyles.lightGrayw400(_responsive.dp(1))),
+                                    Text('1 Years', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                    Text('Age', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
                                   ],
                                 ),
                                 
@@ -153,8 +159,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('15 Kg', style: TextStyles.blackw500(_responsive.dp(2))),
-                                    Text('Weight', style: TextStyles.lightGrayw400(_responsive.dp(1))),
+                                    Text('15 Kg', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                    Text('Weight', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
                                   ],
                                 ),
                               ),
@@ -175,8 +181,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('Francisco', style: TextStyles.blackw500(_responsive.dp(2))),
-                                    Text('${widget.animal.name} owner.', style: TextStyles.lightGrayw400(_responsive.dp(1))),
+                                    Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                    Text('${widget.animal.name} owner.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
                                   ],
                                 ),
                               ),
@@ -196,8 +202,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Description:', style: TextStyles.blackw500(_responsive.dp(2))),
-                              Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGrayw400(_responsive.dp(1))),
+                              Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                              Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
                             ],
                           )
                         )
