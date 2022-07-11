@@ -9,7 +9,6 @@ abstract class ThemeColors{
   static const Color darkGray = Color(0xFF4B4B4B);
   static const Color black = Color(0xFF242424);
   static const Color lightBlack = Color(0xFF424242);
-  static const Color accent = Color(0xff548CFF);
   static const Color containerWhite = Color(0xFFFFFFFF);
   static const Color containersGray = Color(0xB6FFFFFF);
 
@@ -18,11 +17,18 @@ abstract class ThemeColors{
   static const Color containerBackground2 = Color(0xfffee8c2);
   static const Color containerBackground3 = Color(0xffc2ebfe);
 
+  // New colors
+  static const Color infoContainerBackgroundGray = Color(0xFFEAEAEA);
+  static const Color accent = Color(0xff8cbaf0);
+  static const Color accentForText = Color(0xFF4A9BF8);
+  static const Color redForBackground = Color(0xfff8cfdf);
+  static const Color redForText = Color(0xFFFF6078);
+
   // Gradients
   static const LinearGradient blueGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF68A9FF), Color(0xff2F80ED)],
+    colors: [accent, accentForText],
   );
 
   static const List<List<Color>> gradients = [

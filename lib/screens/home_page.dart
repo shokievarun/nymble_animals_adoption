@@ -1,6 +1,8 @@
 import 'dart:math';
 
-import 'package:animals_adoption_flutter/utils/constants.dart';
+import 'package:animals_adoption_flutter/constants/assets_paths.dart';
+import 'package:animals_adoption_flutter/constants/constants.dart';
+import 'package:animals_adoption_flutter/utils/screen_utils.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
@@ -55,11 +57,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final _size = MediaQuery.of(context).size;
+    final Size _size = MediaQuery.of(context).size;
+    final ScreenUtils _screenUtils = ScreenUtils(screenSize: _size);
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+        padding: EdgeInsets.only(top: _screenUtils.topPadding, bottom: _screenUtils.bottomPadding, left: _screenUtils.sidesPadding, right: _screenUtils.sidesPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Text('Check all the pets available in our application', style: TextStyles.principalContainerTitle)
+                          Text('Check all the pets available in our application.', style: TextStyles.principalContainerTitle)
                         ],
                       ),
                     ),
@@ -106,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Image.asset(
-                        'assets/images/animals/kitty.png', fit: BoxFit.contain,
+                        '$animalImagesPath/kitty.png', fit: BoxFit.contain,
                         ),
                     ),
                   ),
@@ -147,7 +150,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: _size.height * 0.05),
             const Text('Pet list:', style: TextStyles.bodySubtitle),
             SizedBox(
-              height: _size.height * 0.175,
+              height: _size.height * 0.2,
               width: _size.width,
               child: PageView.builder(
                 physics: const BouncingScrollPhysics(),

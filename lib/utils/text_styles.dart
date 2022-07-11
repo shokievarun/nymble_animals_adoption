@@ -14,7 +14,7 @@ abstract class TextStyles{
     fontFamily: 'SimplyRounded',
     fontSize: 25,
     fontWeight: FontWeight.w700,
-    color: ThemeColors.darkGray
+    color: ThemeColors.black
   );
 
   static const TextStyle principalContainerTitle = TextStyle(
@@ -88,6 +88,7 @@ abstract class TextStyles{
   static const TextStyle lightGray14size = TextStyle(
     fontFamily: 'SimplyRounded',
     fontSize: 12,
-    color: ThemeColors.lightGray
+    color: ThemeColors.lightGray,
+    fontWeight: FontWeight.w400,
   );
 }

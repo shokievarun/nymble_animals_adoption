@@ -27,39 +27,39 @@ class CustomAnimalContainer extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 20, right: 5, left: 5),
-        child: Hero(
-          tag: animal.imagePath,
-          child: SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: backgroundColor,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(animal.name, textAlign: TextAlign.center, style: TextStyles.petTitleList),
-                        Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.petSubtitleList),
-                      ],
-                    ),
+        child: SizedBox(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: backgroundColor,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(animal.name, textAlign: TextAlign.center, style: TextStyles.petTitleList),
+                      Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.petSubtitleList),
+                    ],
                   ),
                 ),
-                Divider(color: backgroundColor),
-                Expanded(
-                  flex: 3,
+              ),
+              Divider(color: backgroundColor),
+              Expanded(
+                flex: 3,
+                child: Hero(
+                  tag: animal.imagePath,
                   child: Image.network(
                     animal.imagePath, 
                     fit: BoxFit.contain,
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),

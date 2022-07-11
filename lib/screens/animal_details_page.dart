@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:animals_adoption_flutter/models/animal_model.dart';
-import 'package:animals_adoption_flutter/utils/constants.dart';
+import 'package:animals_adoption_flutter/constants/constants.dart';
+import 'package:animals_adoption_flutter/utils/screen_utils.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
+import 'package:animals_adoption_flutter/widgets/custom_back_button.dart';
+import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:flutter/material.dart';
 
 
@@ -42,8 +45,9 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
   Widget build(BuildContext context) {
     
     final Size _size = MediaQuery.of(context).size;
+    final ScreenUtils _screenUtils = ScreenUtils(screenSize: _size);
 
-    final double targetAnimationValue = _size.height * 0.45;
+    final double targetAnimationValue = (_size.height * 0.45) - _screenUtils.bottomPadding;
     final double? dataContainerHeightValue = lerpDouble(_size.height, targetAnimationValue, _animation!.value);
     final double? dataContainerScaleValue = lerpDouble(0.7, 1, _animation!.value);
 
@@ -64,22 +68,14 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
           ),
 
           Positioned(
-            left: _size.width * 0.06,
-            top: _size.height * 0.03,
-            child: Container(
-              height: _size.height * 0.05,
-              width: _size.width * 0.1,
-              decoration: BoxDecoration(
-                color: ThemeColors.accent,
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: const Icon(Icons.arrow_back_ios_new_rounded, color: ThemeColors.containerWhite)
-            )
+            left: _screenUtils.sidesPadding,
+            top: _screenUtils.topPadding,
+            child: const CustomBackButton()
           ),
 
           // Data container
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.only(left: _screenUtils.sidesPadding, right: _screenUtils.sidesPadding),
             child: Transform.scale(
               scale: dataContainerScaleValue!,
               child: Transform.translate(
@@ -87,9 +83,9 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                 child: Container(
                   height: _size.height * 0.535,
                   width: _size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(50)),
-                    color: Colors.grey[300]?.withOpacity(0.85)
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    color: ThemeColors.infoContainerBackgroundGray
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
@@ -112,76 +108,57 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(widget.animal.name, style: TextStyles.titleData),
-                                    Text(widget.animal.location, style: TextStyles.titleInformation),
+                                    Text(widget.animal.location, style: TextStyles.lightGray14size),
                                   ],
                                 ),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 2,
-                                child: Icon(Icons.favorite_border_rounded, size: 25, color: Colors.red[300])
+                                child: CustomFavoriteButton()
                               )
                             ],
                           ),
                         ),
             
                         // Data containers, sex, age and weight
-                        SizedBox(height: _size.height * 0.02),
                         Expanded(
                           flex: 5,
                           child: Row(
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: ThemeColors.containerBackground1
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text('Female', style: TextStyles.lightBlack18size),
-                                      Text('Sex', style: TextStyles.animalDataSubtitle),
-                                    ],
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('Female', style: TextStyles.lightBlack18size),
+                                    Text('Sex', style: TextStyles.lightGray14size),
+                                  ],
                                 ),
                               ),
                               SizedBox(width: _size.width * 0.035),
                               Expanded(
                                 flex: 1,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: ThemeColors.containerBackground2
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text('1 Years', style: TextStyles.lightBlack18size),
-                                      Text('Age', style: TextStyles.animalDataSubtitle),
-                                    ],
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('1 Years', style: TextStyles.lightBlack18size),
+                                    Text('Age', style: TextStyles.lightGray14size),
+                                  ],
                                 ),
                                 
                               ),
                               SizedBox(width: _size.width * 0.035),
                               Expanded(
                                 flex: 1,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: ThemeColors.containerBackground3
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text('15 Kg', style: TextStyles.lightBlack18size),
-                                      Text('Weight', style: TextStyles.animalDataSubtitle),
-                                    ],
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('15 Kg', style: TextStyles.lightBlack18size),
+                                    Text('Weight', style: TextStyles.lightGray14size),
+                                  ],
                                 ),
                               ),
                             ],
@@ -189,7 +166,6 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                         ),
             
                         // User data
-                        SizedBox(height: _size.height * 0.02),
                         Expanded(
                           flex: 3,
                           child: Row(

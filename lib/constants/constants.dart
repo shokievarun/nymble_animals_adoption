@@ -1,32 +1,38 @@
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
 
+import 'assets_paths.dart';
+
+
+const double topPaddingPercent = 0.05;
+const double bottomPaddingPercent = 0.015;
+const double sidesPaddingPercent = 0.05;
 
 List<CategoryModel> categories = [
   CategoryModel(
     name: 'Dogs', 
     description: 'There are 5 dogs near you!', 
-    imagePath: 'assets/images/animal_categories/dog.png'
+    imagePath: '$animalCategoriesPath/dog.png'
   ),
   CategoryModel(
     name: 'Cats', 
     description: 'There are 10 cats near you!', 
-    imagePath: 'assets/images/animal_categories/cat.png'
+    imagePath: '$animalCategoriesPath/cat.png'
   ),
   CategoryModel(
     name: 'Fishes', 
     description: 'There are 100 fishes near you!', 
-    imagePath: 'assets/images/animal_categories/fish.png'
+    imagePath: '$animalCategoriesPath/fish.png'
   ),
   CategoryModel(
     name: 'Birds', 
     description: 'There are 1 bird near you!', 
-    imagePath: 'assets/images/animal_categories/bird.png'
+    imagePath: '$animalCategoriesPath/bird.png'
   ),
   CategoryModel(
     name: 'Rabbits', 
     description: 'There are 25 rabbits near you!', 
-    imagePath: 'assets/images/animal_categories/rabbit.png'
+    imagePath: '$animalCategoriesPath/rabbit.png'
   ),
 ];
 
