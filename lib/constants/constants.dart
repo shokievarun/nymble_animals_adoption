@@ -4,7 +4,7 @@ import 'package:animals_adoption_flutter/models/category_model.dart';
 import 'assets_paths.dart';
 
 
-const double topPaddingPercent = 0.05;
+const double topPaddingPercent = 0.075;
 const double bottomPaddingPercent = 0.015;
 const double sidesPaddingPercent = 0.05;
 

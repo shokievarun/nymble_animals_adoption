@@ -60,112 +60,120 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: SingleChildScrollView(
+        clipBehavior: Clip.none,
+        scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-      
-              // Header
-              Text('Location:', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5))),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Tijuana, BC MX', style: TextStyles.blackw900(_responsive.dp(3))),
-                  const Spacer(),
-                  Icon(Icons.search_rounded, size: _responsive.dp(3), color: ThemeColors.darkGray),
-                  SizedBox(width: _responsive.wp(1)),
-                  Icon(Icons.notifications_rounded, size: _responsive.dp(3), color: ThemeColors.darkGray)
-                ],
-              ),
-      
-              // Principal Image
-              SizedBox(height: _responsive.hp(2.5)),
-              Container(
-                height: _responsive.hp(18),
-                width: _responsive.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  gradient: ThemeColors.blueGradient
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Check all the pets available in our application.', style: TextStyles.whitew700(_responsive.dp(1.5)))
-                        ),
-                      ),
+                  
+                  // Header
+                  Text('Location:', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5)).copyWith(color: ThemeColors.darkGray)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Tijuana, BC MX', style: TextStyles.blackw900(_responsive.dp(3))),
+                      const Spacer(),
+                      Icon(Icons.search_rounded, size: _responsive.dp(3), color: ThemeColors.black),
+                      SizedBox(width: _responsive.wp(1)),
+                      Icon(Icons.notifications_rounded, size: _responsive.dp(3), color: ThemeColors.black)
+                    ],
+                  ),
+                  
+                  // Principal announcement
+                  SizedBox(height: _responsive.hp(8)),
+                  Text('AdoptMe', style: TextStyles.blackw900(_responsive.dp(4))),
+                  SizedBox(height: _responsive.hp(2)),
+                  Container(
+                    height: _responsive.hp(18),
+                    width: _responsive.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      gradient: ThemeColors.blueGradient
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Image.asset(
-                          '$animalImagesPath/kitty.png', fit: BoxFit.contain,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Check all the pets available in our application.', style: TextStyles.whitew700(_responsive.dp(1.5)))
+                            ),
                           ),
-                      ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Image.asset(
+                              '$animalImagesPath/kitty.png', fit: BoxFit.contain,
+                              ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                  
+                  // Body categories
+                  SizedBox(height: _responsive.hp(2.5)),
+                  Text('Categories:', style: TextStyles.blackw900(_responsive.dp(2))),
+                  SizedBox(height: _responsive.hp(2.5)),
+                  SizedBox(
+                    height: _responsive.hp(15),
+                    width: _responsive.width,
+                    child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: categories.length,
+                      controller: _categoriesController,
+                      clipBehavior: Clip.none,
+                      itemBuilder: (_, x){
+                        
+                        final bool isSelected = _currentPage == x;
+                        final double containerScale = isSelected  ? 1.10 : 0.8;
+                        
+                        return CategoryContainer(
+                          onTapFunction: () => _onPageChange(x),
+                          backgroundColors: ThemeColors.gradients[x].map((e) => e.withOpacity(0.35)).toList(), 
+                          category: categories[x], 
+                          scale: containerScale, 
+                          isSelected: isSelected
+                        );
+                      },
                     ),
-                  ],
-                )
-              ),
-              
-              // Body categories
-              SizedBox(height: _responsive.hp(2.5)),
-              Text('Categories:', style: TextStyles.blackw900(_responsive.dp(2))),
-              SizedBox(height: _responsive.hp(2.5)),
-              SizedBox(
-                height: _responsive.hp(15),
-                width: _responsive.width,
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: categories.length,
-                  controller: _categoriesController,
-                  clipBehavior: Clip.none,
-                  itemBuilder: (_, x){
-                    
-                    final bool isSelected = _currentPage == x;
-                    final double containerScale = isSelected  ? 1.10 : 0.8;
-                    
-                    return CategoryContainer(
-                      onTapFunction: () => _onPageChange(x),
-                      backgroundColors: ThemeColors.gradients[x].map((e) => e.withOpacity(0.35)).toList(), 
-                      category: categories[x], 
-                      scale: containerScale, 
-                      isSelected: isSelected
-                    );
-                  },
-                ),
-              ),
-      
-              // Pet list
-              SizedBox(height: _responsive.hp(3.5)),
-              Text('Pet list:', style: TextStyles.blackw900(_responsive.dp(2))),
-              SizedBox(
-                height: _responsive.hp(20),
-                width: _responsive.width,
-                child: PageView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _petsController,
-                  padEnds: false,
-                  itemCount: animals.length,
-                  scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none,
-                  itemBuilder: (_, x){
-                    
-                    final Color containerColor = ThemeColors.containersBackground[Random().nextInt(ThemeColors.containersBackground.length - 1)].withOpacity(0.25);
-                    
-                    return CustomAnimalContainer(
-                      animal: animals[x], 
-                      backgroundColor: containerColor
-                    );
-                  },
-                ),
+                  ),
+                  
+                  // Pet list
+                  SizedBox(height: _responsive.hp(3.5)),
+                  Text('Pet list:', style: TextStyles.blackw900(_responsive.dp(2))),
+                  SizedBox(
+                    height: _responsive.hp(20),
+                    width: _responsive.width,
+                    child: PageView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      controller: _petsController,
+                      padEnds: false,
+                      itemCount: animals.length,
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      itemBuilder: (_, x){
+                        
+                        final Color containerColor = ThemeColors.containersBackground[Random().nextInt(ThemeColors.containersBackground.length - 1)].withOpacity(0.25);
+                        
+                        return CustomAnimalContainer(
+                          animal: animals[x], 
+                          backgroundColor: containerColor
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

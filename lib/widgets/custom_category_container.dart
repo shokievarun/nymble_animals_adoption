@@ -82,10 +82,10 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
         duration: const Duration(milliseconds: 250),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
-          transform: Matrix4.identity()..translate(
-            0,
-            elevationQuantity
-          ),
+          // transform: Matrix4.identity()..translate(
+          //   0,
+          //   elevationQuantity
+          // ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: widget.backgroundColors,
