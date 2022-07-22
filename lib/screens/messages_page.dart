@@ -10,9 +10,9 @@ class MessagesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScaffold(
+    return CustomScaffold(
       title: 'Messages',
-      body: Text(''),
+      body: const Text(''),
       withBackButton: true,
       bottomNavigator: CustomBottomNavigatorBar(),
     );

@@ -1,3 +1,4 @@
+import 'package:animals_adoption_flutter/providers/navigator_bar_provider.dart';
 import 'package:animals_adoption_flutter/screens/home_page.dart';
 import 'package:animals_adoption_flutter/screens/list_of_animals_page.dart';
 import 'package:animals_adoption_flutter/screens/map_page.dart';
@@ -24,28 +25,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      useInheritedMediaQuery: true,
-      builder: DevicePreview.appBuilder,
-      locale: DevicePreview.locale(context),
-      debugShowCheckedModeBanner: false,
-      title: 'Animals Adoption App',
-
-      // Theme
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<NavigatorBarProvider>(create: (context) => NavigatorBarProvider())
+      ],
+      child: MaterialApp(
+        useInheritedMediaQuery: true,
+        builder: DevicePreview.appBuilder,
+        locale: DevicePreview.locale(context),
+        debugShowCheckedModeBanner: false,
+        title: 'Animals Adoption App',
+    
+        // Theme
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white
+        ),
+        initialRoute: '/home',
+        home: const HomePage(),
+        routes: {
+    
+          '/home' : ((context) => const HomePage()),
+          '/viewAllAnimals' : ((context) => const ListOfAnimalsPage()),
+          '/profile' : ((context) => const ProfilePage()),
+          '/map' : ((context) => const MapPage()),
+          '/messages' : ((context) => const MessagesPage()),
+    
+        },
       ),
-      initialRoute: '/home',
-      home: const HomePage(),
-      routes: {
-
-        '/home' : ((context) => const HomePage()),
-        '/viewAllAnimals' : ((context) => const ListOfAnimalsPage()),
-        '/profile' : ((context) => const ProfilePage()),
-        '/map' : ((context) => const MapPage()),
-        '/messages' : ((context) => const MessagesPage()),
-
-      },
     );
   }
 }

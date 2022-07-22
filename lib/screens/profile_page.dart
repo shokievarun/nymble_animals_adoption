@@ -8,9 +8,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScaffold(
+    return CustomScaffold(
       title: 'Profile',
-      body: Text(''),
+      body: const Text(''),
       withBackButton: true,
       bottomNavigator: CustomBottomNavigatorBar(),
     );

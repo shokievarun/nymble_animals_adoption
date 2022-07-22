@@ -1,23 +1,45 @@
+import 'package:animals_adoption_flutter/providers/navigator_bar_provider.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/utils/theme_colors.dart';
+import 'package:animals_adoption_flutter/widgets/bottom_navigator_bar_item.dart';
 import 'package:flutter/material.dart';
 
 
 class CustomBottomNavigatorBar extends StatelessWidget {
 
-  const CustomBottomNavigatorBar({ Key? key }) : super(key: key);
+  final List<NavBarItem> items = [
+    NavBarItem(
+      icon: Icons.home,
+      routeName: 'home',
+    ),
+    NavBarItem(
+      icon: Icons.account_circle_rounded,
+      routeName: 'profile',
+    ),
+    NavBarItem(
+      icon: Icons.location_on_rounded,
+      routeName: 'map',
+    ),
+    NavBarItem(
+      icon: Icons.message_rounded,
+      routeName: 'messages',
+    ),
+  ];
+
+  CustomBottomNavigatorBar({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
+    final NavigatorBarProvider _navigatorBarProvider = Provider.of<NavigatorBarProvider>(context);
 
 
-    void _moveToNewRoute(final String routeName){
-      if(ModalRoute.of(context)?.settings.name == '/$routeName'){
+    void _moveToNewRoute(final int index){
+      if(ModalRoute.of(context)?.settings.name == '/${items[index].routeName}'){
         return;
       }
-      Navigator.pushNamed(context, '/$routeName');
+      _navigatorBarProvider.currentRoute = index;
+      Navigator.pushNamed(context, '/${items[index].routeName}');
     }
 
     return Padding(
@@ -40,42 +62,12 @@ class CustomBottomNavigatorBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: Icon(Icons.home, size: _responsive.dp(3.5)),
-                  color: ThemeColors.accentForText, 
-                  onPressed: () => _moveToNewRoute('home')
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: Icon(Icons.account_circle_rounded, size: _responsive.dp(2.5),),
-                  color: ThemeColors.black, 
-                  onPressed: () => _moveToNewRoute('profile')
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: Icon(Icons.location_on_rounded, size: _responsive.dp(2.5),),
-                  color: ThemeColors.black, 
-                  onPressed: () => _moveToNewRoute('map')
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: Icon(Icons.message_rounded, size: _responsive.dp(2.5),),
-                  color: ThemeColors.black, 
-                  onPressed: () => _moveToNewRoute('messages')
-                ),
-              ),
+               for(int x = 0; x < items.length; x++) 
+                items[x]..isSelected = x == _navigatorBarProvider.currentRoute
+                        ..onPressCallback = () => _moveToNewRoute(x)
             ],
-          ),
+          )
         ),
       ),
     );

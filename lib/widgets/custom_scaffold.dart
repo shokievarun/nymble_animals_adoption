@@ -39,6 +39,7 @@ class CustomScaffold extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if(withBackButton ?? false)...[
+                
                 // Back button
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
