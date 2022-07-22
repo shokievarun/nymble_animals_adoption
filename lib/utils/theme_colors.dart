@@ -8,7 +8,7 @@ abstract class ThemeColors{
   static const Color middleDarkGray = Color(0xFFA6A7AD);
   static const Color darkGray = Color(0xFF4B4B4B);
   static const Color black = Color(0xFF242424);
-  static const Color lightBlack = Color(0xFF424242);
+  static const Color lightBlack = Color.fromARGB(255, 87, 87, 87);
   static const Color containerWhite = Color(0xFFFFFFFF);
   static const Color containersGray = Color(0xB6FFFFFF);
 
@@ -19,8 +19,8 @@ abstract class ThemeColors{
 
   // New colors
   static const Color infoContainerBackgroundGray = Color.fromARGB(255, 226, 226, 226);
-  static const Color accent = Color(0xff8cbaf0);
-  static const Color accentForText = Color(0xFF4A9BF8);
+  static const Color accent = Color(0xff7FB5FF);
+  static const Color accentForText = Color(0xff4e91ed);
   static const Color redForBackground = Color(0xfff8cfdf);
   static const Color redForText = Color(0xFFFF6078);
 
@@ -32,11 +32,11 @@ abstract class ThemeColors{
   );
 
   static const List<List<Color>> gradients = [
-    [Color(0xffff9966), Color(0xffff5e62)],
-    [Color(0xffff512f), Color(0xfff09819)],
-    [Color(0xff8E2DE2), Color(0xff4A00E0)],
-    [Color(0xff16a085), Color(0xfff4d03f)],
-    [Color(0xff4e54c8), Color(0xff8f94fb)],
+    [Color(0xffffc2c2), Color(0xffffd7a8)],
+    [Color(0xffeb4174), Color(0xffffe3e3)],
+    [Color(0xffc15cff), Color(0xffff5454)],
+    [Color(0xff9ef9d8), Color(0xffcaf6bf)],
+    [Color(0xff8a2eff), Color(0xffcce0ff)],
     [Color(0xffDAD299), Color(0xff8CA6DB)],
     [Color(0xffCAC531), Color(0xffF3F9A7)],
   ];

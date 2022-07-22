@@ -1,36 +1,37 @@
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
-
 import 'assets_paths.dart';
 
 
-const double topPaddingPercent = 0.075;
-const double bottomPaddingPercent = 0.015;
-const double sidesPaddingPercent = 0.05;
+const double topPaddingPercent = 0.07;
+const double bottomPaddingPercent = 0.025;
+const double sidesPaddingPercent = 0.075;
+
+const int maxAnimalsToShowInVertialList = 5;
 
 List<CategoryModel> categories = [
   CategoryModel(
-    name: 'Dogs', 
+    category: Category.dogs, 
     description: 'There are 5 dogs near you!', 
     imagePath: '$animalCategoriesPath/dog.png'
   ),
   CategoryModel(
-    name: 'Cats', 
+    category: Category.cats,
     description: 'There are 10 cats near you!', 
     imagePath: '$animalCategoriesPath/cat.png'
   ),
   CategoryModel(
-    name: 'Fishes', 
+    category: Category.fishes,
     description: 'There are 100 fishes near you!', 
     imagePath: '$animalCategoriesPath/fish.png'
   ),
   CategoryModel(
-    name: 'Birds', 
+    category: Category.birds,
     description: 'There are 1 bird near you!', 
     imagePath: '$animalCategoriesPath/bird.png'
   ),
   CategoryModel(
-    name: 'Rabbits', 
+    category: Category.rabbits,
     description: 'There are 25 rabbits near you!', 
     imagePath: '$animalCategoriesPath/rabbit.png'
   ),
@@ -42,41 +43,47 @@ List<AnimalModel> animals = [
     description: '', 
     imagePath: 'https://www.collinsdictionary.com/images/thumb/cat_156310937_250.jpg?version=4.0.267', 
     location: 'Tijuana, BC',
-    distanceInKm: 15
+    distanceInKm: 15,
+    category: Category.cats
   ),
   AnimalModel(
     name: 'Jasper', 
     description: '', 
     imagePath: 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png', 
     location: 'Tijuana, BC',
-    distanceInKm: 1
+    distanceInKm: 1,
+    category: Category.cats
   ),
   AnimalModel(
     name: 'Candy', 
     description: '', 
     imagePath: 'https://www.cdc.gov/healthypets/images/kitten-allert.jpg?_=67669', 
     location: 'Tijuana, BC',
-    distanceInKm: 12.5
+    distanceInKm: 12.5,
+    category: Category.cats
   ),
   AnimalModel(
     name: 'Kimbo', 
     description: '', 
     imagePath: 'https://4fi8v2446i0sw2rpq2a3fg51-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/9-weeks-Tweed.jpg', 
     location: 'Tijuana, BC',
-    distanceInKm: 1.12
+    distanceInKm: 1.12,
+    category: Category.cats
   ),
   AnimalModel(
     name: 'Camila', 
     description: '', 
-    imagePath: 'https://media.baamboozle.com/uploads/images/235599/1621054151_115168_url.jpeg', 
+    imagePath: 'https://st2.depositphotos.com/2222024/5819/i/450/depositphotos_58199799-stock-photo-beautiful-happy-reddish-havanese-puppy.jpg', 
     location: 'Tijuana, BC',
-    distanceInKm: 1
+    distanceInKm: 1,
+    category: Category.cats
   ),
   AnimalModel(
     name: 'Moose', 
     description: '', 
     imagePath: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/95142833-crate-training-cat-632x475.jpg', 
     location: 'Tijuana, BC',
-    distanceInKm: 5.25
+    distanceInKm: 5.25,
+    category: Category.cats
   ),
 ];

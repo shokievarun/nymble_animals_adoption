@@ -1,15 +1,13 @@
 import 'dart:ui';
-
 import 'package:animals_adoption_flutter/models/category_model.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 
 class CategoryContainer extends StatefulWidget {
 
-  final VoidCallback onTapFunction;
+  final Function(CategoryModel) onTapFunction;
   final List<Color> backgroundColors;
   final CategoryModel category;
 
@@ -33,6 +31,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
   Animation<double>? animation;
   AnimationController? controller;
+
   
   @override
   void initState() {
@@ -74,48 +73,60 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
     
     return GestureDetector(
       onTap: (){
-        widget.onTapFunction();
+        widget.onTapFunction(widget.category);
         controller!.forward();
       },
-      child: AnimatedScale(
-        scale: widget.scale,
+      child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-        child: AnimatedContainer(
+        transform: Matrix4.identity()..translate(
+          0,
+          elevationQuantity
+        ),
+        child: AnimatedScale(
+          scale: widget.scale,
           duration: const Duration(milliseconds: 250),
-          // transform: Matrix4.identity()..translate(
-          //   0,
-          //   elevationQuantity
-          // ),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: widget.backgroundColors,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomRight
-            ),
-            borderRadius: BorderRadius.circular(25)
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20, right: 15, left: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.category.name, style: TextStyles.whitew700(_responsive.dp(1.5))),
-                Text(widget.category.description, style: TextStyles.whitew600(_responsive.dp(0.9))),
-                const Spacer(),
-                Expanded(
-                  flex: 5,
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      Image.asset(
-                        widget.category.imagePath, 
-                        fit: BoxFit.fill,
-                      ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 4,
+                child: Image.asset(
+                  widget.category.imagePath, 
+                  fit: BoxFit.fill,
+                  scale: 1,
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: widget.backgroundColors[0].withOpacity(0.4),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                      )
                     ],
+                    gradient: LinearGradient(
+                      colors: widget.backgroundColors,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomRight
+                    ),
+                    borderRadius: BorderRadius.circular(10)
                   ),
-                )
-              ],
-            ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: _responsive.hp(0.1), horizontal: _responsive.wp(1)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(widget.category.name, style: TextStyles.whitew700(_responsive.dp(1.5)), textAlign: TextAlign.center, maxLines: 1),
+                        Text(widget.category.description, style: TextStyles.whitew600(_responsive.dp(0.9)), textAlign: TextAlign.center, maxLines: 1),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

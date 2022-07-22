@@ -50,166 +50,197 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
     
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    final Size _size = MediaQuery.of(context).size;
 
-    final double targetAnimationValue = (_size.height * 0.45) - _responsive.bPadding;
-    final double? dataContainerHeightValue = lerpDouble(_size.height, targetAnimationValue, _animation!.value);
+    final double targetAnimationValue = (_responsive.hp(60));
+    final double? dataContainerHeightValue = lerpDouble(_responsive.height, targetAnimationValue, _animation!.value);
     final double? dataContainerScaleValue = lerpDouble(0.7, 1, _animation!.value);
 
     return Scaffold(
       body: Stack(
         children: [
-          Hero(
-            tag: widget.animal.imagePath,
-            transitionOnUserGestures: false,
-            child: SizedBox(
-              height: _responsive.hp(50),
-              width: _responsive.width,
-              child: Image.network(
-                widget.animal.imagePath,
-                fit: BoxFit.fill,                
-              ),
-            ),
-          ),
+          Padding(
+            padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-          Positioned(
-            left: _responsive.sPadding,
-            top: _responsive.tPadding,
-            child: const CustomBackButton()
+                // Back button
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: _responsive.hp(5),
+                      width: _responsive.wp(33) - _responsive.sPadding,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          CustomBackButton(),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: _responsive.hp(5),
+                      width: _responsive.wp(33),
+                      child: Center(
+                        child: Text('Details', style: TextStyles.blackw700(_responsive.dp(2)))
+                      )
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: _responsive.hp(5)),
+
+                // Animal images
+                Hero(
+                  tag: widget.animal.imagePath,
+                  transitionOnUserGestures: false,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: SizedBox(
+                      height: _responsive.hp(40),
+                      width: _responsive.wp(100),
+                      child: Image.network(
+                        widget.animal.imagePath,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
           ),
 
           // Data container
           Padding(
-            padding: EdgeInsets.only(left: _responsive.sPadding, right: _responsive.sPadding),
+            padding: EdgeInsets.only(left: _responsive.sPadding, right: _responsive.sPadding, bottom: _responsive.bPadding),
             child: Transform.scale(
               scale: dataContainerScaleValue!,
               child: Transform.translate(
                 offset: Offset(0, dataContainerHeightValue!),
-                child: Container(
-                  height: _responsive.hp(53),
-                  width: _responsive.width,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(50)),
-                    color: ThemeColors.infoContainerBackgroundGray.withOpacity(0.8),
-                    border: Border.all(color: ThemeColors.accent, width: _responsive.wp(0.25)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
             
-                        // Name, location and favorite button
-                        Expanded(
-                          flex: 3,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                    // Name, location and favorite button
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 8,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(widget.animal.name, style: TextStyles.blackw900(_responsive.dp(3))),
+                                Row(
                                   children: [
-                                    Text(widget.animal.name, style: TextStyles.blackw900(_responsive.dp(3))),
-                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                    Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
+                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25)).copyWith(color: ThemeColors.accentForText)),
                                   ],
-                                ),
-                              ),
-                              const CustomFavoriteButton()
-                            ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-            
-                        // Data containers, sex, age and weight
-                        Expanded(
-                          flex: 2,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('Female', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                    Text('Sex', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: _responsive.hp(3.5)),
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('1 Years', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                    Text('Age', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                                  ],
-                                ),
-                                
-                              ),
-                              SizedBox(height: _responsive.hp(3.5)),
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('15 Kg', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                    Text('Weight', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
-                        ),
-            
-                        // User data
-                        Expanded(
-                          flex: 3,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                    Text('${widget.animal.name} owner.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: _responsive.hp(2.5)),
-                              Expanded(
-                                flex: 1,
-                                child:  Icon(Icons.message_rounded, color: ThemeColors.accent, size: _responsive.dp(2))
-                              ),
-                            ],
-                          )
-                        ),
-            
-                        // Show description
-                        SizedBox(height: _responsive.hp(2)),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                              Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                            ],
-                          )
-                        )
-                      ],
+                          const CustomFavoriteButton()
+                        ],
+                      ),
                     ),
-                  ),
+            
+                    // Data containers, sex, age and weight
+                    Expanded(
+                      flex: 2,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Female', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                Text('Sex', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: _responsive.hp(3.5)),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('1 Years', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                Text('Age', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                              ],
+                            ),
+                            
+                          ),
+                          SizedBox(height: _responsive.hp(3.5)),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('15 Kg', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                Text('Weight', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ),
+            
+                    // User data
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                Text('${widget.animal.name} owner.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: _responsive.hp(2.5)),
+                          Expanded(
+                            flex: 1,
+                            child:  Icon(Icons.message_rounded, color: ThemeColors.accentForText, size: _responsive.dp(2))
+                          ),
+                        ],
+                      )
+                    ),
+            
+                    // Show description
+                    SizedBox(height: _responsive.hp(2)),
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                          Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                        ],
+                      )
+                    ),
+                    const Expanded(
+                      flex: 15,
+                      child: SizedBox(),
+                    )
+                  ],
                 ),
               ),
             ),
