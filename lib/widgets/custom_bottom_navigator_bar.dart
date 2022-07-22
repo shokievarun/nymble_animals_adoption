@@ -45,7 +45,7 @@ class CustomBottomNavigatorBar extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: IconButton(
-                  icon: Icon(Icons.home, size: _responsive.dp(2.5),),
+                  icon: Icon(Icons.home, size: _responsive.dp(3.5)),
                   color: ThemeColors.accentForText, 
                   onPressed: () => _moveToNewRoute('home')
                 ),
