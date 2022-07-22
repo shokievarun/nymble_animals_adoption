@@ -1,12 +1,12 @@
 import 'package:animals_adoption_flutter/providers/navigator_bar_provider.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/widgets/bottom_navigator_bar_item.dart';
+import 'package:animals_adoption_flutter/widgets/custom_nav_bar_item.dart';
 import 'package:flutter/material.dart';
 
 
 class CustomBottomNavigatorBar extends StatelessWidget {
 
-  final List<NavBarItem> items = [
+  final List<NavBarItem> _items = [
     NavBarItem(
       icon: Icons.home,
       routeName: 'home',
@@ -35,11 +35,11 @@ class CustomBottomNavigatorBar extends StatelessWidget {
 
 
     void _moveToNewRoute(final int index){
-      if(ModalRoute.of(context)?.settings.name == '/${items[index].routeName}'){
+      if(ModalRoute.of(context)?.settings.name == '/${_items[index].routeName}'){
         return;
       }
       _navigatorBarProvider.currentRoute = index;
-      Navigator.pushNamed(context, '/${items[index].routeName}');
+      Navigator.pushNamed(context, '/${_items[index].routeName}');
     }
 
     return Padding(
@@ -63,8 +63,8 @@ class CustomBottomNavigatorBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Row(
             children: [
-               for(int x = 0; x < items.length; x++) 
-                items[x]..isSelected = x == _navigatorBarProvider.currentRoute
+               for(int x = 0; x < _items.length; x++) 
+                _items[x]..isSelected = x == _navigatorBarProvider.currentRoute
                         ..onPressCallback = () => _moveToNewRoute(x)
             ],
           )
