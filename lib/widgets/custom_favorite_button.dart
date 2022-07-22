@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 
 class CustomFavoriteButton extends StatefulWidget {
   
-  const CustomFavoriteButton({ Key? key }) : super(key: key);
+  final double size;
+
+  const CustomFavoriteButton({
+    Key? key,
+    required this.size
+  }) : super(key: key);
 
   @override
   State<CustomFavoriteButton> createState() => _CustomFavoriteButtonState();
@@ -33,15 +38,15 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-        height: _responsive.hp(5),
-        width: _responsive.wp(12),
+        height: widget.size,
+        width: widget.size,
         decoration: BoxDecoration(
           color: _isPressed! ? ThemeColors.redForBackground : ThemeColors.lightGray.withOpacity(0.5),
           borderRadius: BorderRadius.circular(25)
         ),
         child: Icon(
           Icons.favorite_border_rounded, 
-          size: _responsive.dp(2.5), 
+          size: widget.size * 0.70, 
           color: _isPressed! ? ThemeColors.redForText : ThemeColors.lightBlack.withOpacity(0.5)
         ),
       ),

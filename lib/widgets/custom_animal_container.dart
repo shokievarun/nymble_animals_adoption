@@ -1,6 +1,7 @@
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/screens/animal_details_page.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
+import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/text_styles.dart';
@@ -10,13 +11,11 @@ import '../utils/theme_colors.dart';
 class CustomAnimalContainer extends StatefulWidget {
 
   final AnimalModel animal;
-  final Color backgroundColor;
 
 
   const CustomAnimalContainer({
     Key? key, 
     required this.animal,
-    required this.backgroundColor
   }) : super(key: key);
 
   @override
@@ -93,16 +92,38 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: EdgeInsets.only(top: _responsive.hp(2.5), bottom: _responsive.hp(2.5), right: _responsive.wp(10)),
+                  padding: EdgeInsets.only(top: _responsive.hp(1.5), bottom: _responsive.hp(1.5), right: _responsive.wp(2.5)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(widget.animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.5))),
+                      Row(
+                        children: [
+                          Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
+                          Text('${widget.animal.location} (${widget.animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
+                        ],
+                      ),
                       SizedBox(height: _responsive.hp(1)),
-                      Text('${widget.animal.location} (${widget.animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
+                      Text(widget.animal.description, textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1)), maxLines: 2, overflow: TextOverflow.ellipsis),
                       const Spacer(),
-                      Text('Details', style: TextStyles.middleDarkGrayw500(_responsive.dp(1)).copyWith(color: ThemeColors.accentForText)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: _responsive.wp(15),
+                            height: _responsive.hp(3),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: ThemeColors.accent.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Text('Details', style: TextStyles.middleDarkGrayw500(_responsive.dp(1)).copyWith(color: ThemeColors.accentForText)),
+                          ),
+                          const Spacer(),
+                          CustomFavoriteButton(size: _responsive.dp(3))
+                        ],
+                      ),
                     ],
                   ),
                 ),

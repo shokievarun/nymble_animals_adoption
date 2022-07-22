@@ -40,7 +40,7 @@ List<CategoryModel> categories = [
 List<AnimalModel> animals = [
   AnimalModel(
     name: 'Kenya', 
-    description: '', 
+    description: 'No description.', 
     imagePath: 'https://www.collinsdictionary.com/images/thumb/cat_156310937_250.jpg?version=4.0.267', 
     location: 'Tijuana, BC',
     distanceInKm: 15,
@@ -48,7 +48,7 @@ List<AnimalModel> animals = [
   ),
   AnimalModel(
     name: 'Jasper', 
-    description: '', 
+    description: 'No description.', 
     imagePath: 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png', 
     location: 'Tijuana, BC',
     distanceInKm: 1,
@@ -56,7 +56,7 @@ List<AnimalModel> animals = [
   ),
   AnimalModel(
     name: 'Candy', 
-    description: '', 
+    description: 'No description.', 
     imagePath: 'https://www.cdc.gov/healthypets/images/kitten-allert.jpg?_=67669', 
     location: 'Tijuana, BC',
     distanceInKm: 12.5,
@@ -64,7 +64,7 @@ List<AnimalModel> animals = [
   ),
   AnimalModel(
     name: 'Kimbo', 
-    description: '', 
+    description: 'No description.', 
     imagePath: 'https://4fi8v2446i0sw2rpq2a3fg51-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/9-weeks-Tweed.jpg', 
     location: 'Tijuana, BC',
     distanceInKm: 1.12,
@@ -72,7 +72,7 @@ List<AnimalModel> animals = [
   ),
   AnimalModel(
     name: 'Camila', 
-    description: '', 
+    description: 'No description.', 
     imagePath: 'https://st2.depositphotos.com/2222024/5819/i/450/depositphotos_58199799-stock-photo-beautiful-happy-reddish-havanese-puppy.jpg', 
     location: 'Tijuana, BC',
     distanceInKm: 1,
@@ -80,7 +80,7 @@ List<AnimalModel> animals = [
   ),
   AnimalModel(
     name: 'Moose', 
-    description: '', 
+    description: 'No description.', 
     imagePath: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/95142833-crate-training-cat-632x475.jpg', 
     location: 'Tijuana, BC',
     distanceInKm: 5.25,

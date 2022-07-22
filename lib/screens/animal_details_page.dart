@@ -147,7 +147,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                               ],
                             ),
                           ),
-                          const CustomFavoriteButton()
+                          CustomFavoriteButton(size: _responsive.dp(4))
                         ],
                       ),
                     ),

@@ -91,12 +91,8 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.zero,
               separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
               itemBuilder: (_, x){
-                
-                final Color containerColor = ThemeColors.containersBackground[Random().nextInt(ThemeColors.containersBackground.length - 1)].withOpacity(0.25);
-                
                 return CustomAnimalContainer(
                   animal: _animalsToShow![x], 
-                  backgroundColor: containerColor
                 );
               },
             ),
@@ -213,10 +209,19 @@ class _HomePageState extends State<HomePage> {
                   Text('Pet list:', style: TextStyles.blackw900(_responsive.dp(2))),
                   if(_animalsToShow!.isNotEmpty)...[
                     const Spacer(),
-                    TextButton(
-                      child: Text('View all', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5)).copyWith(color: ThemeColors.accentForText)),
-                      onPressed: () => Navigator.of(context).pushNamed('/viewAllAnimals'),
-                    )
+                    Container(
+                      width: _responsive.wp(15),
+                      height: _responsive.hp(4),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: ThemeColors.accent.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: TextButton(
+                        child: Text('View all', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25)).copyWith(color: ThemeColors.accentForText)),
+                        onPressed: () => Navigator.of(context).pushNamed('/viewAllAnimals'),
+                      )
+                    ),
                   ]
                 ],
               ),
@@ -224,7 +229,8 @@ class _HomePageState extends State<HomePage> {
 
               // ! Implementar carga de solo 6 items
 
-              _getAnimalList()
+              _getAnimalList(),
+              SizedBox(height: _responsive.hp(3.5)),
             ],
           ),
         ],

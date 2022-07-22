@@ -26,7 +26,7 @@ class CustomBottomNavigatorBar extends StatelessWidget {
         height: _responsive.hp(10),
         width: _responsive.width,
         decoration: BoxDecoration(
-          color: ThemeColors.containerWhite,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
