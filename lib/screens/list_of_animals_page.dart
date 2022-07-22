@@ -7,7 +7,8 @@ class ListOfAnimalsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CustomScaffold(
-      body: Text('New page'),
+      title: 'List of animals',
+      body: Text(''),
       withBackButton: true,
     );
   }

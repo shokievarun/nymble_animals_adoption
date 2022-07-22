@@ -9,7 +9,8 @@ class MapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CustomScaffold(
-      body: Text('Map page'),
+      title: 'My location',
+      body: Text(''),
       withBackButton: true,
       bottomNavigator: CustomBottomNavigatorBar(),
     );
