@@ -3,7 +3,7 @@ import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
-import 'package:animals_adoption_flutter/widgets/custom_animal_info_container.dart';
+import 'package:animals_adoption_flutter/widgets/custom_animal_info_item.dart';
 import 'package:animals_adoption_flutter/widgets/custom_back_button.dart';
 import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -22,27 +22,46 @@ class AnimalDetailsPage extends StatefulWidget {
   State<AnimalDetailsPage> createState() => _AnimalDetailsPageState();
 }
 
-class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTickerProviderStateMixin{
+class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProviderStateMixin{
 
-  late AnimationController? _animationController;
-  late Animation<double>? _animation;
+  late AnimationController _infoContainerAnimationController;
+  late Animation<double> _infoContainerAnimation;
+
+  late AnimationController _textInformationAnimationController;
+  late Animation<double> _textContainerAnimation;
 
 
   @override
   void initState() {
-    _animationController = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController!)
-    ..addListener(() {
-      setState(() {
+    
+    _textInformationAnimationController = AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
+    _infoContainerAnimationController = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
+
+    _textContainerAnimation = Tween<double>(begin: 1, end: 0).animate(
+      CurvedAnimation(
+        parent: _textInformationAnimationController, 
+        curve: Curves.ease
+      ))
+      ..addListener(() {
+        setState(() {
+        });
       });
-    });
-    _animationController!.forward();
+    _infoContainerAnimation = Tween<double>(begin: 1, end: 0).animate(_infoContainerAnimationController)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((status) {
+        if(status == AnimationStatus.completed){
+          _textInformationAnimationController.forward();
+        }
+      });
+    _infoContainerAnimationController.forward();
     super.initState();
   }
 
   @override
   void dispose() {
-    _animationController!.dispose();
+    _infoContainerAnimationController.dispose();
     super.dispose();
   }
 
@@ -53,8 +72,10 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
 
 
     final double targetAnimationValue = _responsive.hp(52.5);
-    final double? dataContainerHeightValue = lerpDouble(_responsive.height, targetAnimationValue, _animation!.value);
-    final double? dataContainerScaleValue = lerpDouble(0.7, 1, _animation!.value);
+    final double dataContainerHeightValue = lerpDouble(targetAnimationValue, _responsive.height, _infoContainerAnimation.value)!;
+    final double dataContainerScaleValue = lerpDouble(1, 0.7, _infoContainerAnimation.value)!;
+
+    final double textPosition = _responsive.wp(50) * _textContainerAnimation.value;
 
     return Scaffold(
       body: Padding(
@@ -114,98 +135,113 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
 
             // Data container
             Transform.scale(
-              scale: dataContainerScaleValue!,
+              scale: dataContainerScaleValue,
               child: Transform.translate(
-                offset: Offset(0, dataContainerHeightValue!),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-            
-                    // Name, location and favorite button
-                    Expanded(
-                      flex: 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 8,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(widget.animal.name, style: TextStyles.blackw900(_responsive.dp(3))),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
-                                  ],
-                                )
-                              ],
+                offset: Offset(0, dataContainerHeightValue),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))
+                  ),
+                  child: Opacity(
+                    opacity: 1 - _textContainerAnimation.value,
+                    child: Transform(
+                      transform: Matrix4.identity()..translate(
+                        textPosition
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: _responsive.sPadding, vertical: _responsive.tPadding / 2),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                                  
+                            // Name, location and favorite button
+                            Expanded(
+                              flex: 3,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    flex: 8,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(widget.animal.name, style: TextStyles.blackw900(_responsive.dp(3))),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
+                                            Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  CustomFavoriteButton(size: _responsive.dp(4))
+                                ],
+                              ),
                             ),
-                          ),
-                          CustomFavoriteButton(size: _responsive.dp(4))
-                        ],
+                                  
+                            // Data containers, sex, age and weight
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                children: 
+                                  // Get and show props 
+                                  widget.animal.dataToShow.entries.map((e) 
+                                          => CustomAnimalInfoContainer(dataValue: e.value.toString(), dataName: e.key)).toList()
+                              )
+                            ),
+                                  
+                            // User data
+                            Expanded(
+                              flex: 3,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                        Text('${widget.animal.name} owner.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child:  Icon(Icons.message_rounded, color: ThemeColors.accentForText, size: _responsive.dp(2))
+                                  ),
+                                ],
+                              )
+                            ),
+                                  
+                            // Show description
+                            SizedBox(height: _responsive.hp(2)),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                  Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                ],
+                              )
+                            ),
+                            const Expanded(
+                              flex: 15,
+                              child: SizedBox(),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-            
-                    // Data containers, sex, age and weight
-                    Expanded(
-                      flex: 2,
-                      child: Row(
-                        children: 
-
-                          // Get and show props 
-                          widget.animal.dataToShow.entries.map((e) 
-                                  => CustomAnimalInfoContainer(dataValue: e.value.toString(), dataName: e.key)).toList()
-                      )
-                    ),
-            
-                    // User data
-                    Expanded(
-                      flex: 3,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                Text('${widget.animal.name} owner.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: _responsive.hp(2.5)),
-                          Expanded(
-                            flex: 1,
-                            child:  Icon(Icons.message_rounded, color: ThemeColors.accentForText, size: _responsive.dp(2))
-                          ),
-                        ],
-                      )
-                    ),
-            
-                    // Show description
-                    SizedBox(height: _responsive.hp(2)),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                          Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
-                        ],
-                      )
-                    ),
-                    const Expanded(
-                      flex: 15,
-                      child: SizedBox(),
-                    )
-                  ],
+                  ),
                 ),
               ),
             )

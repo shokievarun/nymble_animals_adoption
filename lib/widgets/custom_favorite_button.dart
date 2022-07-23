@@ -28,8 +28,6 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
   @override
   Widget build(BuildContext context) {
 
-    final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
-
     return GestureDetector(
       onTap: (){
         setState(() {

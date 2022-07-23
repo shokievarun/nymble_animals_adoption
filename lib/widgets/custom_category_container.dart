@@ -76,8 +76,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
         widget.onTapFunction(widget.category);
         controller!.forward();
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
+      child: Transform(
         transform: Matrix4.identity()..translate(
           0,
           elevationQuantity

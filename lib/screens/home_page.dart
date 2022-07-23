@@ -74,23 +74,25 @@ class _HomePageState extends State<HomePage> {
 
     Widget _getAnimalList() {
 
+      final int _itemsToShow = _animalsToShow!.length > 6 ? 6 : _animalsToShow!.length;
+
       return _animalsToShow!.isEmpty
         ? Center(
             child: Text('No animals in this category.', style: TextStyles.lightGrayw600(_responsive.dp(1.5)))
           )
         : SizedBox(
-            height: _responsive.hp(15) * (_animalsToShow!.length > 5 ? 5 : _animalsToShow!.length),
+            height: _responsive.hp(15) * _itemsToShow,
             width: _responsive.width,
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: _animalsToShow!.length > 5 ? 5 : _animalsToShow!.length,
+              itemCount: _itemsToShow + 1,
               scrollDirection: Axis.vertical,
               shrinkWrap: false,
               clipBehavior: Clip.none,
               padding: EdgeInsets.zero,
               separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
               itemBuilder: (_, x){
-                if(x + 1 <= 4){
+                if(x + 1 < _itemsToShow){
                   return CustomAnimalContainer(
                     animal: _animalsToShow![x],
                     withHeroAnimation: true,

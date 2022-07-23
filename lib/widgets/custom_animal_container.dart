@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
+
+
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/screens/animal_details_page.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
-import 'package:flutter/material.dart';
 
 import '../utils/text_styles.dart';
 import '../utils/theme_colors.dart';
@@ -58,22 +62,11 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     Widget getAnimalImages(){
-      return Image.network(
-        widget.animal.imagePath,
-        fit: BoxFit.contain,
-        loadingBuilder: (_, child, loadingProgress){
-          if (loadingProgress == null){
-            return child;
-          }
-          return Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes!
-                  : null,
-            ),
-          );
-        },
+      return CachedNetworkImage(
+        imageUrl: widget.animal.imagePath,
+        progressIndicatorBuilder: (context, url, downloadProgress) => 
+          CircularProgressIndicator(value: downloadProgress.progress),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       );
     }
 
