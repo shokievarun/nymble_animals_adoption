@@ -18,7 +18,7 @@ class ListOfAnimalsPage extends StatelessWidget {
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     return CustomScaffold(
-      title: 'List of animals',
+      title: 'All the animals',
       withBackButton: true,
       body: [
         SizedBox(

@@ -1,5 +1,4 @@
 
-import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 

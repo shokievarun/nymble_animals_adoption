@@ -79,20 +79,38 @@ class _HomePageState extends State<HomePage> {
             child: Text('No animals in this category.', style: TextStyles.lightGrayw600(_responsive.dp(1.5)))
           )
         : SizedBox(
-            height: _responsive.hp(15) * _animalsToShow!.length,
+            height: _responsive.hp(15) * (_animalsToShow!.length > 5 ? 5 : _animalsToShow!.length),
             width: _responsive.width,
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: _animalsToShow!.length,
+              itemCount: _animalsToShow!.length > 5 ? 5 : _animalsToShow!.length,
               scrollDirection: Axis.vertical,
               shrinkWrap: false,
               clipBehavior: Clip.none,
               padding: EdgeInsets.zero,
               separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
               itemBuilder: (_, x){
-                return CustomAnimalContainer(
-                  animal: _animalsToShow![x],
-                  withHeroAnimation: true,
+                if(x + 1 <= 4){
+                  return CustomAnimalContainer(
+                    animal: _animalsToShow![x],
+                    withHeroAnimation: true,
+                  );
+                }
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))
+                    );
+                  },
+                  child: Container(
+                    height: _responsive.hp(10),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: ThemeColors.middleDarkGray.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Text('Press to see all the animals.', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.middleDarkGray))
+                  ),
                 );
               },
             ),
@@ -173,9 +191,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(height: _responsive.hp(3.5)),
-
-                  // ! Implementar carga de solo 6 items
-
                   _getAnimalList(),
                   SizedBox(height: _responsive.hp(3.5)),
                 ],

@@ -99,14 +99,6 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
                 flex: 3,
                 child: Container(
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: widget.backgroundColors[0].withOpacity(0.25),
-                        spreadRadius: 2.5,
-                        blurRadius: 3.5,
-                        offset: const Offset(0, 5)
-                      )
-                    ],
                     gradient: LinearGradient(
                       colors: widget.backgroundColors,
                       begin: Alignment.topCenter,
