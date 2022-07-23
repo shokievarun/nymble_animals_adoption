@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         routes: {
     
           '/home' : ((context) => const HomePage()),
-          '/viewAllAnimals' : ((context) => const ListOfAnimalsPage()),
+          '/viewAllAnimals' : ((context) => const ListOfAnimalsPage(animalsToShow: [])),
           '/profile' : ((context) => const ProfilePage()),
           '/map' : ((context) => const MapPage()),
           '/messages' : ((context) => const MessagesPage()),

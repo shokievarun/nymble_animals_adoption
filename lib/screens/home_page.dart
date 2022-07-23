@@ -1,3 +1,4 @@
+import 'package:animals_adoption_flutter/screens/list_of_animals_page.dart';
 import 'package:animals_adoption_flutter/widgets/custom_announcements_galery.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
@@ -90,7 +91,8 @@ class _HomePageState extends State<HomePage> {
               separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
               itemBuilder: (_, x){
                 return CustomAnimalContainer(
-                  animal: _animalsToShow![x], 
+                  animal: _animalsToShow![x],
+                  withHeroAnimation: true,
                 );
               },
             ),
@@ -163,7 +165,9 @@ class _HomePageState extends State<HomePage> {
                           textColor: ThemeColors.lightGray,
                           backgroundColor: ThemeColors.middleDarkGray,
                           textSize: _responsive.dp(1.25),
-                          onPressedCallback: () => Navigator.of(context).pushNamed('/viewAllAnimals'), 
+                          onPressedCallback: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))
+                          )
                         )
                       ]
                     ],

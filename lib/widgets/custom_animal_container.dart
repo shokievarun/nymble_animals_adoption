@@ -12,11 +12,14 @@ import '../utils/theme_colors.dart';
 class CustomAnimalContainer extends StatefulWidget {
 
   final AnimalModel animal;
-
+  final bool? showInVertical;
+  final bool? withHeroAnimation;
 
   const CustomAnimalContainer({
     Key? key, 
     required this.animal,
+    this.showInVertical,
+    this.withHeroAnimation
   }) : super(key: key);
 
   @override
@@ -53,12 +56,89 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
+
+    Widget getAnimalImages(){
+      return Image.network(
+        widget.animal.imagePath,
+        fit: BoxFit.contain,
+        loadingBuilder: (_, child, loadingProgress){
+          if (loadingProgress == null){
+            return child;
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
+      );
+    }
+
+    List<Widget> getAnimalInformationWidget(){
+      return [
+        Expanded(
+          flex: 3,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: widget.withHeroAnimation ?? false 
+             ? Hero(
+              tag: widget.animal.imagePath,
+              child: getAnimalImages()
+            ) : getAnimalImages(),
+          )
+        ),
+        Expanded(
+          flex: 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.5))),
+              SizedBox(height: _responsive.hp(1)),
+              Text(
+                widget.animal.description, 
+                textAlign: TextAlign.center, 
+                style: TextStyles.lightBlackw600(_responsive.dp(1)), 
+                maxLines: widget.showInVertical ?? false ? 3 : 2, 
+                overflow: TextOverflow.ellipsis
+              ),
+              Row(
+                children: [
+                  Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
+                  Text('${widget.animal.location} (${widget.animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
+                ],
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomTextButton(
+                    text: 'Details', 
+                    textColor: ThemeColors.accentForText,
+                    backgroundColor: ThemeColors.accent,
+                    textSize: _responsive.dp(1),
+                    onPressedCallback: () => Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: widget.animal))
+                    ), 
+                  ),
+                  const Spacer(),
+                  CustomFavoriteButton(size: _responsive.dp(3))
+                ],
+              ),
+            ],
+          ),
+        )
+      ];
+    }
     
     return Opacity(
       opacity: _fadeValue!.value,
       child: Container(
         height: _responsive.hp(15),
-        width: _responsive.width,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -71,73 +151,13 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
             )
           ]
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 3,
-              child: Hero(
-                tag: widget.animal.imagePath,
-                child: Image.network(
-                  widget.animal.imagePath,
-                  fit: BoxFit.contain,
-                  loadingBuilder: (_, child, loadingProgress){
-                    if (loadingProgress == null){
-                      return child;
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: EdgeInsets.only(top: _responsive.hp(1.5), bottom: _responsive.hp(1.5), right: _responsive.wp(2.5)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.5))),
-                    Row(
-                      children: [
-                        Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                        Text('${widget.animal.location} (${widget.animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
-                      ],
-                    ),
-                    SizedBox(height: _responsive.hp(1)),
-                    Text(widget.animal.description, textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1)), maxLines: 2, overflow: TextOverflow.ellipsis),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CustomTextButton(
-                          text: 'Details', 
-                          textColor: ThemeColors.accentForText,
-                          backgroundColor: ThemeColors.accent,
-                          textSize: _responsive.dp(1),
-                          onPressedCallback: () => Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: widget.animal))
-                          ), 
-                        ),
-                        const Spacer(),
-                        CustomFavoriteButton(size: _responsive.dp(3))
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+        child: 
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),
+            child: widget.showInVertical ?? false
+              ? Column(children: getAnimalInformationWidget())
+              : Row(children: getAnimalInformationWidget()),
+          )
       ),
     );
   }
