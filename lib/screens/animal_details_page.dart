@@ -3,6 +3,7 @@ import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
+import 'package:animals_adoption_flutter/widgets/custom_animal_info_container.dart';
 import 'package:animals_adoption_flutter/widgets/custom_back_button.dart';
 import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -51,16 +52,16 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
 
-    final double targetAnimationValue = (_responsive.hp(60));
+    final double targetAnimationValue = _responsive.hp(52.5);
     final double? dataContainerHeightValue = lerpDouble(_responsive.height, targetAnimationValue, _animation!.value);
     final double? dataContainerScaleValue = lerpDouble(0.7, 1, _animation!.value);
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
-            child: Column(
+      body: Padding(
+        padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
+        child: Stack(
+          children: [
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
@@ -110,12 +111,9 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
 
               ],
             ),
-          ),
 
-          // Data container
-          Padding(
-            padding: EdgeInsets.only(left: _responsive.sPadding, right: _responsive.sPadding, bottom: _responsive.bPadding),
-            child: Transform.scale(
+            // Data container
+            Transform.scale(
               scale: dataContainerScaleValue!,
               child: Transform.translate(
                 offset: Offset(0, dataContainerHeightValue!),
@@ -141,7 +139,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                                 Row(
                                   children: [
                                     Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25)).copyWith(color: ThemeColors.accentForText)),
+                                    Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                                   ],
                                 )
                               ],
@@ -156,44 +154,11 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                     Expanded(
                       flex: 2,
                       child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Female', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                Text('Sex', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: _responsive.hp(3.5)),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('1 Years', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                Text('Age', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                              ],
-                            ),
-                            
-                          ),
-                          SizedBox(height: _responsive.hp(3.5)),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('15 Kg', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                Text('Weight', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
-                              ],
-                            ),
-                          ),
-                        ],
+                        children: 
+
+                          // Get and show props 
+                          widget.animal.dataToShow.entries.map((e) 
+                                  => CustomAnimalInfoContainer(dataValue: e.value.toString(), dataName: e.key)).toList()
                       )
                     ),
             
@@ -211,7 +176,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                Text('${widget.animal.name} owner.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                                Text('${widget.animal.name} owner.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                               ],
                             ),
                           ),
@@ -232,7 +197,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                          Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.lightGrayw600(_responsive.dp(1.25))),
+                          Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                         ],
                       )
                     ),
@@ -243,9 +208,9 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with SingleTicker
                   ],
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

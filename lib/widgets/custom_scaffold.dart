@@ -10,7 +10,7 @@ export 'package:animals_adoption_flutter/utils/theme_colors.dart';
 
 class CustomScaffold extends StatelessWidget {
 
-  final Widget body;
+  final List<Widget> body;
   final Widget? bottomNavigator;
   final bool? withBackButton;
   final String? title;
@@ -65,7 +65,7 @@ class CustomScaffold extends StatelessWidget {
                   ],
                 ),
               ],
-              body,
+              ...body,
             ],
           ),
         ),

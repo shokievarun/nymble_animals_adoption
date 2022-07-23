@@ -8,8 +8,8 @@ class ListOfAnimalsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScaffold(
       title: 'List of animals',
-      body: Text(''),
       withBackButton: true,
+      body: [],
     );
   }
 }

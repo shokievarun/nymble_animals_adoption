@@ -10,6 +10,9 @@ class AnimalModel extends ModelBase{
   String description;
   String imagePath;
   String location;
+  String sex;
+  double age;
+  double weight;
   double distanceInKm;
 
 
@@ -19,11 +22,20 @@ class AnimalModel extends ModelBase{
     required this.imagePath,
     required this.location,
     required this.distanceInKm,
+    required this.sex,
+    required this.age,
+    required this.weight,
     required this.category
   });
 
   @override
   List<Object?> get props => throw UnimplementedError();
+
+  Map<String, Object?> get dataToShow => {
+    'Sex'    : sex,
+    'Age'    : age,
+    'Weight' : weight
+  };
 
   @override
   Map<String, dynamic> toJson() {

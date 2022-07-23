@@ -38,9 +38,9 @@ class NavBarItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              iconSize: isSelected! ? _responsive.dp(3.5) : _responsive.dp(2.5),
-              
+              iconSize: _responsive.dp(2.5),
               padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
               icon: Icon(icon),
               color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack, 
               onPressed: onPressCallback!

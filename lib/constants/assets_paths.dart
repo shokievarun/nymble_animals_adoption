@@ -1,5 +1,8 @@
 
 
 
-const String animalCategoriesPath = 'assets/images/animal_categories';
-const String animalImagesPath = 'assets/images/animals';
+const String imagesPath = 'assets/images';
+
+const String animalCategoriesPath = '$imagesPath/animal_categories';
+const String animalImagesPath = '$imagesPath/animals';
+const String illustrationsPath = '$imagesPath/illustrations';

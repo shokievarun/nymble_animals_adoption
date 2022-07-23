@@ -101,9 +101,10 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: widget.backgroundColors[0].withOpacity(0.4),
-                        spreadRadius: 5,
-                        blurRadius: 7,
+                        color: widget.backgroundColors[0].withOpacity(0.25),
+                        spreadRadius: 2.5,
+                        blurRadius: 3.5,
+                        offset: const Offset(0, 5)
                       )
                     ],
                     gradient: LinearGradient(
