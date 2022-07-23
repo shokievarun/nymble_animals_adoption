@@ -28,7 +28,7 @@ List<CategoryModel> categories = [
   CategoryModel(
     category: Category.birds,
     description: 'There are 1 bird near you!', 
-    imagePath: '$animalCategoriesPath/bird.png'
+    imagePath: '$animalCategoriesPath/parrot.png'
   ),
   CategoryModel(
     category: Category.rabbits,
