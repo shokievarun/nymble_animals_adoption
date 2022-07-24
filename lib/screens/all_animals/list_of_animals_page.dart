@@ -17,13 +17,15 @@ class ListOfAnimalsPage extends StatelessWidget {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
+    final double gridViewHeight = _responsive.hp(32.5) * (animalsToShow.length ~/ 2);
+
     return CustomScaffold(
       title: 'All the animals',
       withBackButton: true,
       body: [
         SizedBox(
-          height: _responsive.hp(32.5) * (animalsToShow.length ~/ 2),
-          width: _responsive.wp(100),
+          height: gridViewHeight,
+          width: _responsive.width,
           child: GridView.builder(
             shrinkWrap: false,
             clipBehavior: Clip.none,

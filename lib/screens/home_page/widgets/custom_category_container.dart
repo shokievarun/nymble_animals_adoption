@@ -31,7 +31,6 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
   Animation<double>? animation;
   AnimationController? controller;
-
   
   @override
   void initState() {

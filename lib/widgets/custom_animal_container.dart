@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
-import 'package:animals_adoption_flutter/screens/animal_details_page.dart';
+import 'package:animals_adoption_flutter/screens/animal_details/animal_details_page.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
@@ -113,7 +113,7 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
                     textColor: ThemeColors.accentForText,
                     backgroundColor: ThemeColors.accent,
                     textSize: _responsive.dp(1),
-                    onPressedCallback: () => Navigator.push(
+                    onPressedCallback: () async => await Navigator.push(
                       context, 
                       MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: widget.animal))
                     ), 
@@ -132,6 +132,7 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
       opacity: _fadeValue!.value,
       child: Container(
         height: _responsive.hp(15),
+        padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -145,12 +146,9 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
           ]
         ),
         child: 
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),
-            child: widget.showInVertical ?? false
-              ? Column(children: getAnimalInformationWidget())
-              : Row(children: getAnimalInformationWidget()),
-          )
+          widget.showInVertical ?? false
+            ? Column(children: getAnimalInformationWidget())
+            : Row(children: getAnimalInformationWidget())
       ),
     );
   }

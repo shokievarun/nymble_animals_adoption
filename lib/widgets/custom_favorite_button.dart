@@ -1,4 +1,3 @@
-import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,7 @@ class CustomFavoriteButton extends StatefulWidget {
 
 class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
 
-  bool? _isPressed;
+  late bool _isPressed;
 
   @override
   void initState() {
@@ -31,7 +30,7 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
     return GestureDetector(
       onTap: (){
         setState(() {
-          _isPressed = !_isPressed!;
+          _isPressed = !_isPressed;
         });
       },
       child: AnimatedContainer(
@@ -39,13 +38,13 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
         height: widget.size,
         width: widget.size,
         decoration: BoxDecoration(
-          color: _isPressed! ? ThemeColors.redForBackground : ThemeColors.lightGray.withOpacity(0.5),
+          color: _isPressed ? ThemeColors.redForBackground : ThemeColors.lightGray.withOpacity(0.5),
           shape: BoxShape.circle
         ),
         child: Icon(
           Icons.favorite_border_rounded, 
           size: widget.size * 0.70, 
-          color: _isPressed! ? ThemeColors.redForText : ThemeColors.lightBlack.withOpacity(0.5)
+          color: _isPressed ? ThemeColors.redForText : ThemeColors.lightBlack.withOpacity(0.5)
         ),
       ),
     );

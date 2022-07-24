@@ -1,10 +1,8 @@
-
-
-
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
+import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 
-import '../widgets/custom_bottom_navigator_bar.dart';
+import '../../widgets/custom_bottom_navigator_bar.dart';
 
 class MessagesPage extends StatelessWidget {
   const MessagesPage({Key? key}) : super(key: key);

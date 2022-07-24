@@ -1,11 +1,10 @@
-import 'package:animals_adoption_flutter/screens/list_of_animals_page.dart';
-import 'package:animals_adoption_flutter/widgets/custom_announcements_galery.dart';
+import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
-import 'package:animals_adoption_flutter/widgets/custom_category_container.dart';
 import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 
+import 'widgets/widgets.dart';
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
@@ -99,8 +98,8 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
                 return GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(
+                  onTap: () async {
+                    await Navigator.of(context).push(
                       MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))
                     );
                   },
@@ -185,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                           textColor: ThemeColors.lightGray,
                           backgroundColor: ThemeColors.middleDarkGray,
                           textSize: _responsive.dp(1.25),
-                          onPressedCallback: () => Navigator.of(context).push(
+                          onPressedCallback: () async => await Navigator.of(context).push(
                             MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))
                           )
                         )

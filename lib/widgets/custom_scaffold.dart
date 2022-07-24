@@ -33,41 +33,39 @@ class CustomScaffold extends StatelessWidget {
         clipBehavior: Clip.none,
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if(withBackButton ?? false)...[
-                
-                // Back button
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: _responsive.hp(5),
-                      width: _responsive.wp(33) - _responsive.sPadding,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          CustomBackButton(),
-                        ],
-                      ),
+        padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if(withBackButton ?? false)...[
+              
+              // Back button
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: _responsive.hp(5),
+                    width: _responsive.wp(33) - _responsive.sPadding,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        CustomBackButton(),
+                      ],
                     ),
-                    SizedBox(
-                      height: _responsive.hp(5),
-                      width: _responsive.wp(33),
-                      child: Center(
-                        child: Text(title ?? 'No title', style: TextStyles.blackw700(_responsive.dp(2)))
-                      )
-                    ),
-                  ],
-                ),
-              ],
-              ...body,
+                  ),
+                  SizedBox(
+                    height: _responsive.hp(5),
+                    width: _responsive.wp(33),
+                    child: Center(
+                      child: Text(title ?? 'No title', style: TextStyles.blackw700(_responsive.dp(2)))
+                    )
+                  ),
+                ],
+              ),
             ],
-          ),
+            ...body
+          ],
         ),
       ),
       bottomNavigationBar: bottomNavigator ?? const SizedBox(),

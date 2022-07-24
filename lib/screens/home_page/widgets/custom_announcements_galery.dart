@@ -42,21 +42,19 @@ class CustomAnnouncementsGalery extends StatelessWidget {
             child: Container(
               height: _responsive.hp(10),
               width: _responsive.width,
+              padding: EdgeInsets.symmetric(horizontal: _responsive.wp(5), vertical: _responsive.hp(1.5)),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: Colors.white
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: _responsive.hp(1.5), horizontal: _responsive.wp(10)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Announcement', style: TextStyles.blackw900(_responsive.dp(1.5)), textAlign: TextAlign.center),
-                    SizedBox(height: _responsive.hp(0.5)),
-                    Text('Check all the pets available in our application.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1 )), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis)
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Announcement', style: TextStyles.blackw900(_responsive.dp(1.5)), textAlign: TextAlign.center),
+                  SizedBox(height: _responsive.hp(0.5)),
+                  Text('Check all the pets available in our application.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1 )), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis)
+                ],
               ),
             ),
           ),
