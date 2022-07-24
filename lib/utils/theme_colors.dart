@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 abstract class ThemeColors{
 
   // Normal Colors
-  static const Color lightGray = Color(0xFFC2C3CA);
-  static const Color middleDarkGray = Color(0xFFA6A7AD);
-  static const Color darkGray = Color(0xFF4B4B4B);
+  static const Color lightGrey = Color(0xFFC2C3CA);
+  static const Color middleDarkGrey = Color(0xFFA6A7AD);
+  static const Color darkGrey = Color(0xFF4B4B4B);
   static const Color black = Color(0xFF242424);
   static const Color lightBlack = Color.fromARGB(255, 87, 87, 87);
 

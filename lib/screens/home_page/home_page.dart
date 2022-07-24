@@ -107,10 +107,10 @@ class _HomePageState extends State<HomePage> {
                     height: _responsive.hp(10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: ThemeColors.middleDarkGray.withOpacity(0.3),
+                      color: ThemeColors.middleDarkGrey.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(20)
                     ),
-                    child: Text('Press to see all the animals.', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.middleDarkGray))
+                    child: Text('Press to see all the animals.', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.middleDarkGrey))
                   ),
                 );
               },
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                   
                   // Body categories
                   SizedBox(height: _responsive.hp(2.5)),
-                  Text('Location:', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5)).copyWith(color: ThemeColors.darkGray)),
+                  Text('Location:', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5)).copyWith(color: ThemeColors.darkGrey)),
                   Text('Tijuana, BC MX', style: TextStyles.blackw900(_responsive.dp(2.5))),
                   SizedBox(height: _responsive.hp(2.5)),
                   Text('Categories:', style: TextStyles.blackw900(_responsive.dp(2))),
@@ -181,8 +181,8 @@ class _HomePageState extends State<HomePage> {
                         const Spacer(),
                         CustomTextButton(
                           text: 'View all', 
-                          textColor: ThemeColors.lightGray,
-                          backgroundColor: ThemeColors.middleDarkGray,
+                          textColor: ThemeColors.lightGrey,
+                          backgroundColor: ThemeColors.middleDarkGrey,
                           textSize: _responsive.dp(1.25),
                           onPressedCallback: () async => await Navigator.of(context).push(
                             MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))

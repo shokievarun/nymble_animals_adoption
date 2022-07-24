@@ -8,7 +8,7 @@ class TextStyles{
       fontFamily: 'Rocko',
       fontSize: size,
       fontWeight: FontWeight.w500,
-      color: ThemeColors.middleDarkGray
+      color: ThemeColors.middleDarkGrey
     );
   }
 
@@ -16,7 +16,7 @@ class TextStyles{
     return TextStyle(
       fontFamily: 'Rocko',
       fontSize: size,
-      color: ThemeColors.lightGray,
+      color: ThemeColors.lightGrey,
       fontWeight: FontWeight.w600,
     );
   }

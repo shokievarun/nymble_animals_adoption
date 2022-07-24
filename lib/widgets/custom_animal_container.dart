@@ -33,8 +33,9 @@ class CustomAnimalContainer extends StatefulWidget {
 class _CustomAnimalContainerState extends State<CustomAnimalContainer> with SingleTickerProviderStateMixin{
 
   // Animation
-  AnimationController? _controller;
-  Animation<double>? _fadeValue;
+  late AnimationController _controller;
+  late Animation<double> _fadeValue;
+
 
   @override
   void initState() {
@@ -45,14 +46,14 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
       setState(() {
       });
     })..forward();
-    _fadeValue = Tween<double>(begin: 0.15, end: 1).animate(_controller!);
+    _fadeValue = Tween<double>(begin: 0.15, end: 1).animate(_controller);
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller!.stop();
-    _controller!.dispose();
+    _controller.stop();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -65,7 +66,12 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
       return CachedNetworkImage(
         imageUrl: widget.animal.imagePath,
         progressIndicatorBuilder: (context, url, downloadProgress) => 
-          CircularProgressIndicator(value: downloadProgress.progress),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              CircularProgressIndicator(value: downloadProgress.progress, color: ThemeColors.accentForText, backgroundColor: ThemeColors.accent.withOpacity(0.5))
+            ]
+          ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       );
     }
@@ -129,7 +135,7 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
     }
     
     return Opacity(
-      opacity: _fadeValue!.value,
+      opacity: _fadeValue.value,
       child: Container(
         height: _responsive.hp(15),
         padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),

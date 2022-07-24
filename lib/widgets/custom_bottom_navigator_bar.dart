@@ -43,7 +43,7 @@ class CustomBottomNavigatorBar extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
+      padding: EdgeInsets.only(bottom: _responsive.bPadding / 2, left: _responsive.sPadding, right: _responsive.sPadding),
       child: Container(
         height: _responsive.hp(10),
         width: _responsive.width,
