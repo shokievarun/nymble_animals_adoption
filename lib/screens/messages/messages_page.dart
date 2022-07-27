@@ -29,7 +29,6 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
         curve: Curves.ease
       ))..addListener(() { 
         setState(() {
-          
         });
       });
 
@@ -41,6 +40,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
 
   @override
   void dispose() {
+    _controller.removeListener(() { });
     _controller.dispose();
     super.dispose();
   }

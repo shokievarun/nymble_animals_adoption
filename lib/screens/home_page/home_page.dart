@@ -1,4 +1,5 @@
 import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
+import 'package:animals_adoption_flutter/utils/animations/fade_animation.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
 import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
@@ -18,10 +19,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
 
   // Controllers
   PageController? _categoriesController; 
+  late FadeAnimationController _fadeAnimationController;
 
   // Variables
   List<AnimalModel>? _animalsToShow;
@@ -31,6 +33,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    _fadeAnimationController = FadeAnimationController(
+      listener: animationListener, 
+      tickerProvider: this
+    );
     _categoriesController = PageController(
       initialPage: _currentPage, 
       viewportFraction: 1 / 3,
@@ -59,9 +65,16 @@ class _HomePageState extends State<HomePage> {
     _animalsToShow = animals.where((a) => a.category.name == _selectedCategory!.category.name).toList();
   }
 
+  void animationListener(){
+    setState(() {
+      print(_fadeAnimationController.animation.value);
+    });
+  }
+
   @override
   void dispose() {
     _categoriesController!.dispose();
+    _fadeAnimationController.dispose();
     super.dispose();
   }
 
@@ -79,43 +92,46 @@ class _HomePageState extends State<HomePage> {
         ? Center(
             child: Text('No animals in this category.', style: TextStyles.lightGreyw600(_responsive.dp(1.5)))
           )
-        : SizedBox(
-            height: _responsive.hp(15) * _itemsToShow,
-            width: _responsive.width,
-            child: ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _itemsToShow + 1,
-              scrollDirection: Axis.vertical,
-              shrinkWrap: false,
-              clipBehavior: Clip.none,
-              padding: EdgeInsets.zero,
-              separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
-              itemBuilder: (_, x){
-                if(x + 1 < _itemsToShow){
-                  return CustomAnimalContainer(
-                    animal: _animalsToShow![x],
-                    withHeroAnimation: true,
-                  );
-                }
-                return GestureDetector(
-                  onTap: () async {
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))
+        : Opacity(
+          opacity: _fadeAnimationController.animation.value,
+          child: SizedBox(
+              height: _responsive.hp(15) * _itemsToShow,
+              width: _responsive.width,
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: _itemsToShow + 1,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: false,
+                clipBehavior: Clip.none,
+                padding: EdgeInsets.zero,
+                separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
+                itemBuilder: (_, x){
+                  if(x + 1 < _itemsToShow){
+                    return CustomAnimalContainer(
+                      animal: _animalsToShow![x],
+                      withHeroAnimation: true,
                     );
-                  },
-                  child: Container(
-                    height: _responsive.hp(10),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: ThemeColors.middleDarkGrey.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(20)
+                  }
+                  return GestureDetector(
+                    onTap: () async {
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: _animalsToShow!)))
+                      );
+                    },
+                    child: Container(
+                      height: _responsive.hp(10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: ThemeColors.middleDarkGrey.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      child: Text('Press to see all the animals.', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.middleDarkGrey))
                     ),
-                    child: Text('Press to see all the animals.', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.middleDarkGrey))
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          );
+        );
     }
 
     return CustomScaffold(

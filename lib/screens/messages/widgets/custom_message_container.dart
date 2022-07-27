@@ -20,10 +20,10 @@ class CustomMessagesContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withOpacity(0.15),
             spreadRadius: 2.5,
             blurRadius: 3.5,
-            offset: const Offset(0, 2.5)
+            offset: const Offset(0, 1.5)
           )
         ]
       ),

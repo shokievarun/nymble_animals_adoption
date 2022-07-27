@@ -32,31 +32,6 @@ class CustomAnimalContainer extends StatefulWidget {
 
 class _CustomAnimalContainerState extends State<CustomAnimalContainer> with SingleTickerProviderStateMixin{
 
-  // Animation
-  late AnimationController _controller;
-  late Animation<double> _fadeValue;
-
-
-  @override
-  void initState() {
-    _controller = AnimationController(
-      vsync: this, 
-      duration: const Duration(milliseconds: 250)
-    )..addListener(() { 
-      setState(() {
-      });
-    })..forward();
-    _fadeValue = Tween<double>(begin: 0.15, end: 1).animate(_controller);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.stop();
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -134,28 +109,25 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
       ];
     }
     
-    return Opacity(
-      opacity: _fadeValue.value,
-      child: Container(
-        height: _responsive.hp(15),
-        padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2.5,
-              blurRadius: 3.5,
-              offset: const Offset(0, 2.5)
-            )
-          ]
-        ),
-        child: 
-          widget.showInVertical ?? false
-            ? Column(children: getAnimalInformationWidget())
-            : Row(children: getAnimalInformationWidget())
+    return Container(
+      height: _responsive.hp(15),
+      padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.15),
+            spreadRadius: 2.5,
+            blurRadius: 3.5,
+            offset: const Offset(0, 1.5)
+          )
+        ]
       ),
+      child: 
+        widget.showInVertical ?? false
+          ? Column(children: getAnimalInformationWidget())
+          : Row(children: getAnimalInformationWidget())
     );
   }
 }

@@ -60,7 +60,10 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
 
   @override
   void dispose() {
+    _infoContainerAnimation.removeListener(() { });
+    _textInformationAnimationController.removeListener(() { });
     _infoContainerAnimationController.dispose();
+    _textInformationAnimationController.dispose();
     super.dispose();
   }
 

@@ -28,47 +28,49 @@ class CustomScaffold extends StatelessWidget {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        clipBehavior: Clip.none,
-        scrollDirection: Axis.vertical,
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if(withBackButton ?? false)...[
-              
-              // Back button
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: _responsive.hp(5),
-                    width: _responsive.wp(33) - _responsive.sPadding,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        CustomBackButton(),
-                      ],
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          clipBehavior: Clip.none,
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if(withBackButton ?? false)...[
+                
+                // Back button
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: _responsive.hp(5),
+                      width: _responsive.wp(33) - _responsive.sPadding,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          CustomBackButton(),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: _responsive.hp(5),
-                    width: _responsive.wp(33),
-                    child: Center(
-                      child: Text(title ?? 'No title', style: TextStyles.blackw700(_responsive.dp(2)))
-                    )
-                  ),
-                ],
-              ),
+                    SizedBox(
+                      height: _responsive.hp(5),
+                      width: _responsive.wp(33),
+                      child: Center(
+                        child: Text(title ?? 'No title', style: TextStyles.blackw700(_responsive.dp(2)))
+                      )
+                    ),
+                  ],
+                ),
+              ],
+              ...body
             ],
-            ...body
-          ],
+          ),
         ),
+        bottomNavigationBar: bottomNavigator ?? const SizedBox(),
       ),
-      bottomNavigationBar: bottomNavigator ?? const SizedBox(),
     );
   }
 }
