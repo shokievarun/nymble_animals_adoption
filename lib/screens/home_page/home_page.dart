@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
 
       return _animalsToShow!.isEmpty
         ? Center(
-            child: Text('No animals in this category.', style: TextStyles.lightGrayw600(_responsive.dp(1.5)))
+            child: Text('No animals in this category.', style: TextStyles.lightGreyw600(_responsive.dp(1.5)))
           )
         : SizedBox(
             height: _responsive.hp(15) * _itemsToShow,

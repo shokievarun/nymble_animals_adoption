@@ -147,7 +147,7 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2.5,
               blurRadius: 3.5,
-              offset: const Offset(0, 7)
+              offset: const Offset(0, 2.5)
             )
           ]
         ),

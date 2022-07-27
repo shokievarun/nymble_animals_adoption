@@ -12,7 +12,7 @@ class TextStyles{
     );
   }
 
-  static TextStyle lightGrayw600(final double size){
+  static TextStyle lightGreyw600(final double size){
     return TextStyle(
       fontFamily: 'Rocko',
       fontSize: size,

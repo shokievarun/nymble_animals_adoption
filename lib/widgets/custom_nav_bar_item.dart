@@ -47,7 +47,7 @@ class NavBarItem extends StatelessWidget {
             ),
             Text(
               routeName[0].toUpperCase() + routeName.substring(1), 
-              style: TextStyles.lightGrayw600(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack)
+              style: TextStyles.lightGreyw600(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack)
             ),
           ],
         ),
