@@ -18,8 +18,12 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
   late AnimationController _controller;
   late Animation<double> _animation;
 
+  late int messageDirection;
+
   @override
   void initState() {
+
+    messageDirection = 1;
 
     // Initialize controllers
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
@@ -50,35 +54,37 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    final double messagesWidthPosition = _responsive.width * _animation.value;
+    final double messagesWidthPosition = _responsive.wp(5) * _animation.value;
 
     return CustomScaffold(
       title: 'Messages',
       withBackButton: true,
       bottomNavigator: CustomBottomNavigatorBar(),
       body: [
-        SizedBox(height: _responsive.hp(2.5)),
         Text(
           'Total messages: $messagesCount',
           style: TextStyles.lightGreyw600(_responsive.dp(1.25)),
         ),
-        Transform(
-          transform: Matrix4.identity()..translate(
-            messagesWidthPosition
-          ),
-          child: Opacity(
-            opacity: 1 - _animation.value,
-            child: Padding(
-              padding: EdgeInsets.only(top: _responsive.hp(2.5)),
-              child: SizedBox(
-                height: (_responsive.hp(10) + _responsive.hp(1.5)) * messagesCount,
-                child: ListView.separated(
-                  itemCount: messagesCount,
-                  separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(1.5)),
-                  itemBuilder: (_, x){
-                    return const CustomMessagesContainer();
-                  },
-                ),
+        Opacity(
+          opacity: 1 - _animation.value,
+          child: Padding(
+            padding: EdgeInsets.only(top: _responsive.hp(2.5)),
+            child: SizedBox(
+              height: (_responsive.hp(10) + _responsive.hp(1.5)) * messagesCount,
+              child: ListView.separated(
+                shrinkWrap: false,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: messagesCount,
+                separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(1.5)),
+                itemBuilder: (_, x) {
+                  final double messagePositionWithCustomDirection = messagesWidthPosition * messageDirection;
+                  messageDirection *= -1;
+                  return Transform(
+                    transform: Matrix4.identity()..translate(
+                      messagePositionWithCustomDirection
+                    ),
+                    child: const CustomMessagesContainer());
+                }
               ),
             ),
           ),

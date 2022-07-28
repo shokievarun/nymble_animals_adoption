@@ -1,3 +1,4 @@
+import 'package:animals_adoption_flutter/bloc/categories/categories_bloc.dart';
 import 'package:animals_adoption_flutter/providers/navigator_bar_provider.dart';
 import 'package:animals_adoption_flutter/screens/home_page/home_page.dart';
 import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
@@ -5,14 +6,8 @@ import 'package:animals_adoption_flutter/screens/map/map_page.dart';
 import 'package:animals_adoption_flutter/screens/messages/messages_page.dart';
 import 'package:animals_adoption_flutter/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// void main() => runApp(
-//   DevicePreview(
-//     enabled: !kReleaseMode,
-//     builder: (context) => const MyApp(), // Wrap your app
-//   ),
-// );
 
 void main(List<String> args) => runApp(const MyApp());
 
@@ -22,32 +17,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider<NavigatorBarProvider>(create: (context) => NavigatorBarProvider())
+        BlocProvider<CategoriesBloc>(
+          create: (_) => CategoriesBloc(),
+        )
       ],
-      child: MaterialApp(
-        useInheritedMediaQuery: true,
-        builder: DevicePreview.appBuilder,
-        locale: DevicePreview.locale(context),
-        debugShowCheckedModeBanner: false,
-        title: 'Animals Adoption App',
-    
-        // Theme
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<NavigatorBarProvider>(create: (context) => NavigatorBarProvider())
+        ],
+        child: MaterialApp(
+          useInheritedMediaQuery: true,
+          debugShowCheckedModeBanner: false,
+          title: 'Animals Adoption App',
+      
+          // Theme
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white
+          ),
+          routes: {
+            '/' : ((context) => const HomePage()),
+            '/viewAllAnimals' : ((context) => const ListOfAnimalsPage(animalsToShow: [])),
+            '/profile' : ((context) => const ProfilePage()),
+            '/map' : ((context) => const MapPage()),
+            '/messages' : ((context) => const MessagesPage()),
+      
+          },
         ),
-        initialRoute: '/home',
-        home: const HomePage(),
-        routes: {
-    
-          '/home' : ((context) => const HomePage()),
-          '/viewAllAnimals' : ((context) => const ListOfAnimalsPage(animalsToShow: [])),
-          '/profile' : ((context) => const ProfilePage()),
-          '/map' : ((context) => const MapPage()),
-          '/messages' : ((context) => const MessagesPage()),
-    
-        },
       ),
     );
   }

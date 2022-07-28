@@ -90,8 +90,6 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  SizedBox(height: _responsive.hp(2.5)),
-
                   // Animal images
                   Hero(
                     tag: widget.animal.imagePath,

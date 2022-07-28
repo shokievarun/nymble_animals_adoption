@@ -9,7 +9,7 @@ class CustomBottomNavigatorBar extends StatelessWidget {
   final List<NavBarItem> _items = [
     NavBarItem(
       icon: Icons.home,
-      routeName: 'home',
+      routeName: '',
     ),
     NavBarItem(
       icon: Icons.account_circle_rounded,

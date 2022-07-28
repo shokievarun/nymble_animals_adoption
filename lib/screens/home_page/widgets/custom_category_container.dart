@@ -70,16 +70,13 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
       elevationQuantity = lerpDouble(0, _responsive.hp(0.08), animation!.value)!;
     }
     
-    return GestureDetector(
-      onTap: (){
-        widget.onTapFunction(widget.category);
-        controller!.forward();
-      },
-      child: Transform(
-        transform: Matrix4.identity()..translate(
-          0,
-          elevationQuantity
-        ),
+    return Transform.translate(
+      offset: Offset(0, elevationQuantity),
+      child: GestureDetector(
+        onTap: (){
+          widget.onTapFunction(widget.category);
+          controller!.forward();
+        },
         child: AnimatedScale(
           scale: widget.scale,
           duration: const Duration(milliseconds: 250),

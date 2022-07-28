@@ -38,6 +38,7 @@ class CustomScaffold extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               if(withBackButton ?? false)...[
                 
                 // Back button
@@ -65,6 +66,7 @@ class CustomScaffold extends StatelessWidget {
                   ],
                 ),
               ],
+              SizedBox(height: _responsive.hp(2.5)),
               ...body
             ],
           ),
