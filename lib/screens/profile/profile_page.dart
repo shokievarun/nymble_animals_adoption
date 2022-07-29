@@ -1,8 +1,6 @@
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 
-import '../../widgets/custom_bottom_navigator_bar.dart';
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -14,7 +12,7 @@ class ProfilePage extends StatelessWidget {
     return CustomScaffold(
       title: 'Profile',
       withBackButton: true,
-      bottomNavigator: CustomBottomNavigatorBar(),
+      withBottomNavigator: true,
       body: [
         SizedBox(height: _responsive.hp(25)),
         SizedBox(

@@ -1,7 +1,4 @@
-
-
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
-import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 
 class MapPage extends StatelessWidget {
@@ -15,7 +12,7 @@ class MapPage extends StatelessWidget {
     return CustomScaffold(
       title: 'My location',
       withBackButton: true,
-      bottomNavigator: CustomBottomNavigatorBar(),
+      withBottomNavigator: true,
       body: [
         SizedBox(height: _responsive.hp(20)),
         SizedBox(

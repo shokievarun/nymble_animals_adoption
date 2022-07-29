@@ -1,6 +1,7 @@
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
-import 'package:animals_adoption_flutter/utils/animations/fade_animation.dart';
+import 'package:animals_adoption_flutter/screens/home_page/widgets/custom_animals_list_or_grid.dart';
+import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 
@@ -22,12 +23,12 @@ class ListOfAnimalsPage extends StatefulWidget {
 
 class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTickerProviderStateMixin{
 
-  late FadeAnimationController _fadeAnimationController;
+  late BasicCustomAnimation _fadeAnimationController;
 
 
   @override
   void initState() {
-    _fadeAnimationController = FadeAnimationController(
+    _fadeAnimationController = BasicCustomAnimation(
       listener: _animationListener, 
       tickerProvider: this
     );
@@ -56,43 +57,12 @@ class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTicker
       title: 'All the animals',
       withBackButton: true,
       body: [
-        Opacity(
-          opacity: _fadeAnimationController.animation.value,
-          child: SizedBox(
-            height: gridViewHeight,
-            width: _responsive.width,
-            child: GridView.builder(
-              shrinkWrap: false,
-              clipBehavior: Clip.none,
-              scrollDirection: Axis.vertical,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(top: _responsive.hp(3.5)),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: containersInRow,
-                crossAxisSpacing: _responsive.wp(2.5),
-                mainAxisSpacing: _responsive.hp(1),
-                childAspectRatio: 0.65
-              ),
-              itemCount: widget.animalsToShow.length,
-              itemBuilder: (_, x) {
-
-                final bool isModuleOfTwo = (x + 1) % containersInRow == 0;
-                final int direction = isModuleOfTwo ? 1 : -1;
-
-                final double sideStartPosition = _responsive.width * direction;
-                final double sideCurrentPosition = sideStartPosition * (1 - _fadeAnimationController.animation.value);
-
-                return Transform(
-                  transform: Matrix4.identity()..translate(sideCurrentPosition),
-                  child: CustomAnimalContainer(
-                    animal: widget.animalsToShow[x],
-                    showInVertical: true,
-                  ),
-                );
-              },
-            ),
-          ),
+        CustomAnimalsListOrGrid(
+          animals: widget.animalsToShow,
+          isListView: false,
+          gridViewHeight: gridViewHeight,
         ),
+        SizedBox(height: _responsive.hp(10))
       ],
     );
   }

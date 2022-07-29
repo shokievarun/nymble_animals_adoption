@@ -1,8 +1,6 @@
 import 'package:animals_adoption_flutter/screens/messages/widgets/custom_message_container.dart';
-import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
+import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
-
-import '../../widgets/custom_bottom_navigator_bar.dart';
 
 const int messagesCount = 10;
 
@@ -15,9 +13,7 @@ class MessagesPage extends StatefulWidget {
 
 class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderStateMixin{
 
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
+  late BasicCustomAnimation _animator;
   late int messageDirection;
 
   @override
@@ -25,27 +21,21 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
 
     messageDirection = 1;
 
-    // Initialize controllers
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
-    _animation = Tween<double>(begin: 1, end: 0).animate(
-      CurvedAnimation(
-        parent: _controller, 
-        curve: Curves.ease
-      ))..addListener(() { 
-        setState(() {
-        });
-      });
-
-    // Start animation
-    _controller.forward();
-
+    _animator = BasicCustomAnimation(
+      listener: _animationListener, 
+      tickerProvider: this,
+      begin: 1,
+      end: 0,
+      durationInMillisec: 500
+    );
     super.initState();
   }
 
+  void _animationListener() => setState(() {});
+
   @override
   void dispose() {
-    _controller.removeListener(() { });
-    _controller.dispose();
+    _animator.dispose();
     super.dispose();
   }
 
@@ -53,20 +43,19 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
-
-    final double messagesWidthPosition = _responsive.wp(5) * _animation.value;
+    final double messagesWidthPosition = _responsive.wp(5) * _animator.animation.value;
 
     return CustomScaffold(
       title: 'Messages',
       withBackButton: true,
-      bottomNavigator: CustomBottomNavigatorBar(),
+      withBottomNavigator: true,
       body: [
         Text(
           'Total messages: $messagesCount',
           style: TextStyles.lightGreyw600(_responsive.dp(1.25)),
         ),
         Opacity(
-          opacity: 1 - _animation.value,
+          opacity: 1 - _animator.animation.value,
           child: Padding(
             padding: EdgeInsets.only(top: _responsive.hp(2.5)),
             child: SizedBox(

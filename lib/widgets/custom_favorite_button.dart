@@ -29,9 +29,7 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
 
     return GestureDetector(
       onTap: (){
-        setState(() {
-          _isPressed = !_isPressed;
-        });
+        setState(() => _isPressed = !_isPressed);
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),

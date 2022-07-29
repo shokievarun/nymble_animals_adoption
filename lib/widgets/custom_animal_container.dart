@@ -13,7 +13,7 @@ import '../utils/text_styles.dart';
 import '../utils/theme_colors.dart';
 
 
-class CustomAnimalContainer extends StatefulWidget {
+class CustomAnimalContainer extends StatelessWidget {
 
   final AnimalModel animal;
   final bool? showInVertical;
@@ -27,19 +27,13 @@ class CustomAnimalContainer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomAnimalContainer> createState() => _CustomAnimalContainerState();
-}
-
-class _CustomAnimalContainerState extends State<CustomAnimalContainer> with SingleTickerProviderStateMixin{
-
-  @override
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     Widget getAnimalImages(){
       return CachedNetworkImage(
-        imageUrl: widget.animal.imagePath,
+        imageUrl: animal.imagePath,
         progressIndicatorBuilder: (context, url, downloadProgress) => 
           Stack(
             alignment: Alignment.center,
@@ -57,9 +51,9 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
           flex: 3,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: widget.withHeroAnimation ?? false 
+            child: withHeroAnimation ?? false 
              ? Hero(
-              tag: widget.animal.imagePath,
+              tag: animal.imagePath,
               child: getAnimalImages()
             ) : getAnimalImages(),
           )
@@ -70,19 +64,19 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.5))),
+              Text(animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.5))),
               SizedBox(height: _responsive.hp(1)),
               Text(
-                widget.animal.description, 
+                animal.description, 
                 textAlign: TextAlign.center, 
                 style: TextStyles.lightBlackw600(_responsive.dp(1)), 
-                maxLines: widget.showInVertical ?? false ? 3 : 2, 
+                maxLines: showInVertical ?? false ? 3 : 2, 
                 overflow: TextOverflow.ellipsis
               ),
               Row(
                 children: [
                   Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                  Text('${widget.animal.location} (${widget.animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
+                  Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
                 ],
               ),
               const Spacer(),
@@ -96,7 +90,7 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
                     textSize: _responsive.dp(1),
                     onPressedCallback: () async => await Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: widget.animal))
+                      MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: animal))
                     ), 
                   ),
                   const Spacer(),
@@ -125,7 +119,7 @@ class _CustomAnimalContainerState extends State<CustomAnimalContainer> with Sing
         ]
       ),
       child: 
-        widget.showInVertical ?? false
+        showInVertical ?? false
           ? Column(children: getAnimalInformationWidget())
           : Row(children: getAnimalInformationWidget())
     );

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:animals_adoption_flutter/models/category_model.dart';
+import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -29,34 +30,41 @@ class CategoryContainer extends StatefulWidget {
 
 class _CategoryContainerState extends State<CategoryContainer> with SingleTickerProviderStateMixin {
 
-  Animation<double>? animation;
-  AnimationController? controller;
+  late BasicCustomAnimation _animator;
   
   @override
   void initState() {
-    controller = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
-    animation = Tween<double>(begin: 0, end: 10).animate(controller!)
-    ..addListener(() {
-      setState(() {
-      });
-    })
-    ..addStatusListener((status){
-      if(status == AnimationStatus.completed){
-        controller!.reverse();
-      }
-      else if(status == AnimationStatus.dismissed && widget.isSelected){
-        controller!.forward();
-      }
-    });
+
+    _animator = BasicCustomAnimation(
+      listener: _animationListener, 
+      tickerProvider: this,
+      statusListener: _animationStatusListener,
+      durationInMillisec: 500,
+      begin: 0,
+      end: 1,
+      autoStart: false
+    );
+      
     if(widget.isSelected){
-      controller!.forward();
+      _animator.controller.forward();
     }
     super.initState();
   }
 
+  void _animationListener() => setState(() {});
+
+  void _animationStatusListener(final AnimationStatus status){
+    if(status == AnimationStatus.completed){
+        _animator.controller.reverse();
+    }
+    else if(status == AnimationStatus.dismissed && widget.isSelected){
+      _animator.controller.forward();
+    }
+  }
+
   @override
   void dispose() {
-    controller!.dispose();
+    _animator.dispose();
     super.dispose();
   }
 
@@ -65,17 +73,14 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    double elevationQuantity = 0;
-    if(widget.isSelected){
-      elevationQuantity = lerpDouble(0, _responsive.hp(0.08), animation!.value)!;
-    }
+    double elevationQuantity = widget.isSelected ? lerpDouble(0, _responsive.hp(0.5), _animator.controller.value)! : 0;
     
     return Transform.translate(
       offset: Offset(0, elevationQuantity),
       child: GestureDetector(
         onTap: (){
           widget.onTapFunction(widget.category);
-          controller!.forward();
+          _animator.controller.forward();
         },
         child: AnimatedScale(
           scale: widget.scale,
