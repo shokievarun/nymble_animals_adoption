@@ -3,6 +3,7 @@ import 'package:animals_adoption_flutter/bloc/categories/categories_bloc.dart';
 import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
 
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
+import 'package:animals_adoption_flutter/widgets/custom_button.dart';
 
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
@@ -27,7 +28,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
 
   // Controllers
-  late BasicCustomAnimation _animator;
+  late final BasicCustomAnimation _animator;
 
   // Variables
   final CategoriesBloc _categoriesBloc = CategoriesBloc();
@@ -74,7 +75,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         builder: (_, state){
           if(state is CategoriesLoaded){
 
-            if(state.animals == []){
+
+            if(state.animals.isEmpty){
               return Center(
                 child: Text('No animals in this category.', style: TextStyles.lightGreyw600(_responsive.dp(1.5)))
               );
@@ -106,20 +108,23 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   children: [
                     Text('AdoptMe', style: TextStyles.blackw900(_responsive.dp(4))),
                     const Spacer(),
-                    Icon(Icons.notifications_rounded, size: _responsive.dp(3), color: ThemeColors.black)
+                    CustomButton(
+                      icon: Icons.notifications,
+                      size: _responsive.dp(4),
+                    )
                   ],
                 ),
           
                 // Principal announcement
                 SizedBox(height: _responsive.hp(2)),
-                const CustomAnnouncementsGalery(),
+                CustomAnnouncementsGalery(),
                 
                 // Body categories
                 SizedBox(height: _responsive.hp(2.5)),
-                Text('Location:', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.5)).copyWith(color: ThemeColors.darkGrey)),
-                Text('Tijuana, BC MX', style: TextStyles.blackw900(_responsive.dp(2.5))),
+                Text('Location:', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.darkGrey)),
+                Text('Tijuana, BC MX', style: TextStyles.blackw900(_responsive.dp(2.25))),
                 SizedBox(height: _responsive.hp(2.5)),
-                Text('Categories:', style: TextStyles.blackw900(_responsive.dp(2))),
+                Text('Categories:', style: TextStyles.blackw700(_responsive.dp(2))),
                 SizedBox(height: _responsive.hp(2.5)),
                 SizedBox(
                   height: _responsive.hp(15),
@@ -147,22 +152,25 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 // Pet list
                 SizedBox(height: _responsive.hp(3.5)),
                 state is CategoriesLoaded
-                    ? Row(
-                      children: [
-                        Text('Pet list:', style: TextStyles.blackw900(_responsive.dp(2))),
-                        if(state.animals.isNotEmpty)...[
-                          const Spacer(),
-                          CustomTextButton(
-                            text: 'View all', 
-                            textColor: ThemeColors.lightGrey,
-                            backgroundColor: ThemeColors.middleDarkGrey,
-                            textSize: _responsive.dp(1.25),
-                            onPressedCallback: () async => await Navigator.of(context).push(
-                              MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: state.animals)))
+                    ? SizedBox(
+                      height: _responsive.hp(5),
+                      child: Row(
+                        children: [
+                          Text('Pet list:', style: TextStyles.blackw700(_responsive.dp(2))),
+                          if(state.animals.isNotEmpty)...[
+                            const Spacer(),
+                            CustomTextButton(
+                              text: 'View all', 
+                              textColor: ThemeColors.middleDarkGrey,
+                              backgroundColor: ThemeColors.grey,
+                              textSize: _responsive.dp(1.25),
+                              onPressedCallback: () async => await Navigator.of(context).push(
+                                MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: state.animals)))
+                              )
                             )
-                          )
-                        ]
-                      ],
+                          ]
+                        ],
+                      ),
                     )
                   : Container(),
                 SizedBox(height: _responsive.hp(3.5)),

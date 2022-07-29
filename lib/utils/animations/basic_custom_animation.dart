@@ -2,26 +2,23 @@ import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 
 class BasicCustomAnimation{
 
-  late AnimationController controller;
-  late Animation<double> animation;
+  late final AnimationController controller;
+  late final Animation<double> _animation;
 
   final VoidCallback listener; 
   final TickerProvider tickerProvider; 
 
   final void Function(AnimationStatus)? statusListener;
-  final double? begin;
-  final double? end;
-  final int? durationInMillisec;
-  final bool? autoStart;
+  
 
   BasicCustomAnimation({
     required this.listener,
     required this.tickerProvider,
     this.statusListener,
-    this.begin,
-    this.end,
-    this.durationInMillisec,
-    this.autoStart
+    final double? begin,
+    final double? end,
+    final bool? autoStart,
+    final int? durationInMillisec,
   }){
     controller = AnimationController(
       vsync: tickerProvider, 
@@ -29,8 +26,10 @@ class BasicCustomAnimation{
     )..addListener(listener);
     if(statusListener != null) controller.addStatusListener(statusListener!);
     if(autoStart ?? true) controller.forward();
-    animation = Tween<double>(begin: begin ?? 0.5, end: end ?? 1).animate(controller);
+    _animation = Tween<double>(begin: begin ?? 0.5, end: end ?? 1).animate(controller);
   }
+
+  double get getValue => _animation.value;
 
   void dispose(){
     controller.stop();

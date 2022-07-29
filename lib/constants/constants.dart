@@ -1,4 +1,5 @@
 import 'package:animals_adoption_flutter/models/animal_model.dart';
+import 'package:animals_adoption_flutter/models/announcement_model.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
 import 'assets_paths.dart';
 
@@ -104,4 +105,12 @@ List<AnimalModel> animals = [
     sex: 'Female',
     weight: 15
   ),
+];
+
+List<AnnouncementModel> announcements = const [
+  AnnouncementModel(title: 'Announcement 1', description: 'Check all the pets available in our application.', imageURL: '$animalImagesPath/petadoption.png'),
+  AnnouncementModel(title: 'Announcement 2', description: 'Check your messages.', imageURL: '$illustrationsPath/no_messages.png'),
+  AnnouncementModel(title: 'Announcement 3', description: 'Check your location.', imageURL: '$illustrationsPath/map.png'),
+  AnnouncementModel(title: 'Announcement 4', description: 'Check your configuration.', imageURL: '$illustrationsPath/user.png'),
+
 ];

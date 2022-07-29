@@ -14,20 +14,21 @@ class CustomBackButton extends StatelessWidget {
 
     return Container(
       height: _responsive.hp(5),
-      width: _responsive.wp(11.5),
-      decoration: BoxDecoration(
-        color: ThemeColors.redForBackground,
-        borderRadius: BorderRadius.circular(10)
+      // width: _responsive.wp(11.5),
+      decoration: const BoxDecoration(
+        color: ThemeColors.grey,
+        shape: BoxShape.circle
       ),
       child: IconButton(
         icon: Icon(
           Icons.arrow_back_ios_new_rounded,
           size: _responsive.dp(2)
         ), 
-        color: ThemeColors.redForText,
+        splashRadius: _responsive.hp(3.5),
+        color: ThemeColors.black,
         focusColor: Colors.transparent,
         hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+        highlightColor: ThemeColors.grey.withOpacity(0.5),
         splashColor: Colors.transparent,
         disabledColor: Colors.transparent,
         onPressed: Navigator.of(context).pop,

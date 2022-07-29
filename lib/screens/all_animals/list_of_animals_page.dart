@@ -23,12 +23,12 @@ class ListOfAnimalsPage extends StatefulWidget {
 
 class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTickerProviderStateMixin{
 
-  late BasicCustomAnimation _fadeAnimationController;
+  late final BasicCustomAnimation _animator;
 
 
   @override
   void initState() {
-    _fadeAnimationController = BasicCustomAnimation(
+    _animator = BasicCustomAnimation(
       listener: _animationListener, 
       tickerProvider: this
     );
@@ -37,15 +37,11 @@ class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTicker
 
   @override
   void dispose() {
-    _fadeAnimationController.dispose();
+    _animator.dispose();
     super.dispose();
   }
 
-  void _animationListener(){
-    setState(() {
-      
-    });
-  }
+  void _animationListener() => setState(() {});
   @override
   Widget build(BuildContext context) {
 

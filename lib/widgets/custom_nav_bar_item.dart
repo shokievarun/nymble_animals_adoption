@@ -46,7 +46,7 @@ class NavBarItem extends StatelessWidget {
               onPressed: onPressCallback!
             ),
             Text(
-              routeName.isEmpty ? '' : routeName[0].toUpperCase() + routeName.substring(1), 
+              routeName.isEmpty ? 'Home' : routeName[0].toUpperCase() + routeName.substring(1), 
               style: TextStyles.lightGreyw600(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack)
             ),
           ],

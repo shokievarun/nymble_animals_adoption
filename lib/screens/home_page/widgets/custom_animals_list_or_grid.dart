@@ -4,9 +4,9 @@ import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
+import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 
 
@@ -34,7 +34,7 @@ class CustomAnimalsListOrGrid extends StatefulWidget {
 
 class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with SingleTickerProviderStateMixin{
 
-  late BasicCustomAnimation _animator;
+  late final BasicCustomAnimation _animator;
 
   @override
   void initState() {
@@ -68,21 +68,25 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
                 withHeroAnimation: true,
               );
             }
-            return GestureDetector(
-              onTap: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: widget.animals)))
-                );
-              },
-              child: Container(
-                height: _responsive.hp(10),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: ThemeColors.middleDarkGrey.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(20)
+            return Column(
+              children: [
+                Column(
+                  children: [
+                    CustomTextButton(
+                      backgroundColor: ThemeColors.grey,
+                      text: 'Press to see all the animals',
+                      textColor: ThemeColors.middleDarkGrey,
+                      textSize: _responsive.dp(1.5),
+                      onPressedCallback: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: widget.animals)))
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                child: Text('Press to see all the animals.', style: TextStyles.blackw700(_responsive.dp(1.5)).copyWith(color: ThemeColors.middleDarkGrey))
-              ),
+              ],
             );
           },
         ),
@@ -104,8 +108,8 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
           padding: EdgeInsets.only(top: _responsive.hp(3.5)),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: containersInRow,
-            crossAxisSpacing: _responsive.wp(2.5),
-            mainAxisSpacing: _responsive.hp(1),
+            crossAxisSpacing: _responsive.wp(5),
+            mainAxisSpacing: _responsive.hp(2.5),
             childAspectRatio: 0.65
           ),
           itemCount: widget.animals.length,
@@ -115,7 +119,7 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
             final int direction = isModuleOfTwo ? 1 : -1;
 
             final double sideStartPosition = _responsive.width * direction;
-            final double sideCurrentPosition = sideStartPosition * (1 - _animator.animation.value);
+            final double sideCurrentPosition = sideStartPosition * (1 - _animator.getValue);
 
             return Transform(
               transform: Matrix4.identity()..translate(sideCurrentPosition),
@@ -130,7 +134,7 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
     }
 
     return Opacity(
-      opacity: _animator.animation.value,
+      opacity: _animator.getValue,
       child: widget.isListView ? _getListView() : _getGridView(),
     );
   }

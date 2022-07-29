@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 abstract class ThemeColors{
 
   // Normal Colors
+  static const Color grey = Color.fromARGB(255, 241, 241, 241);
   static const Color lightGrey = Color(0xFFC2C3CA);
   static const Color middleDarkGrey = Color(0xFFA6A7AD);
   static const Color darkGrey = Color(0xFF4B4B4B);

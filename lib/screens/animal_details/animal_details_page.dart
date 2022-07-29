@@ -1,4 +1,6 @@
+import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
 
@@ -23,45 +25,42 @@ class AnimalDetailsPage extends StatefulWidget {
 
 class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProviderStateMixin{
 
-  late AnimationController _infoContainerAnimationController;
-  late Animation<double> _infoContainerAnimation;
 
-  late AnimationController _textInformationAnimationController;
-  late Animation<double> _textContainerAnimation;
-
+  late final BasicCustomAnimation _infoContainerAnimationController;
+  late final BasicCustomAnimation _textInformationAnimationController;
 
   @override
   void initState() {
-    
-    _textInformationAnimationController = AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
-    _infoContainerAnimationController = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
 
-    _textContainerAnimation = Tween<double>(begin: 1, end: 0).animate(
-      CurvedAnimation(
-        parent: _textInformationAnimationController, 
-        curve: Curves.ease
-      ))
-      ..addListener(() {
-        setState(() {
-        });
-      });
-    _infoContainerAnimation = Tween<double>(begin: 1, end: 0).animate(_infoContainerAnimationController)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        if(status == AnimationStatus.completed){
-          _textInformationAnimationController.forward();
-        }
-      });
-    _infoContainerAnimationController.forward();
+    _infoContainerAnimationController = BasicCustomAnimation(
+      listener: _animationListener, 
+      tickerProvider: this,
+      begin: 1,
+      end: 0,
+      durationInMillisec: 500,
+      statusListener: _animationStatusListener
+    );
+
+    _textInformationAnimationController = BasicCustomAnimation(
+      listener: _animationListener, 
+      tickerProvider: this,
+      durationInMillisec: 250,
+      begin: 1,
+      end: 0,
+      autoStart: false
+    );
+    
     super.initState();
+  }
+
+  void _animationListener() => setState(() {});
+
+  void _animationStatusListener(final AnimationStatus status) {
+    if(status == AnimationStatus.completed) _textInformationAnimationController.controller.forward();
   }
 
   @override
   void dispose() {
-    _infoContainerAnimation.removeListener(() { });
-    _textInformationAnimationController.removeListener(() { });
     _infoContainerAnimationController.dispose();
     _textInformationAnimationController.dispose();
     super.dispose();
@@ -73,10 +72,10 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     final double targetAnimationValue = _responsive.hp(45);
-    final double dataContainerHeightValue = lerpDouble(targetAnimationValue, _responsive.height, _infoContainerAnimation.value)!;
-    final double dataContainerScaleValue = lerpDouble(1, 0.7, _infoContainerAnimation.value)!;
+    final double dataContainerHeightValue = lerpDouble(targetAnimationValue, _responsive.height, _infoContainerAnimationController.getValue)!;
+    final double dataContainerScaleValue = lerpDouble(1, 0.7, _infoContainerAnimationController.getValue)!;
 
-    final double textPosition = _responsive.wp(50) * _textContainerAnimation.value;
+    final double textPosition = _responsive.wp(50) * _textInformationAnimationController.getValue;
 
     return CustomScaffold(
       title: 'Details',
@@ -96,16 +95,14 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                     transitionOnUserGestures: false,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: SizedBox(
+                      child: CachedNetworkImage(
                         height: _responsive.hp(40),
-                        width: _responsive.wp(100),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.animal.imagePath,
-                          progressIndicatorBuilder: (context, url, downloadProgress) => 
-                            CircularProgressIndicator(value: downloadProgress.progress),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
-                          fit: BoxFit.fill,
-                        )
+                        width: _responsive.width,
+                        imageUrl: widget.animal.imagePath,
+                        progressIndicatorBuilder: (context, url, downloadProgress) => 
+                          CircularProgressIndicator(value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
@@ -120,11 +117,18 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: _responsive.sPadding, vertical: _responsive.tPadding / 2),
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))
+                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.15),
+                          spreadRadius: 1,
+                          blurRadius: 3.5,
+                        )
+                      ]
                     ),
                     child: Opacity(
-                      opacity: 1 - _textContainerAnimation.value,
+                      opacity: 1 - _textInformationAnimationController.getValue,
                       child: Transform(
                         transform: Matrix4.identity()..translate(
                           textPosition
@@ -202,7 +206,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                             // Show description
                             SizedBox(height: _responsive.hp(2)),
                             Expanded(
-                              flex: 4,
+                              flex: 2,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -210,6 +214,13 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                   Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                                 ],
                               )
+                            ),
+                            CustomTextButton(
+                              onPressedCallback: () => {},
+                              textColor: ThemeColors.accentForText, 
+                              backgroundColor: ThemeColors.accent, 
+                              text: 'Send message', 
+                              textSize: _responsive.dp(1.25)
                             ),
                             const Expanded(
                               flex: 15,

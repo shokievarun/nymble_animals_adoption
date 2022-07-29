@@ -13,7 +13,7 @@ class MessagesPage extends StatefulWidget {
 
 class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderStateMixin{
 
-  late BasicCustomAnimation _animator;
+  late final BasicCustomAnimation _animator;
   late int messageDirection;
 
   @override
@@ -43,7 +43,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
-    final double messagesWidthPosition = _responsive.wp(5) * _animator.animation.value;
+    final double messagesWidthPosition = _responsive.wp(5) * _animator.getValue;
 
     return CustomScaffold(
       title: 'Messages',
@@ -55,7 +55,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
           style: TextStyles.lightGreyw600(_responsive.dp(1.25)),
         ),
         Opacity(
-          opacity: 1 - _animator.animation.value,
+          opacity: 1 - _animator.getValue,
           child: Padding(
             padding: EdgeInsets.only(top: _responsive.hp(2.5)),
             child: SizedBox(

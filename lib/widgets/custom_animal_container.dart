@@ -80,22 +80,27 @@ class CustomAnimalContainer extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomTextButton(
-                    text: 'Details', 
-                    textColor: ThemeColors.accentForText,
-                    backgroundColor: ThemeColors.accent,
-                    textSize: _responsive.dp(1),
-                    onPressedCallback: () async => await Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: animal))
-                    ), 
-                  ),
-                  const Spacer(),
-                  CustomFavoriteButton(size: _responsive.dp(3))
-                ],
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomTextButton(
+                      text: 'Details', 
+                      textColor: ThemeColors.accentForText,
+                      backgroundColor: ThemeColors.accent,
+                      textSize: _responsive.dp(1),
+                      onPressedCallback: () async => await Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => AnimalDetailsPage(animal: animal))
+                      ), 
+                    ),
+                    const Spacer(),
+                    CustomFavoriteButton(
+                      size: _responsive.dp(3)
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -114,7 +119,6 @@ class CustomAnimalContainer extends StatelessWidget {
             color: Colors.grey.withOpacity(0.15),
             spreadRadius: 2.5,
             blurRadius: 3.5,
-            offset: const Offset(0, 1.5)
           )
         ]
       ),

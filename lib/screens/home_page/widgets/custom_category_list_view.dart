@@ -72,7 +72,7 @@ class _CustomCategoryListViewState extends State<CustomCategoryListView> with Si
         final double containerScale = isSelected  ? 1.10 : 0.8;
         
         double elevation = 0; 
-        if(isSelected) elevation = -_responsive.hp(1.5) * animator.animation.value;
+        if(isSelected) elevation = -_responsive.hp(1.5) * animator.getValue;
         
         return Transform.translate(
           offset: Offset(0, elevation),

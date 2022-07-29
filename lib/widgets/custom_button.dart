@@ -1,20 +1,22 @@
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomFavoriteButton extends StatefulWidget {
-  
+class CustomButton extends StatefulWidget {
+
+  final IconData icon;
   final double size;
 
-  const CustomFavoriteButton({
+  const CustomButton({
     Key? key,
-    required this.size
+    required this.icon,
+    required this.size,
   }) : super(key: key);
 
   @override
-  State<CustomFavoriteButton> createState() => _CustomFavoriteButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
-class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
+class _CustomButtonState extends State<CustomButton> {
 
   late bool _isPressed;
 
@@ -26,7 +28,6 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: (){
         setState(() => _isPressed = !_isPressed);
@@ -35,14 +36,14 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
         duration: const Duration(milliseconds: 250),
         height: widget.size,
         width: widget.size,
-        decoration: BoxDecoration(
-          color: _isPressed ? ThemeColors.redForBackground : ThemeColors.grey,
+        decoration: const BoxDecoration(
+          color: ThemeColors.grey,
           shape: BoxShape.circle
         ),
         child: Icon(
-          Icons.favorite_border_rounded, 
+          widget.icon, 
           size: widget.size * 0.65, 
-          color: _isPressed ? ThemeColors.redForText : ThemeColors.black,
+          color: ThemeColors.black,
         ),
       ),
     );
