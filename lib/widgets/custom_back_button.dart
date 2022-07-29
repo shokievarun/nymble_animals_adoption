@@ -25,7 +25,7 @@ class CustomBackButton extends StatelessWidget {
           size: _responsive.dp(2)
         ), 
         splashRadius: _responsive.hp(3.5),
-        color: ThemeColors.black,
+        color: ThemeColors.middleDarkGrey,
         focusColor: Colors.transparent,
         hoverColor: Colors.transparent,
         highlightColor: ThemeColors.grey.withOpacity(0.5),

@@ -42,7 +42,7 @@ class _CustomFavoriteButtonState extends State<CustomFavoriteButton> {
         child: Icon(
           Icons.favorite_border_rounded, 
           size: widget.size * 0.65, 
-          color: _isPressed ? ThemeColors.redForText : ThemeColors.black,
+          color: _isPressed ? ThemeColors.redForText : ThemeColors.middleDarkGrey,
         ),
       ),
     );

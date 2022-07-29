@@ -1,3 +1,4 @@
+import 'package:animals_adoption_flutter/constants/assets_paths.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
@@ -82,7 +83,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
       withBackButton: true,
       body: [
         SizedBox(
-          height: _responsive.height - (_responsive.tPadding * 2) - _responsive.hp(5),
+          height: _responsive.hp(120) - (_responsive.tPadding * 2) - _responsive.hp(5),
           child: Stack(
             children: [
               Column(
@@ -215,6 +216,29 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                 ],
                               )
                             ),
+                            Expanded(
+                              flex: 8,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Location:', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                  SizedBox(height: _responsive.hp(2)),
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: SizedBox(
+                                        width: _responsive.width,
+                                        child: Image.asset(
+                                          '$illustrationsPath/map_test.png',
+                                          fit: BoxFit.fitWidth,
+                                        )
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ),
+                            SizedBox(height: _responsive.hp(2)),
                             CustomTextButton(
                               onPressedCallback: () => {},
                               textColor: ThemeColors.accentForText, 

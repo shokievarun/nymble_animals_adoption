@@ -43,7 +43,7 @@ class _CustomButtonState extends State<CustomButton> {
         child: Icon(
           widget.icon, 
           size: widget.size * 0.65, 
-          color: ThemeColors.black,
+          color: ThemeColors.middleDarkGrey,
         ),
       ),
     );

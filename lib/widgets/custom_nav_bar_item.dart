@@ -42,12 +42,12 @@ class NavBarItem extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               icon: Icon(icon),
-              color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack, 
+              color: isSelected! ? ThemeColors.accentForText : ThemeColors.middleDarkGrey, 
               onPressed: onPressCallback!
             ),
             Text(
               routeName.isEmpty ? 'Home' : routeName[0].toUpperCase() + routeName.substring(1), 
-              style: TextStyles.lightGreyw600(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack)
+              style: TextStyles.lightGreyw600(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.middleDarkGrey)
             ),
           ],
         ),

@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 
 class TextStyles{
 
+  // Singleton
+  static final TextStyles _textStyles = TextStyles._internal();
+
+  factory TextStyles(){
+    return _textStyles;
+  }
+
+  TextStyles._internal();
+
   static TextStyle middleDarkGrayw500(final double size){
     return TextStyle(
       fontFamily: 'Rocko',
