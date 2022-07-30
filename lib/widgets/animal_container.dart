@@ -31,21 +31,24 @@ class AnimalContainer extends StatelessWidget {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    Widget getAnimalImages(){
-      return CachedNetworkImage(
-        imageUrl: animal.imagePath,
-        progressIndicatorBuilder: (context, url, downloadProgress) => 
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              CircularProgressIndicator(
-                value: downloadProgress.progress, 
-                color: ThemeColors.accentForText, 
-                backgroundColor: ThemeColors.accent.withOpacity(0.5)
-              )
-            ]
-          ),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+    Image getAnimalImages(){
+      return Image.network(
+        animal.imagePath,
+        errorBuilder: (context, error, stackTrace) {
+          return const Icon(Icons.error);
+        },
+        loadingBuilder: (_, image, progress){
+          if (progress == null) return image;
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: ThemeColors.accent.withOpacity(0.5),
+              color: ThemeColors.accent,
+              value: progress.expectedTotalBytes != null ? 
+                  progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
       );
     }
 

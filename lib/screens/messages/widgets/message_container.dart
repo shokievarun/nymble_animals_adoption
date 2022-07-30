@@ -44,9 +44,9 @@ class MessagesContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Francisco Rodríguez', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1.20)).copyWith(fontWeight: FontWeight.w900)),
+                Text('Francisco Rodríguez', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1.20))),
                 SizedBox(height: _responsive.heightSeparator / 100),
-                Text('Jasper owner', textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.10))),
+                Text('Jasper owner', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1.10))),
                 SizedBox(height: _responsive.hp(0.5)),
                 Expanded(
                   flex: 2,

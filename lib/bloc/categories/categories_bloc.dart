@@ -16,7 +16,6 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
 
       try{
         emit(const CategoriesLoading());
-        await Future.delayed(const Duration(seconds: 2));
         final List<AnimalModel> animalsOfSelectedCategory = animals.where((a) => a.category.name == categories[1].name.toLowerCase()).toList();
         emit(CategoriesLoaded(categories: categories, index: 1, animals: animalsOfSelectedCategory));
       } on Exception{

@@ -51,16 +51,13 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
       withBackButton: true,
       withBottomNavigator: true,
       body: [
-        Text(
-          'Total messages: $messagesCount',
-          style: TextStyles.lightGreyw600(_responsive.dp(1.25)),
-        ),
+        Text('Total messages: $messagesCount', style: TextStyles.lightGreyw600(_responsive.dp(1.25))),
         Opacity(
           opacity: 1 - _animator!.getValue,
           child: Padding(
             padding: EdgeInsets.only(top: _responsive.hp(2.5)),
             child: SizedBox(
-              height: (_responsive.hp(10) + _responsive.hp(1.5)) * messagesCount,
+              height: (_responsive.hp(10) + _responsive.hp(3)) * messagesCount,
               child: ListView.separated(
                 shrinkWrap: false,
                 physics: const NeverScrollableScrollPhysics(),

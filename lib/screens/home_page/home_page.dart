@@ -25,9 +25,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  // Controllers
 
   // Variables
+
+  int? _selectedCategoryIndex = 1;
+
   final CategoriesBloc _categoriesBloc = CategoriesBloc();
 
   @override
@@ -38,8 +40,8 @@ class _HomePageState extends State<HomePage>
   }
 
   void _onPageChange(final CategoryModel category, final int newIndex) {
-    _categoriesBloc
-        .add(OnCategorySelected(index: newIndex, category: category));
+    _selectedCategoryIndex = newIndex;
+    _categoriesBloc.add(OnCategorySelected(index: newIndex, category: category));
     setState(() {});
   }
 
@@ -92,18 +94,7 @@ class _HomePageState extends State<HomePage>
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('AdoptMe',
-                        style: TextStyles.blackw900(_responsive.dp(4))),
-                    const Spacer(),
-                    CircleButton(
-                      icon: Icons.notifications,
-                      size: _responsive.dp(4),
-                    )
-                  ],
-                ),
+                Text('AdoptMe', style: TextStyles.blackw900(_responsive.dp(4))),
 
                 // Principal announcement
                 SizedBox(height: _responsive.heightSeparator),
@@ -119,29 +110,23 @@ class _HomePageState extends State<HomePage>
                 SizedBox(
                   height: _responsive.hp(20),
                   width: _responsive.width,
-                  child: state is CategoriesLoading
-                      ? Skeleton(
-                          isLoading: true,
-                          skeleton: SkeletonAvatar(
-                            style: SkeletonAvatarStyle(
-                              height: _responsive.hp(15),
-                              width: _responsive.width,
-                            ),
-                          ),
-                          child: Container(),
-                        )
-                      : state is CategoriesLoaded
-                          ? CategoryListView(
-                              categories: categories,
-                              onPageChangeCallBack: _onPageChange,
-                              currentIndex: state.index,
-                            )
-                          : Container()),
+                  child: CategoryListView(
+                    categories: categories,
+                    onPageChangeCallBack: _onPageChange,
+                    currentIndex: state is CategoriesLoaded ? state.index : 1,
+                  )
+                ),
 
                 // Pet list
                 SizedBox(height: _responsive.heightSeparator),
-                state is CategoriesLoaded
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                  child: state is CategoriesLoaded
                   ? SizedBox(
+                      key: Key(_selectedCategoryIndex.toString()),
                       height: _responsive.hp(5),
                       child: Row(
                         children: [
@@ -170,6 +155,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     )
                   : Container(),
+                ),
                 SizedBox(height: _responsive.heightSeparator),
                 _getAnimalList(),
                 SizedBox(height: _responsive.heightSeparator),

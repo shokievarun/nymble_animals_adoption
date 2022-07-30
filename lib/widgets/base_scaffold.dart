@@ -61,7 +61,7 @@ class BaseScaffold extends StatelessWidget {
                       height: _responsive.hp(5),
                       width: _responsive.wp(33),
                       child: Center(
-                        child: Text(title ?? 'No title', style: TextStyles.blackw900(_responsive.dp(2)))
+                        child: Text(title ?? 'No title', style: TextStyles.lightBlackw600(_responsive.dp(2.25)), maxLines: 1, overflow: TextOverflow.ellipsis)
                       )
                     ),
                   ],
