@@ -1,22 +1,20 @@
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatefulWidget {
-
-  final IconData icon;
+class FavoriteButton extends StatefulWidget {
+  
   final double size;
 
-  const CustomButton({
+  const FavoriteButton({
     Key? key,
-    required this.icon,
-    required this.size,
+    required this.size
   }) : super(key: key);
 
   @override
-  State<CustomButton> createState() => _CustomButtonState();
+  State<FavoriteButton> createState() => _FavoriteButtonState();
 }
 
-class _CustomButtonState extends State<CustomButton> {
+class _FavoriteButtonState extends State<FavoriteButton> {
 
   late bool _isPressed;
 
@@ -28,6 +26,7 @@ class _CustomButtonState extends State<CustomButton> {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: (){
         setState(() => _isPressed = !_isPressed);
@@ -36,14 +35,14 @@ class _CustomButtonState extends State<CustomButton> {
         duration: const Duration(milliseconds: 250),
         height: widget.size,
         width: widget.size,
-        decoration: const BoxDecoration(
-          color: ThemeColors.grey,
+        decoration: BoxDecoration(
+          color: _isPressed ? ThemeColors.redForBackground : ThemeColors.grey,
           shape: BoxShape.circle
         ),
         child: Icon(
-          widget.icon, 
+          Icons.favorite_border_rounded, 
           size: widget.size * 0.65, 
-          color: ThemeColors.middleDarkGrey,
+          color: _isPressed ? ThemeColors.redForText : ThemeColors.middleDarkGrey,
         ),
       ),
     );

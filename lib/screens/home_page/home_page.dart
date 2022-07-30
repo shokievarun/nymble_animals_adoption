@@ -2,9 +2,9 @@ import 'package:animals_adoption_flutter/bloc/categories/categories_bloc.dart';
 
 import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
 
-import 'package:animals_adoption_flutter/widgets/custom_button.dart';
+import 'package:animals_adoption_flutter/widgets/circle_button.dart';
 
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage>
             }
             final int animalsToShow =
                 state.animals.length > 5 ? 6 : state.animals.length;
-            return CustomAnimalsListOrGrid(
+            return AnimalsListOrGrid(
               animals: state.animals,
               isListView: true,
               animalsToShow: animalsToShow,
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage>
       );
     }
 
-    return CustomScaffold(
+    return BaseScaffold(
       withBottomNavigator: true,
       body: [
         BlocBuilder(
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage>
                     Text('AdoptMe',
                         style: TextStyles.blackw900(_responsive.dp(4))),
                     const Spacer(),
-                    CustomButton(
+                    CircleButton(
                       icon: Icons.notifications,
                       size: _responsive.dp(4),
                     )
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage>
 
                 // Principal announcement
                 SizedBox(height: _responsive.heightSeparator),
-                CustomAnnouncementsGalery(),
+                AnnouncementsGalery(),
 
                 // Body categories
                 SizedBox(height: _responsive.heightSeparator),
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage>
                           child: Container(),
                         )
                       : state is CategoriesLoaded
-                          ? CustomCategoryListView(
+                          ? CategoryListView(
                               categories: categories,
                               onPageChangeCallBack: _onPageChange,
                               currentIndex: state.index,

@@ -10,8 +10,8 @@ class NavBarItem extends StatelessWidget {
   final IconData icon;
   final String routeName;
 
-  late VoidCallback? onPressCallback;
-  late bool? isSelected;
+  late final VoidCallback? onPressCallback;
+  late final bool? isSelected;
 
   NavBarItem({
     Key? key,

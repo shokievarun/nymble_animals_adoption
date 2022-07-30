@@ -13,13 +13,13 @@ import '../utils/text_styles.dart';
 import '../utils/theme_colors.dart';
 
 
-class CustomAnimalContainer extends StatelessWidget {
+class AnimalContainer extends StatelessWidget {
 
   final AnimalModel animal;
   final bool? showInVertical;
   final bool? withHeroAnimation;
 
-  const CustomAnimalContainer({
+  const AnimalContainer({
     Key? key, 
     required this.animal,
     this.showInVertical,

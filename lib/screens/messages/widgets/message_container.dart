@@ -1,11 +1,11 @@
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 
 
-class CustomMessagesContainer extends StatelessWidget {
+class MessagesContainer extends StatelessWidget {
 
-  const CustomMessagesContainer({Key? key}) : super(key: key);
+  const MessagesContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

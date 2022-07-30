@@ -1,3 +1,3 @@
 
 
-export 'custom_animal_info_item.dart';
+export 'animal_info_item.dart';

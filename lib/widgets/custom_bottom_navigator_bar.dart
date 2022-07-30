@@ -1,6 +1,6 @@
 import 'package:animals_adoption_flutter/providers/navigator_bar_provider.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/widgets/custom_nav_bar_item.dart';
+import 'package:animals_adoption_flutter/widgets/nav_bar_item.dart';
 import 'package:flutter/material.dart';
 
 

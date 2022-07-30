@@ -6,6 +6,7 @@ import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 
 class CategoryContainer extends StatefulWidget {
+
   final Function(CategoryModel) onTapFunction;
   final List<Color> backgroundColors;
   final CategoryModel category;
@@ -26,8 +27,8 @@ class CategoryContainer extends StatefulWidget {
   State<CategoryContainer> createState() => _CategoryContainerState();
 }
 
-class _CategoryContainerState extends State<CategoryContainer>
-    with SingleTickerProviderStateMixin {
+class _CategoryContainerState extends State<CategoryContainer> with SingleTickerProviderStateMixin {
+
   late final BasicCustomAnimation _animator;
 
   @override
@@ -42,9 +43,7 @@ class _CategoryContainerState extends State<CategoryContainer>
       autoStart: false,
     );
 
-    if (widget.isSelected) {
-      _animator.controller.forward();
-    }
+    if (widget.isSelected) _animator.controller.forward();
     super.initState();
   }
 

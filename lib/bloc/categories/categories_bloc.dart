@@ -1,7 +1,7 @@
 import 'package:animals_adoption_flutter/constants/constants.dart';
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

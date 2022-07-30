@@ -1,5 +1,5 @@
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 
 import 'widgets/widget.dart';
 
@@ -46,7 +46,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
     final double messagesWidthPosition = _responsive.wp(5) * _animator.getValue;
 
-    return CustomScaffold(
+    return BaseScaffold(
       title: 'Messages',
       withBackButton: true,
       withBottomNavigator: true,
@@ -73,7 +73,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
                     transform: Matrix4.identity()..translate(
                       messagePositionWithCustomDirection
                     ),
-                    child: const CustomMessagesContainer());
+                    child: const MessagesContainer());
                 }
               ),
             ),

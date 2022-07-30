@@ -3,12 +3,12 @@ import 'package:animals_adoption_flutter/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
 
-class CustomAnimalInfoContainer extends StatelessWidget {
+class AnimalInfoItem extends StatelessWidget {
 
   final String dataValue;
   final String dataName;
 
-  const CustomAnimalInfoContainer({
+  const AnimalInfoItem({
     Key? key,
     required this.dataValue,
     required this.dataName

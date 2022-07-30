@@ -1,5 +1,5 @@
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class MapPage extends StatelessWidget {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
     
-    return CustomScaffold(
+    return BaseScaffold(
       title: 'My location',
       withBackButton: true,
       withBottomNavigator: true,

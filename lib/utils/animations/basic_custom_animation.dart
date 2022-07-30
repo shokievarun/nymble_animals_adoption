@@ -1,4 +1,4 @@
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 
 class BasicCustomAnimation{
 

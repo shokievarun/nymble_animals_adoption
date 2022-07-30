@@ -8,11 +8,11 @@ import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 
-import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
+import 'package:animals_adoption_flutter/widgets/animal_container.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 
 
-class CustomAnimalsListOrGrid extends StatefulWidget {
+class AnimalsListOrGrid extends StatefulWidget {
 
   final List<AnimalModel> animals;
   final bool isListView;
@@ -21,7 +21,7 @@ class CustomAnimalsListOrGrid extends StatefulWidget {
   final double? gridViewHeight;
   final double? listViewHeight;
 
-  const CustomAnimalsListOrGrid({
+  const AnimalsListOrGrid({
     Key? key,
     required this.animals,
     required this.isListView,
@@ -31,10 +31,10 @@ class CustomAnimalsListOrGrid extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomAnimalsListOrGrid> createState() => _CustomAnimalsListOrGridState();
+  State<AnimalsListOrGrid> createState() => _AnimalsListOrGridState();
 }
 
-class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with SingleTickerProviderStateMixin{
+class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTickerProviderStateMixin{
 
   late final BasicCustomAnimation _animator;
 
@@ -76,7 +76,7 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
           separatorBuilder: (_, x) => SizedBox(height: _responsive.heightSeparator),
           itemBuilder: (_, x){
             if(x < widget.animalsToShow! - 1){
-              return CustomAnimalContainer(
+              return AnimalContainer(
                 animal: widget.animals[x],
                 withHeroAnimation: true,
               );
@@ -136,7 +136,7 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
 
             return Transform(
               transform: Matrix4.identity()..translate(sideCurrentPosition),
-              child: CustomAnimalContainer(
+              child: AnimalContainer(
                 animal: widget.animals[x],
                 showInVertical: true,
               ),

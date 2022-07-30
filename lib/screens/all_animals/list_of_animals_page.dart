@@ -1,8 +1,8 @@
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
-import 'package:animals_adoption_flutter/screens/home_page/widgets/custom_animals_list_or_grid.dart';
+import 'package:animals_adoption_flutter/screens/home_page/widgets/animals_list_or_grid.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 
 
 const int containersInRow = 2;
@@ -48,11 +48,11 @@ class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTicker
 
     final double gridViewHeight = _responsive.hp(32.5) * (widget.animalsToShow.length ~/ 2);
 
-    return CustomScaffold(
+    return BaseScaffold(
       title: 'All the animals',
       withBackButton: true,
       body: [
-        CustomAnimalsListOrGrid(
+        AnimalsListOrGrid(
           animals: widget.animalsToShow,
           isListView: false,
           gridViewHeight: gridViewHeight,

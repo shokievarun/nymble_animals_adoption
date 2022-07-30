@@ -1,2 +1,2 @@
 
-export 'custom_message_container.dart';
+export 'message_container.dart';

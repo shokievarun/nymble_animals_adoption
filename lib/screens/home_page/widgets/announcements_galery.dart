@@ -4,12 +4,12 @@ import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:flutter/material.dart';
 
 
-class CustomAnnouncementsGalery extends StatelessWidget {
+class AnnouncementsGalery extends StatelessWidget {
 
   PageController? _controller;
   int? _currentPage;
 
- CustomAnnouncementsGalery({Key? key}) : super(key: key){
+ AnnouncementsGalery({Key? key}) : super(key: key){
   _currentPage = 0;
   _controller = PageController(
     initialPage: _currentPage!,

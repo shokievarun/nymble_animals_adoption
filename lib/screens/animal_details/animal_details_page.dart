@@ -1,6 +1,6 @@
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
-import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
@@ -78,7 +78,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
 
     final double textPosition = _responsive.wp(50) * _textInformationAnimationController.getValue;
 
-    return CustomScaffold(
+    return BaseScaffold(
       title: 'Details',
       withBackButton: true,
       body: [
@@ -174,7 +174,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                 children: 
                                   // Get and show props 
                                   widget.animal.dataToShow.entries.map((e) 
-                                          => CustomAnimalInfoContainer(dataValue: e.value.toString(), dataName: e.key)).toList()
+                                          => AnimalInfoItem(dataValue: e.value.toString(), dataName: e.key)).toList()
                               )
                             ),
                                   

@@ -1,4 +1,3 @@
-import 'package:animals_adoption_flutter/widgets/custom_back_button.dart';
 import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
@@ -9,14 +8,14 @@ export 'package:animals_adoption_flutter/utils/responsive_util.dart';
 export 'package:animals_adoption_flutter/utils/text_styles.dart';
 export 'package:animals_adoption_flutter/utils/theme_colors.dart';
 
-class CustomScaffold extends StatelessWidget {
+class BaseScaffold extends StatelessWidget {
 
   final List<Widget> body;
   final bool? withBottomNavigator;
   final bool? withBackButton;
   final String? title;
 
-  const CustomScaffold({
+  const BaseScaffold({
     Key? key,
     required this.body,
     this.withBottomNavigator,
@@ -54,7 +53,7 @@ class CustomScaffold extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
-                          CustomBackButton(),
+                          BackButton(),
                         ],
                       ),
                     ),

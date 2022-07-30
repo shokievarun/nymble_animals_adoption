@@ -1,19 +1,19 @@
 import 'package:animals_adoption_flutter/constants/constants.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
-import 'package:animals_adoption_flutter/screens/home_page/widgets/custom_category_container.dart';
+import 'package:animals_adoption_flutter/screens/home_page/widgets/category_container.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 
-class CustomCategoryListView extends StatefulWidget {
+class CategoryListView extends StatefulWidget {
 
   final List<CategoryModel> categories;
   final void Function(CategoryModel, int) onPageChangeCallBack;
   final int currentIndex;
 
-  const CustomCategoryListView({
+  const CategoryListView({
     Key? key,
     required this.categories,
     required this.onPageChangeCallBack,
@@ -21,13 +21,13 @@ class CustomCategoryListView extends StatefulWidget {
     }) : super(key: key);
 
   @override
-  State<CustomCategoryListView> createState() => _CustomCategoryListViewState();
+  State<CategoryListView> createState() => _CategoryListViewState();
 }
 
-class _CustomCategoryListViewState extends State<CustomCategoryListView> with SingleTickerProviderStateMixin{
+class _CategoryListViewState extends State<CategoryListView> with SingleTickerProviderStateMixin{
 
-  late BasicCustomAnimation animator;
-  late PageController pageViewController;
+  late final BasicCustomAnimation animator;
+  late final PageController pageViewController;
 
   @override
   void initState() {
