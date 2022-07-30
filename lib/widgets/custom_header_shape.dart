@@ -6,8 +6,6 @@ class CustomHeaderShape extends CustomPainter{
   
   @override
   void paint(Canvas canvas, Size size) {
-    
-    
 
   Paint paint0 = Paint()
       ..color = ThemeColors.accent

@@ -22,7 +22,7 @@ class ListOfAnimalsPage extends StatefulWidget {
 
 class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTickerProviderStateMixin{
 
-  late final BasicCustomAnimation _animator;
+  BasicCustomAnimation? _animator;
 
 
   @override
@@ -36,7 +36,7 @@ class _ListOfAnimalsPageState extends State<ListOfAnimalsPage> with SingleTicker
 
   @override
   void dispose() {
-    _animator.dispose();
+    _animator!.dispose();
     super.dispose();
   }
 

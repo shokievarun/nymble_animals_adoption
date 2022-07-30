@@ -36,7 +36,7 @@ class AnimalsListOrGrid extends StatefulWidget {
 
 class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTickerProviderStateMixin{
 
-  late final BasicCustomAnimation _animator;
+  BasicCustomAnimation? _animator;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTicker
 
   @override
   void dispose() {
-    _animator.dispose();
+    _animator!.dispose();
     super.dispose();
   }
 
@@ -132,7 +132,7 @@ class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTicker
             final int direction = isModuleOfTwo ? 1 : -1;
 
             final double sideStartPosition = _responsive.width * direction;
-            final double sideCurrentPosition = sideStartPosition * (1 - _animator.getValue);
+            final double sideCurrentPosition = sideStartPosition * (1 - _animator!.getValue);
 
             return Transform(
               transform: Matrix4.identity()..translate(sideCurrentPosition),
@@ -147,7 +147,7 @@ class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTicker
     }
 
     return Opacity(
-      opacity: _animator.getValue,
+      opacity: _animator!.getValue,
       child: widget.isListView ? _getListView() : _getGridView(),
     );
   }

@@ -14,8 +14,8 @@ class MessagesPage extends StatefulWidget {
 
 class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderStateMixin{
 
-  late final BasicCustomAnimation _animator;
-  late int messageDirection;
+  BasicCustomAnimation? _animator;
+  int? messageDirection;
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    _animator.dispose();
+    _animator!.dispose();
     super.dispose();
   }
 
@@ -44,7 +44,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
-    final double messagesWidthPosition = _responsive.wp(5) * _animator.getValue;
+    final double messagesWidthPosition = _responsive.wp(5) * _animator!.getValue;
 
     return BaseScaffold(
       title: 'Messages',
@@ -56,7 +56,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
           style: TextStyles.lightGreyw600(_responsive.dp(1.25)),
         ),
         Opacity(
-          opacity: 1 - _animator.getValue,
+          opacity: 1 - _animator!.getValue,
           child: Padding(
             padding: EdgeInsets.only(top: _responsive.hp(2.5)),
             child: SizedBox(
@@ -67,8 +67,8 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
                 itemCount: messagesCount,
                 separatorBuilder: (_, x) => SizedBox(height: _responsive.heightSeparator),
                 itemBuilder: (_, x) {
-                  final double messagePositionWithCustomDirection = messagesWidthPosition * messageDirection;
-                  messageDirection *= -1;
+                  final double messagePositionWithCustomDirection = messagesWidthPosition * messageDirection!;
+                  messageDirection = messageDirection! * -1;
                   return Transform(
                     transform: Matrix4.identity()..translate(
                       messagePositionWithCustomDirection

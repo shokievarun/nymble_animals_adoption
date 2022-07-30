@@ -1,3 +1,4 @@
+import 'package:animals_adoption_flutter/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,7 +7,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/screens/animal_details/animal_details_page.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 
 import '../utils/text_styles.dart';
@@ -100,7 +100,7 @@ class AnimalContainer extends StatelessWidget {
                       ), 
                     ),
                     const Spacer(),
-                    CustomFavoriteButton(
+                    FavoriteButton(
                       size: _responsive.dp(3)
                     )
                   ],

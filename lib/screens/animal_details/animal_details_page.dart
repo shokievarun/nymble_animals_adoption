@@ -2,13 +2,13 @@ import 'package:animals_adoption_flutter/constants/assets_paths.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
+import 'package:animals_adoption_flutter/widgets/favorite_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 
 import 'package:animals_adoption_flutter/screens/animal_details/widgets/widgets.dart';
-import 'package:animals_adoption_flutter/widgets/custom_favorite_button.dart';
 
 
 class AnimalDetailsPage extends StatefulWidget {
@@ -27,8 +27,8 @@ class AnimalDetailsPage extends StatefulWidget {
 class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProviderStateMixin{
 
 
-  late final BasicCustomAnimation _infoContainerAnimationController;
-  late final BasicCustomAnimation _textInformationAnimationController;
+  BasicCustomAnimation? _infoContainerAnimationController;
+  BasicCustomAnimation? _textInformationAnimationController;
 
   @override
   void initState() {
@@ -57,13 +57,13 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
   void _animationListener() => setState(() {});
 
   void _animationStatusListener(final AnimationStatus status) {
-    if(status == AnimationStatus.completed) _textInformationAnimationController.controller.forward();
+    if(status == AnimationStatus.completed) _textInformationAnimationController!.controller!.forward();
   }
 
   @override
   void dispose() {
-    _infoContainerAnimationController.dispose();
-    _textInformationAnimationController.dispose();
+    _infoContainerAnimationController!.dispose();
+    _textInformationAnimationController!.dispose();
     super.dispose();
   }
 
@@ -73,10 +73,10 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     final double targetAnimationValue = _responsive.hp(45);
-    final double dataContainerHeightValue = lerpDouble(targetAnimationValue, _responsive.height, _infoContainerAnimationController.getValue)!;
-    final double dataContainerScaleValue = lerpDouble(1, 0.7, _infoContainerAnimationController.getValue)!;
+    final double dataContainerHeightValue = lerpDouble(targetAnimationValue, _responsive.height, _infoContainerAnimationController!.getValue)!;
+    final double dataContainerScaleValue = lerpDouble(1, 0.7, _infoContainerAnimationController!.getValue)!;
 
-    final double textPosition = _responsive.wp(50) * _textInformationAnimationController.getValue;
+    final double textPosition = _responsive.wp(50) * _textInformationAnimationController!.getValue;
 
     return BaseScaffold(
       title: 'Details',
@@ -129,7 +129,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                       ]
                     ),
                     child: Opacity(
-                      opacity: 1 - _textInformationAnimationController.getValue,
+                      opacity: 1 - _textInformationAnimationController!.getValue,
                       child: Transform(
                         transform: Matrix4.identity()..translate(
                           textPosition
@@ -162,7 +162,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                       ],
                                     ),
                                   ),
-                                  CustomFavoriteButton(size: _responsive.dp(4))
+                                  FavoriteButton(size: _responsive.dp(4))
                                 ],
                               ),
                             ),

@@ -18,7 +18,7 @@ class CircleButton extends StatefulWidget {
 
 class _CircleButtonState extends State<CircleButton> {
 
-  late bool _isPressed;
+  bool? _isPressed;
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _CircleButtonState extends State<CircleButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        setState(() => _isPressed = !_isPressed);
+        setState(() => _isPressed = !_isPressed!);
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),

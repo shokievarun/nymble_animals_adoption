@@ -26,8 +26,8 @@ class CategoryListView extends StatefulWidget {
 
 class _CategoryListViewState extends State<CategoryListView> with SingleTickerProviderStateMixin{
 
-  late final BasicCustomAnimation animator;
-  late final PageController pageViewController;
+  BasicCustomAnimation? animator;
+  PageController? pageViewController;
 
   @override
   void initState() {
@@ -48,16 +48,16 @@ class _CategoryListViewState extends State<CategoryListView> with SingleTickerPr
     }
     widget.onPageChangeCallBack(category, newIndex);
     newIndex = newIndex + (newIndex == 0 ? 1 : newIndex == categories.length - 1 ? -1 : 0);
-    animator.controller.reset();
-    pageViewController.animateToPage(newIndex, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+    animator!.controller!.reset();
+    pageViewController!.animateToPage(newIndex, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
   }
 
   void _animationListener() => setState(() {});
 
   @override
   void dispose() {
-    animator.dispose();
-    pageViewController.dispose();
+    animator!.dispose();
+    pageViewController!.dispose();
     super.dispose();
   }
 
@@ -78,7 +78,7 @@ class _CategoryListViewState extends State<CategoryListView> with SingleTickerPr
         final double containerScale = isSelected  ? 1.10 : 0.8;
         
         double elevation = 0; 
-        if(isSelected) elevation = -_responsive.hp(1.5) * animator.getValue;
+        if(isSelected) elevation = -_responsive.hp(1.5) * animator!.getValue;
         
         return Transform.translate(
           offset: Offset(0, elevation),

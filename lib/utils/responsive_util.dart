@@ -6,28 +6,28 @@ class ResponsiveUtil{
   
   final double _heightBetweenWidgetsPerc = 2.5;
 
-  late final double _height;
-  late final double _width;
-  late final double _diagonal;
+  double? _height;
+  double? _width;
+  double? _diagonal;
 
   // late bool _isTablet;
   // late bool _isPhone;
 
-  late final double _bottomPadding;
-  late final double _topPadding;
-  late final double _sPadding;
+  double? _bottomPadding;
+  double? _topPadding;
+  double? _sPadding;
 
-  late final double _heightBetweenWidgets;
+  double? _heightBetweenWidgets;
 
   // Getters
-  double get height => _height;
-  double get width => _width;
+  double get height => _height!;
+  double get width => _width!;
 
   // Paddings
-  double get bPadding => _bottomPadding;
-  double get tPadding => _topPadding;
-  double get sPadding => _sPadding;
-  double get heightSeparator => _heightBetweenWidgets;
+  double get bPadding => _bottomPadding!;
+  double get tPadding => _topPadding!;
+  double get sPadding => _sPadding!;
+  double get heightSeparator => _heightBetweenWidgets!;
 
   ResponsiveUtil({
     required BuildContext context
@@ -39,16 +39,16 @@ class ResponsiveUtil{
     _width = size.width;
     _height = size.height;
 
-    _bottomPadding = bottomPaddingPercent * _height;
-    _topPadding = topPaddingPercent * _height;
-    _sPadding = sidesPaddingPercent * _width;
+    _bottomPadding = bottomPaddingPercent * _height!;
+    _topPadding = topPaddingPercent * _height!;
+    _sPadding = sidesPaddingPercent * _width!;
 
-    _heightBetweenWidgets = (_heightBetweenWidgetsPerc / 100) * _height;
+    _heightBetweenWidgets = (_heightBetweenWidgetsPerc / 100) * _height!;
   }
 
   factory ResponsiveUtil.of(BuildContext context) => ResponsiveUtil(context: context);
 
-  double hp(double percent) => _height * percent / 100;
-  double wp(double percent) => _width * percent / 100;
-  double dp(double percent) => _diagonal * percent / 100;
+  double hp(double percent) => _height! * percent / 100;
+  double wp(double percent) => _width! * percent / 100;
+  double dp(double percent) => _diagonal! * percent / 100;
 }

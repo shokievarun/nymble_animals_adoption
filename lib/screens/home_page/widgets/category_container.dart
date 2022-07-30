@@ -29,7 +29,7 @@ class CategoryContainer extends StatefulWidget {
 
 class _CategoryContainerState extends State<CategoryContainer> with SingleTickerProviderStateMixin {
 
-  late final BasicCustomAnimation _animator;
+  BasicCustomAnimation? _animator;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
       autoStart: false,
     );
 
-    if (widget.isSelected) _animator.controller.forward();
+    if (widget.isSelected) _animator!.controller!.forward();
     super.initState();
   }
 
@@ -51,15 +51,15 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
   void _animationStatusListener(final AnimationStatus status) {
     if (status == AnimationStatus.completed) {
-      _animator.controller.reverse();
+      _animator!.controller!.reverse();
     } else if (status == AnimationStatus.dismissed && widget.isSelected) {
-      _animator.controller.forward();
+      _animator!.controller!.forward();
     }
   }
 
   @override
   void dispose() {
-    _animator.dispose();
+    _animator!.dispose();
     super.dispose();
   }
 
@@ -68,7 +68,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     double elevationQuantity = widget.isSelected
-        ? lerpDouble(0, _responsive.hp(0.5), _animator.controller.value)!
+        ? lerpDouble(0, _responsive.hp(0.5), _animator!.controller!.value)!
         : 0;
 
     return Transform.translate(
@@ -79,7 +79,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
         child: GestureDetector(
           onTap: () {
             widget.onTapFunction(widget.category);
-            _animator.controller.forward();
+            _animator!.controller!.forward();
           },
           child: Container(
             padding: EdgeInsets.symmetric(
