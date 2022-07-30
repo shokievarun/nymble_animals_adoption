@@ -1,6 +1,7 @@
-import 'package:animals_adoption_flutter/screens/messages/widgets/custom_message_container.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/custom_scaffold.dart';
+
+import 'widgets/widget.dart';
 
 const int messagesCount = 10;
 
@@ -64,7 +65,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
                 shrinkWrap: false,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: messagesCount,
-                separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(1.5)),
+                separatorBuilder: (_, x) => SizedBox(height: _responsive.heightSeparator),
                 itemBuilder: (_, x) {
                   final double messagePositionWithCustomDirection = messagesWidthPosition * messageDirection;
                   messageDirection *= -1;

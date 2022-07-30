@@ -54,7 +54,7 @@ class AnnouncementContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(announcement.title, style: TextStyles.blackw900(_responsive.dp(1.75)), textAlign: TextAlign.center),
+                Text(announcement.title, style: TextStyles.lightBlackw600(_responsive.dp(1.75)), textAlign: TextAlign.center),
                 SizedBox(height: _responsive.hp(0.5)),
                 Text(announcement.description, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.15)), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis)
               ],

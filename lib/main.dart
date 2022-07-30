@@ -8,8 +8,9 @@ import 'package:animals_adoption_flutter/screens/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-void main(List<String> args) => runApp(const MyApp());
+void main(List<String> args){
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   

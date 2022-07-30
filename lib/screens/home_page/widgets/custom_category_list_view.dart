@@ -55,13 +55,19 @@ class _CustomCategoryListViewState extends State<CustomCategoryListView> with Si
   void _animationListener() => setState(() {});
 
   @override
+  void dispose() {
+    animator.dispose();
+    pageViewController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     return PageView.builder(
       scrollDirection: Axis.horizontal,
-      physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.categories.length,
       controller: pageViewController,
       clipBehavior: Clip.none,

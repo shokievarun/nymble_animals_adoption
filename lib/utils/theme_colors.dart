@@ -5,14 +5,13 @@ abstract class ThemeColors{
 
   // Normal Colors
   static const Color grey = Color.fromARGB(255, 235, 235, 235);
-  static const Color lightGrey = Color(0xFFC2C3CA);
+  static const Color lightGrey = Color.fromARGB(255, 166, 166, 168);
   static const Color middleDarkGrey = Color(0xFFA6A7AD);
-  static const Color darkGrey = Color(0xFF4B4B4B);
   static const Color black = Color(0xFF242424);
   static const Color lightBlack = Color.fromARGB(255, 87, 87, 87);
 
   // New colors
-  static const Color accent = Color(0xff7FB5FF);
+  static const Color accent = Color.fromARGB(255, 127, 180, 255);
   static const Color accentForText = Color(0xff4e91ed);
   static const Color redForBackground = Color(0xfff8cfdf);
   static const Color redForText = Color(0xFFFF6078);

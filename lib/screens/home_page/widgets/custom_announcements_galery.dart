@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 
 class CustomAnnouncementsGalery extends StatelessWidget {
 
-  late PageController _controller;
-  late int _currentPage;
+  PageController? _controller;
+  int? _currentPage;
 
  CustomAnnouncementsGalery({Key? key}) : super(key: key){
   _currentPage = 0;
   _controller = PageController(
-    initialPage: _currentPage,
+    initialPage: _currentPage!,
     viewportFraction: 1
   );
   _changePage();
@@ -21,8 +21,8 @@ class CustomAnnouncementsGalery extends StatelessWidget {
  Future<void> _changePage() async{
 
   await Future.delayed(const Duration(seconds: 2));
-  _currentPage = _currentPage + 1 >= announcements.length ? 0 : _currentPage + 1;
-  if (_controller.hasClients) await _controller.animateToPage(_currentPage, duration: const Duration(milliseconds: 250), curve: Curves.ease);
+  _currentPage = _currentPage! + 1 >= announcements.length ? 0 : _currentPage! + 1;
+  if (_controller!.hasClients) await _controller!.animateToPage(_currentPage!, duration: const Duration(milliseconds: 250), curve: Curves.ease);
   await _changePage();
  }
 

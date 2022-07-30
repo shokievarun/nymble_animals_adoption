@@ -38,7 +38,11 @@ class CustomAnimalContainer extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              CircularProgressIndicator(value: downloadProgress.progress, color: ThemeColors.accentForText, backgroundColor: ThemeColors.accent.withOpacity(0.5))
+              CircularProgressIndicator(
+                value: downloadProgress.progress, 
+                color: ThemeColors.accentForText, 
+                backgroundColor: ThemeColors.accent.withOpacity(0.5)
+              )
             ]
           ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -64,20 +68,20 @@ class CustomAnimalContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(animal.name, textAlign: TextAlign.center, style: TextStyles.blackw900(_responsive.dp(1.5))),
+              Text(animal.name, textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1.5))),
+              Row(
+                children: [
+                  Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
+                  Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightGreyw600(_responsive.dp(1))),
+                ],
+              ),
               SizedBox(height: _responsive.hp(1)),
               Text(
                 animal.description, 
                 textAlign: TextAlign.center, 
-                style: TextStyles.lightBlackw600(_responsive.dp(1)), 
+                style: TextStyles.lightGreyw600(_responsive.dp(1)), 
                 maxLines: showInVertical ?? false ? 3 : 2, 
                 overflow: TextOverflow.ellipsis
-              ),
-              Row(
-                children: [
-                  Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                  Text('${animal.location} (${animal.distanceInKm} km)', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1))),
-                ],
               ),
               const Spacer(),
               Expanded(

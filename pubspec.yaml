@@ -57,32 +57,11 @@ flutter:
     - assets/fonts/
 
   fonts:
-    - family: Rocko
+    - family: DMSans
       fonts:
-        - asset: assets/fonts/rocko/RockoFLF.ttf
+        - asset: assets/fonts/dm_sans/DMSans-Regular.ttf
           weight: 400
-        - asset: assets/fonts/rocko/RockoFLF-Bold.ttf
+        - asset: assets/fonts/dm_sans/DMSans-Medium.ttf
           weight: 600
-        - asset: assets/fonts/rocko/RockoUltraFLF.ttf
-          weight: 700
-        - asset: assets/fonts/rocko/RockoUltraFLF-Bold.ttf
+        - asset: assets/fonts/dm_sans/DMSans-Bold.ttf
           weight: 900
-
-    - family: ProximaSsv
-      fonts:
-        - asset: assets/fonts/proxima_ssv/Proxima_Nova_Alt_Light.otf
-          weight: 400
-        - asset: assets/fonts/proxima_ssv/Proxima_Nova_Regular.otf
-          weight: 600
-        - asset: assets/fonts/proxima_ssv/Proxima_Nova_Bold.otf
-          weight: 700
-        - asset: assets/fonts/proxima_ssv/Proxima_Nova_ExtraBold.otf
-          weight: 900
-
-    - family: SimplyRounded
-      fonts:
-        - asset: assets/fonts/simply_rounded/Simply_Rounded.ttf
-        - asset: assets/fonts/simply_rounded/Simply_Rounded_Bold_Italic.ttf
-        - asset: assets/fonts/simply_rounded/Simply_Rounded_Bold.ttf
-          weight: 600
-        - asset: assets/fonts/simply_rounded/Simply_Rounded_Italic.ttf

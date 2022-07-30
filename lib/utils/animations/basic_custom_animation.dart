@@ -19,6 +19,7 @@ class BasicCustomAnimation{
     final double? end,
     final bool? autoStart,
     final int? durationInMillisec,
+    final Curve? curve
   }){
     controller = AnimationController(
       vsync: tickerProvider, 
@@ -26,7 +27,10 @@ class BasicCustomAnimation{
     )..addListener(listener);
     if(statusListener != null) controller.addStatusListener(statusListener!);
     if(autoStart ?? true) controller.forward();
-    _animation = Tween<double>(begin: begin ?? 0.5, end: end ?? 1).animate(controller);
+    _animation = Tween<double>(begin: begin ?? 0.5, end: end ?? 1).animate(CurvedAnimation(
+      parent: controller,
+      curve: curve ?? Curves.decelerate
+    ));
   }
 
   double get getValue => _animation.value;

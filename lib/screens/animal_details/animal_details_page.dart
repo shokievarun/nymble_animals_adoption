@@ -191,7 +191,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text('Francisco', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                        Text('Francisco', style: TextStyles.blackw900(_responsive.dp(1.5))),
                                         Text('${widget.animal.name} owner.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                                       ],
                                     ),
@@ -205,13 +205,13 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                             ),
                                   
                             // Show description
-                            SizedBox(height: _responsive.hp(2)),
+                            SizedBox(height: _responsive.heightSeparator),
                             Expanded(
                               flex: 2,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Description:', style: TextStyles.blackw700(_responsive.dp(1.5))),
+                                  Text('Description:', style: TextStyles.blackw900(_responsive.dp(1.5))),
                                   Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
                                 ],
                               )
@@ -221,8 +221,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Location:', style: TextStyles.blackw700(_responsive.dp(1.5))),
-                                  SizedBox(height: _responsive.hp(2)),
+                                  Text('Location:', style: TextStyles.blackw900(_responsive.dp(1.5))),
+                                  SizedBox(height: _responsive.heightSeparator),
                                   Expanded(
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
@@ -238,7 +238,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                 ],
                               )
                             ),
-                            SizedBox(height: _responsive.hp(2)),
+                            SizedBox(height: _responsive.heightSeparator),
                             CustomTextButton(
                               onPressedCallback: () => {},
                               textColor: ThemeColors.accentForText, 

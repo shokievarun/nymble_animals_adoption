@@ -37,6 +37,7 @@ class CustomScaffold extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
@@ -61,13 +62,13 @@ class CustomScaffold extends StatelessWidget {
                       height: _responsive.hp(5),
                       width: _responsive.wp(33),
                       child: Center(
-                        child: Text(title ?? 'No title', style: TextStyles.blackw700(_responsive.dp(2)))
+                        child: Text(title ?? 'No title', style: TextStyles.blackw900(_responsive.dp(2)))
                       )
                     ),
                   ],
                 ),
               ],
-              SizedBox(height: _responsive.hp(2.5)),
+              SizedBox(height: _responsive.heightSeparator),
               ...body
             ],
           ),

@@ -25,7 +25,7 @@ class CustomAnimalInfoContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(dataValue, style: TextStyles.blackw700(_responsive.dp(1.5))),
+          Text(dataValue, style: TextStyles.blackw900(_responsive.dp(1.5))),
           Text(dataName, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
         ],
       ),

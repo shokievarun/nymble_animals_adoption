@@ -3,17 +3,21 @@ import 'package:flutter/widgets.dart';
 import 'dart:math' as math;
 
 class ResponsiveUtil{
+  
+  final double _heightBetweenWidgetsPerc = 2.5;
 
-  late double _height;
-  late double _width;
-  late double _diagonal;
+  late final double _height;
+  late final double _width;
+  late final double _diagonal;
 
   // late bool _isTablet;
   // late bool _isPhone;
 
-  late double _bottomPadding;
-  late double _topPadding;
-  late double _sPadding;
+  late final double _bottomPadding;
+  late final double _topPadding;
+  late final double _sPadding;
+
+  late final double _heightBetweenWidgets;
 
   // Getters
   double get height => _height;
@@ -23,6 +27,7 @@ class ResponsiveUtil{
   double get bPadding => _bottomPadding;
   double get tPadding => _topPadding;
   double get sPadding => _sPadding;
+  double get heightSeparator => _heightBetweenWidgets;
 
   ResponsiveUtil({
     required BuildContext context
@@ -37,6 +42,8 @@ class ResponsiveUtil{
     _bottomPadding = bottomPaddingPercent * _height;
     _topPadding = topPaddingPercent * _height;
     _sPadding = sidesPaddingPercent * _width;
+
+    _heightBetweenWidgets = (_heightBetweenWidgetsPerc / 100) * _height;
   }
 
   factory ResponsiveUtil.of(BuildContext context) => ResponsiveUtil(context: context);

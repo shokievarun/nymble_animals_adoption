@@ -1,13 +1,15 @@
 
+import 'package:flutter/material.dart';
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
-import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
+import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart'
+;
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
+
 import 'package:animals_adoption_flutter/widgets/custom_animal_container.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
-import 'package:flutter/material.dart';
 
 
 class CustomAnimalsListOrGrid extends StatefulWidget {
@@ -38,8 +40,19 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
 
   @override
   void initState() {
-    _animator = BasicCustomAnimation(listener: _animationListener, tickerProvider: this);
+    _animator = BasicCustomAnimation(
+      listener: _animationListener, 
+      tickerProvider: this,
+      durationInMillisec: 700,
+      begin: 0
+    );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animator.dispose();
+    super.dispose();
   }
 
   void _animationListener() => setState(() {});
@@ -60,7 +73,7 @@ class _CustomAnimalsListOrGridState extends State<CustomAnimalsListOrGrid> with 
           itemCount: widget.animalsToShow!,
           clipBehavior: Clip.none,
           padding: EdgeInsets.zero,
-          separatorBuilder: (_, x) => SizedBox(height: _responsive.hp(2)),
+          separatorBuilder: (_, x) => SizedBox(height: _responsive.heightSeparator),
           itemBuilder: (_, x){
             if(x < widget.animalsToShow! - 1){
               return CustomAnimalContainer(

@@ -1,13 +1,11 @@
+import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:animals_adoption_flutter/models/category_model.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
-import 'package:flutter/material.dart';
-
 
 class CategoryContainer extends StatefulWidget {
-
   final Function(CategoryModel) onTapFunction;
   final List<Color> backgroundColors;
   final CategoryModel category;
@@ -16,7 +14,7 @@ class CategoryContainer extends StatefulWidget {
   final bool isSelected;
 
   const CategoryContainer({
-    Key? key, 
+    Key? key,
     required this.onTapFunction,
     required this.backgroundColors,
     required this.category,
@@ -28,24 +26,23 @@ class CategoryContainer extends StatefulWidget {
   State<CategoryContainer> createState() => _CategoryContainerState();
 }
 
-class _CategoryContainerState extends State<CategoryContainer> with SingleTickerProviderStateMixin {
+class _CategoryContainerState extends State<CategoryContainer>
+    with SingleTickerProviderStateMixin {
+  late final BasicCustomAnimation _animator;
 
-  late BasicCustomAnimation _animator;
-  
   @override
   void initState() {
-
     _animator = BasicCustomAnimation(
-      listener: _animationListener, 
+      listener: _animationListener,
       tickerProvider: this,
       statusListener: _animationStatusListener,
-      durationInMillisec: 500,
+      durationInMillisec: 300,
       begin: 0,
       end: 1,
-      autoStart: false
+      autoStart: false,
     );
-      
-    if(widget.isSelected){
+
+    if (widget.isSelected) {
       _animator.controller.forward();
     }
     super.initState();
@@ -53,11 +50,10 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
   void _animationListener() => setState(() {});
 
-  void _animationStatusListener(final AnimationStatus status){
-    if(status == AnimationStatus.completed){
-        _animator.controller.reverse();
-    }
-    else if(status == AnimationStatus.dismissed && widget.isSelected){
+  void _animationStatusListener(final AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      _animator.controller.reverse();
+    } else if (status == AnimationStatus.dismissed && widget.isSelected) {
       _animator.controller.forward();
     }
   }
@@ -70,56 +66,74 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    double elevationQuantity = widget.isSelected ? lerpDouble(0, _responsive.hp(0.5), _animator.controller.value)! : 0;
-    
+    double elevationQuantity = widget.isSelected
+        ? lerpDouble(0, _responsive.hp(0.5), _animator.controller.value)!
+        : 0;
+
     return Transform.translate(
       offset: Offset(0, elevationQuantity),
-      child: GestureDetector(
-        onTap: (){
-          widget.onTapFunction(widget.category);
-          _animator.controller.forward();
-        },
-        child: AnimatedScale(
-          scale: widget.scale,
-          duration: const Duration(milliseconds: 250),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 4,
-                child: Image.asset(
-                  widget.category.imagePath, 
-                  fit: BoxFit.fill,
-                  scale: 1,
-                ),
+      child: AnimatedScale(
+        scale: widget.scale,
+        duration: const Duration(milliseconds: 300),
+        child: GestureDetector(
+          onTap: () {
+            widget.onTapFunction(widget.category);
+            _animator.controller.forward();
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: _responsive.wp(2.5),
+              vertical: _responsive.hp(2),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                colors: widget.backgroundColors,
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
               ),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: widget.backgroundColors,
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomRight
-                    ),
-                    borderRadius: BorderRadius.circular(10)
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Image.asset(
+                    widget.category.imagePath,
+                    fit: BoxFit.fill,
                   ),
+                ),
+                Expanded(
+                  flex: 3,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: _responsive.hp(0.1), horizontal: _responsive.wp(1)),
+                    padding: EdgeInsets.symmetric(
+                      vertical: _responsive.hp(0.1),
+                      horizontal: _responsive.wp(1),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(widget.category.name, style: TextStyles.whitew700(_responsive.dp(1.5)), textAlign: TextAlign.center, maxLines: 1),
-                        Text(widget.category.description, style: TextStyles.whitew600(_responsive.dp(0.9)), textAlign: TextAlign.center, maxLines: 1),
+                        Text(
+                          widget.category.name,
+                          style: TextStyles.whitew900(_responsive.dp(2)),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                        ),
+                        Text(
+                          widget.category.description,
+                          style: TextStyles.whitew600(_responsive.dp(1.15)),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
