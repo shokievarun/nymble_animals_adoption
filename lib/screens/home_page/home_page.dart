@@ -2,13 +2,10 @@ import 'package:animals_adoption_flutter/bloc/categories/categories_bloc.dart';
 
 import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_page.dart';
 
-import 'package:animals_adoption_flutter/widgets/circle_button.dart';
-
 import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletons/skeletons.dart';
 
 import 'widgets/widgets.dart';
 
@@ -65,7 +62,7 @@ class _HomePageState extends State<HomePage>
               return Center(
                 child: Text(
                   'No animals in this category.',
-                  style: TextStyles.lightGreyw600(_responsive.dp(1.5)),
+                  style: TextStyles.lightBlackMedium(_responsive.dp(1.5)),
                 ),
               );
             }
@@ -94,18 +91,15 @@ class _HomePageState extends State<HomePage>
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('AdoptMe', style: TextStyles.blackw900(_responsive.dp(4))),
+                Text('AdoptMe', style: TextStyles.blackBold(_responsive.dp(4))),
 
                 // Principal announcement
-                SizedBox(height: _responsive.heightSeparator),
+                SizedBox(height: _responsive.heightSeparator * 2),
                 AnnouncementsGalery(),
 
                 // Body categories
                 SizedBox(height: _responsive.heightSeparator),
-                Text(
-                  'Categories:',
-                  style: TextStyles.lightBlackw600(_responsive.dp(2)),
-                ),
+                Text('Categories:', style: TextStyles.blackSemiBold(_responsive.dp(2))),
                 SizedBox(height: _responsive.heightSeparator),
                 SizedBox(
                   height: _responsive.hp(20),
@@ -130,23 +124,18 @@ class _HomePageState extends State<HomePage>
                       height: _responsive.hp(5),
                       child: Row(
                         children: [
-                          Text(
-                            'Pet list:',
-                            style:
-                                TextStyles.lightBlackw600(_responsive.dp(2)),
-                          ),
+                          Text('Pet list:', style: TextStyles.blackSemiBold(_responsive.dp(2))),
                           if (state.animals.isNotEmpty) ...[
                             const Spacer(),
                             CustomTextButton(
                               text: 'View all',
-                              textColor: ThemeColors.middleDarkGrey,
-                              backgroundColor: ThemeColors.grey,
+                              textColor: ThemeColors.lightBlack,
+                              backgroundColor: ThemeColors.lightGrey,
                               textSize: _responsive.dp(1.25),
                               onPressedCallback: () async =>
                                   await Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: ((context) => ListOfAnimalsPage(
-                                      animalsToShow: state.animals)),
+                                  builder: ((context) => ListOfAnimalsPage(animalsToShow: state.animals)),
                                 ),
                               ),
                             ),

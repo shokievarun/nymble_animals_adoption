@@ -34,12 +34,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  device_preview: ^1.1.0
-  provider: ^6.0.3
-  cached_network_image: ^3.2.1
   equatable: ^2.0.3
-  skeletons: ^0.0.3
   flutter_bloc: ^8.0.1
+  cached_network_image: ^3.2.1
 
 dev_dependencies:
   flutter_test:
@@ -57,11 +54,19 @@ flutter:
     - assets/fonts/
 
   fonts:
-    - family: DMSans
+    - family: Montserrat
       fonts:
-        - asset: assets/fonts/dm_sans/DMSans-Regular.ttf
+        - asset: assets/fonts/montserrat/Montserrat-ExtraLight.otf
+          weight: 100
+        - asset: assets/fonts/montserrat/Montserrat-Light.otf
+          weight: 200
+        - asset: assets/fonts/montserrat/Montserrat-Regular.otf
+          weight: 300
+        - asset: assets/fonts/montserrat/Montserrat-Medium.otf
           weight: 400
-        - asset: assets/fonts/dm_sans/DMSans-Medium.ttf
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.otf
+          weight: 500
+        - asset: assets/fonts/montserrat/Montserrat-Bold.otf
           weight: 600
-        - asset: assets/fonts/dm_sans/DMSans-Bold.ttf
-          weight: 900
+        - asset: assets/fonts/montserrat/Montserrat-ExtraBold.otf
+          weight: 700

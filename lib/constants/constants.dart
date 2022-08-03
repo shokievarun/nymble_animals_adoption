@@ -1,6 +1,7 @@
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 import 'package:animals_adoption_flutter/models/announcement_model.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
+import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'assets_paths.dart';
 
 
@@ -10,31 +11,40 @@ const double sidesPaddingPercent = 0.075;
 
 const int maxAnimalsToShowInVertialList = 5;
 
+
+List<BoxShadow> containerShadows = [
+  BoxShadow(
+    blurRadius: 50,
+    color: Colors.grey[200]!,
+    offset: const Offset(0, 5),
+  )
+];
+
 List<CategoryModel> categories = [
   CategoryModel(
     category: Category.dogs, 
     description: 'There are 5 dogs near you!', 
-    imagePath: '$animalCategoriesPath/dog.png'
+    imagePath: '$animalCategoriesPath/dog_category.jpg'
   ),
   CategoryModel(
     category: Category.cats,
     description: 'There are 10 cats near you!', 
-    imagePath: '$animalCategoriesPath/cat.png'
+    imagePath: '$animalCategoriesPath/cat_category.jpg'
   ),
   CategoryModel(
     category: Category.fishes,
     description: 'There are 100 fishes near you!', 
-    imagePath: '$animalCategoriesPath/fish.png'
+    imagePath: '$animalCategoriesPath/fish_category.jpg'
   ),
   CategoryModel(
     category: Category.birds,
     description: 'There are 1 bird near you!', 
-    imagePath: '$animalCategoriesPath/parrot.png'
+    imagePath: '$animalCategoriesPath/bird_category.jpg'
   ),
   CategoryModel(
     category: Category.rabbits,
     description: 'There are 25 rabbits near you!', 
-    imagePath: '$animalCategoriesPath/rabbit.png'
+    imagePath: '$animalCategoriesPath/rabbit_category.jpg'
   ),
 ];
 

@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:animals_adoption_flutter/constants/constants.dart';
 import 'package:animals_adoption_flutter/models/category_model.dart';
 import 'package:animals_adoption_flutter/screens/home_page/widgets/category_container.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
-import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 
@@ -31,14 +32,12 @@ class _CategoryListViewState extends State<CategoryListView> with SingleTickerPr
 
   @override
   void initState() {
-
+    super.initState();
     animator = BasicCustomAnimation(listener: _animationListener, tickerProvider: this);
     pageViewController = PageController(
       initialPage: widget.currentIndex, 
       viewportFraction: 1 / 3,
     );
-    
-    super.initState();
   }
 
   void _onPageChange(int newIndex, final CategoryModel category){
@@ -67,6 +66,7 @@ class _CategoryListViewState extends State<CategoryListView> with SingleTickerPr
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     return PageView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       scrollDirection: Axis.horizontal,
       itemCount: widget.categories.length,
       controller: pageViewController,
@@ -84,7 +84,6 @@ class _CategoryListViewState extends State<CategoryListView> with SingleTickerPr
           offset: Offset(0, elevation),
           child: CategoryContainer(
             onTapFunction: (category) => _onPageChange(x, category),
-            backgroundColors: ThemeColors.gradients[x].map((e) => e.withOpacity(0.5)).toList(), 
             category: categories[x], 
             scale: containerScale, 
             isSelected: isSelected

@@ -27,7 +27,7 @@ class AnnouncementContainer extends StatelessWidget {
           height: _responsive.hp(20),
           width: _responsive.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(15),
             gradient: ThemeColors.blueGradient
           ),
         ),
@@ -47,16 +47,16 @@ class AnnouncementContainer extends StatelessWidget {
             width: _responsive.width,
             padding: EdgeInsets.symmetric(horizontal: _responsive.wp(5), vertical: _responsive.hp(1.5)),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: Colors.white
+              borderRadius: BorderRadius.circular(15),
+              color: ThemeColors.white
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(announcement.title, style: TextStyles.lightBlackw600(_responsive.dp(1.75)), textAlign: TextAlign.center),
+                Text(announcement.title, style: TextStyles.blackSemiBold(_responsive.dp(1.75)), textAlign: TextAlign.center),
                 SizedBox(height: _responsive.hp(0.5)),
-                Text(announcement.description, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.15)), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis)
+                Text(announcement.description, style: TextStyles.greySemiBold(_responsive.dp(1.15)), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis)
               ],
             ),
           ),

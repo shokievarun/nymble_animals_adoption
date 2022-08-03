@@ -25,8 +25,8 @@ class AnimalInfoItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(dataValue, style: TextStyles.blackw900(_responsive.dp(1.5))),
-          Text(dataName, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+          Text(dataValue, style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
+          Text(dataName, style: TextStyles.greySemiBold(_responsive.dp(1.25))),
         ],
       ),
     );

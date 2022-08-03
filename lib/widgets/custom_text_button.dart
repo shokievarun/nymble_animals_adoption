@@ -30,10 +30,10 @@ class CustomTextButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: backgroundColor.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(15)
         ),
         child: TextButton(
-          child: Text(text, style: TextStyles.middleDarkGrayw500(textSize).copyWith(color: textColor)),
+          child: Text(text, style: TextStyles.greySemiBold(textSize).copyWith(color: textColor)),
           onPressed: onPressedCallback
         )
       ),

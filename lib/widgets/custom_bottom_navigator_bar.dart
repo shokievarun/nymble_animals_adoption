@@ -1,5 +1,7 @@
+import 'package:animals_adoption_flutter/constants/constants.dart';
 import 'package:animals_adoption_flutter/providers/navigator_bar_provider.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
+import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:animals_adoption_flutter/widgets/nav_bar_item.dart';
 import 'package:flutter/material.dart';
 
@@ -49,15 +51,9 @@ class CustomBottomNavigatorBar extends StatelessWidget {
         width: _responsive.width,
         padding: EdgeInsets.symmetric(horizontal: _responsive.wp(3), vertical: _responsive.wp(2)),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(25),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.15),
-              spreadRadius: 1,
-              blurRadius: 3.5,
-            )
-          ]
+          color: ThemeColors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: containerShadows
         ),
         child: Row(
           children: [

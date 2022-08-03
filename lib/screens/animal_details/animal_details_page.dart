@@ -1,14 +1,15 @@
 import 'package:animals_adoption_flutter/constants/assets_paths.dart';
+import 'package:animals_adoption_flutter/constants/constants.dart';
 import 'package:animals_adoption_flutter/utils/animations/basic_custom_animation.dart';
 import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:animals_adoption_flutter/widgets/custom_text_button.dart';
 import 'package:animals_adoption_flutter/widgets/favorite_button.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
 
 import 'package:animals_adoption_flutter/models/animal_model.dart';
 
 import 'package:animals_adoption_flutter/screens/animal_details/widgets/widgets.dart';
+import 'package:animals_adoption_flutter/widgets/get_network_image.dart';
 
 
 class AnimalDetailsPage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
     
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
-    final double targetAnimationValue = _responsive.hp(45);
+    final double targetAnimationValue = _responsive.hp(55);
     final double dataContainerHeightValue = lerpDouble(targetAnimationValue, _responsive.height, _infoContainerAnimationController!.getValue)!;
     final double dataContainerScaleValue = lerpDouble(1, 0.7, _infoContainerAnimationController!.getValue)!;
 
@@ -91,19 +92,19 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                 children: [
 
                   // Animal images
-                  Hero(
-                    tag: widget.animal.imagePath,
-                    transitionOnUserGestures: false,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: CachedNetworkImage(
-                        height: _responsive.hp(40),
-                        width: _responsive.width,
-                        imageUrl: widget.animal.imagePath,
-                        progressIndicatorBuilder: (context, url, downloadProgress) => 
-                          CircularProgressIndicator(value: downloadProgress.progress),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                        fit: BoxFit.fill,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(
+                      height: _responsive.hp(50),
+                      width: _responsive.width,
+                      decoration: BoxDecoration(
+                        color: ThemeColors.white,
+                        boxShadow: containerShadows
+                      ),
+                      child: Hero(
+                        tag: widget.animal.imagePath,
+                        transitionOnUserGestures: false,
+                        child: GetNetworkImage(url: widget.animal.imagePath),
                       ),
                     ),
                   ),
@@ -119,14 +120,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                     padding: EdgeInsets.symmetric(horizontal: _responsive.sPadding, vertical: _responsive.tPadding / 2),
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.15),
-                          spreadRadius: 1,
-                          blurRadius: 3.5,
-                        )
-                      ]
+                      color: ThemeColors.white,
+                      boxShadow: containerShadows
                     ),
                     child: Opacity(
                       opacity: 1 - _textInformationAnimationController!.getValue,
@@ -152,11 +147,11 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text(widget.animal.name, style: TextStyles.blackw900(_responsive.dp(3))),
+                                        Text(widget.animal.name, style: TextStyles.blackBold(_responsive.dp(3))),
                                         Row(
                                           children: [
                                             Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                                            Text(widget.animal.location, style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                            Text(widget.animal.location, style: TextStyles.greySemiBold(_responsive.dp(1.25))),
                                           ],
                                         )
                                       ],
@@ -191,8 +186,8 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text('Francisco', style: TextStyles.blackw900(_responsive.dp(1.5))),
-                                        Text('${widget.animal.name} owner.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                        Text('Francisco', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
+                                        Text('${widget.animal.name} owner.', style: TextStyles.greySemiBold(_responsive.dp(1.25))),
                                       ],
                                     ),
                                   ),
@@ -205,14 +200,13 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                             ),
                                   
                             // Show description
-                            SizedBox(height: _responsive.heightSeparator),
                             Expanded(
                               flex: 2,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Description:', style: TextStyles.blackw900(_responsive.dp(1.5))),
-                                  Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.middleDarkGrayw500(_responsive.dp(1.25))),
+                                  Text('Description:', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
+                                  Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.greySemiBold(_responsive.dp(1.25))),
                                 ],
                               )
                             ),
@@ -221,7 +215,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Location:', style: TextStyles.blackw900(_responsive.dp(1.5))),
+                                  Text('Location:', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
                                   SizedBox(height: _responsive.heightSeparator),
                                   Expanded(
                                     child: ClipRRect(
@@ -247,7 +241,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                               textSize: _responsive.dp(1.25)
                             ),
                             const Expanded(
-                              flex: 15,
+                              flex: 25,
                               child: SizedBox(),
                             )
                           ],

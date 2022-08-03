@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 
 class TextStyles{
 
+
+  // w100 ExtraLight
+  // w200 Light
+  // w300 Regular
+  // w400 Medium
+  // w500 SemiBold
+  // w600 Bold
+  // w700 ExtraBold
+
   // Singleton
   static final TextStyles _textStyles = TextStyles._internal();
 
@@ -12,57 +21,50 @@ class TextStyles{
 
   TextStyles._internal();
 
-  static TextStyle middleDarkGrayw500(final double size){
+  static TextStyle greySemiBold(final double size){
     return TextStyle(
-      fontFamily: 'DMSans',
+      fontFamily: 'Montserrat',
       fontSize: size,
       fontWeight: FontWeight.w500,
-      color: ThemeColors.middleDarkGrey
+      color: ThemeColors.grey
     );
   }
 
-  static TextStyle lightGreyw600(final double size){
+  static TextStyle greyBold(final double size){
     return TextStyle(
-      fontFamily: 'DMSans',
+      fontFamily: 'Montserrat',
       fontSize: size,
-      color: ThemeColors.lightGrey,
+      color: ThemeColors.grey,
       fontWeight: FontWeight.w600,
     );
   }
 
-  static TextStyle blackw900(final double size){
+  static TextStyle lightBlackMedium(final double size){
     return TextStyle(
-      fontFamily: 'DMSans',
+      fontFamily: 'Montserrat',
       fontSize: size,
-      fontWeight: FontWeight.w900,
+      color: ThemeColors.lightBlack,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
+
+  static TextStyle blackSemiBold(final double size){
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: size,
+      fontWeight: FontWeight.w500,
+      color: ThemeColors.black
+    );
+  }
+  
+  static TextStyle blackBold(final double size){
+    return TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: size,
+      fontWeight: FontWeight.w600,
       color: ThemeColors.black
     );
   }
 
-  static TextStyle whitew600(final double size){
-    return TextStyle(
-      fontFamily: 'DMSans',
-      fontSize: size,
-      fontWeight: FontWeight.w600,
-      color: Colors.white
-    );
-  }
-
-  static TextStyle whitew900(final double size){
-    return TextStyle(
-      fontFamily: 'DMSans',
-      fontSize: size,
-      fontWeight: FontWeight.w900,
-      color: Colors.white
-    );
-  }
-
-  static TextStyle lightBlackw600(final double size){
-    return TextStyle(
-      fontFamily: 'DMSans',
-      fontSize: size,
-      fontWeight: FontWeight.w600,
-      color: ThemeColors.lightBlack
-    );
-  }
 }

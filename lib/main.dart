@@ -5,6 +5,7 @@ import 'package:animals_adoption_flutter/screens/all_animals/list_of_animals_pag
 import 'package:animals_adoption_flutter/screens/map/map_page.dart';
 import 'package:animals_adoption_flutter/screens/messages/messages_page.dart';
 import 'package:animals_adoption_flutter/screens/profile/profile_page.dart';
+import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       
           // Theme
           theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white
+            scaffoldBackgroundColor: ThemeColors.background
           ),
           routes: {
             '/' : ((context) => const HomePage()),

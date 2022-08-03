@@ -1,3 +1,5 @@
+import 'package:animals_adoption_flutter/constants/constants.dart';
+import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:animals_adoption_flutter/models/category_model.dart';
@@ -8,7 +10,6 @@ import 'package:animals_adoption_flutter/utils/text_styles.dart';
 class CategoryContainer extends StatefulWidget {
 
   final Function(CategoryModel) onTapFunction;
-  final List<Color> backgroundColors;
   final CategoryModel category;
 
   final double scale;
@@ -17,7 +18,6 @@ class CategoryContainer extends StatefulWidget {
   const CategoryContainer({
     Key? key,
     required this.onTapFunction,
-    required this.backgroundColors,
     required this.category,
     required this.scale,
     required this.isSelected,
@@ -50,6 +50,7 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
   void _animationListener() => setState(() {});
 
   void _animationStatusListener(final AnimationStatus status) {
+
     if (status == AnimationStatus.completed) {
       _animator!.controller!.reverse();
     } else if (status == AnimationStatus.dismissed && widget.isSelected) {
@@ -83,54 +84,55 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
           },
           child: Container(
             padding: EdgeInsets.symmetric(
-              horizontal: _responsive.wp(2.5),
-              vertical: _responsive.hp(2),
+              horizontal: _responsive.wp(2.25),
+              vertical: _responsive.hp(1),
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ThemeColors.white,
               borderRadius: BorderRadius.circular(15),
-              gradient: LinearGradient(
-                colors: widget.backgroundColors,
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
+              boxShadow: containerShadows
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 4,
-                  child: Image.asset(
-                    widget.category.imagePath,
-                    fit: BoxFit.fill,
+                  flex: 8,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      widget.category.imagePath,
+                      fit: BoxFit.cover,
+                      cacheWidth: 260,
+                      cacheHeight: 260,
+                    ),
                   ),
+                ),
+                const Expanded(
+                  flex: 1,
+                  child: SizedBox(),
                 ),
                 Expanded(
-                  flex: 3,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: _responsive.hp(0.1),
-                      horizontal: _responsive.wp(1),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget.category.name,
-                          style: TextStyles.whitew900(_responsive.dp(2)),
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                        ),
-                        Text(
-                          widget.category.description,
-                          style: TextStyles.whitew600(_responsive.dp(1.15)),
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.category.name,
+                        style: TextStyles.blackSemiBold(_responsive.dp(1.75)),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                      ),
+                      Text(
+                        widget.category.description,
+                        style: TextStyles.greySemiBold(_responsive.dp(1.15)),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                      ),
+                    ],
+                  )
+                )
               ],
             ),
           ),

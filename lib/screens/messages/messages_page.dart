@@ -51,7 +51,7 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
       withBackButton: true,
       withBottomNavigator: true,
       body: [
-        Text('Total messages: $messagesCount', style: TextStyles.lightGreyw600(_responsive.dp(1.25))),
+        Text('Total messages: $messagesCount', style: TextStyles.greyBold(_responsive.dp(1.25))),
         Opacity(
           opacity: 1 - _animator!.getValue,
           child: Padding(

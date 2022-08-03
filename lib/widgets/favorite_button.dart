@@ -36,13 +36,13 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         height: widget.size,
         width: widget.size,
         decoration: BoxDecoration(
-          color: _isPressed ? ThemeColors.redForBackground : ThemeColors.grey,
+          color: _isPressed ? ThemeColors.redForBackground : ThemeColors.lightGrey,
           shape: BoxShape.circle
         ),
         child: Icon(
           Icons.favorite_border_rounded, 
           size: widget.size * 0.65, 
-          color: _isPressed ? ThemeColors.redForText : ThemeColors.middleDarkGrey,
+          color: _isPressed ? ThemeColors.redForText : ThemeColors.lightBlack,
         ),
       ),
     );

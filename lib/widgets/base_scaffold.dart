@@ -1,4 +1,5 @@
 import 'package:animals_adoption_flutter/widgets/custom_bottom_navigator_bar.dart';
+import 'package:animals_adoption_flutter/widgets/header_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import '../utils/text_styles.dart';
@@ -53,7 +54,7 @@ class BaseScaffold extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
-                          BackButton(),
+                          HeaderBackButton(),
                         ],
                       ),
                     ),
@@ -61,7 +62,7 @@ class BaseScaffold extends StatelessWidget {
                       height: _responsive.hp(5),
                       width: _responsive.wp(33),
                       child: Center(
-                        child: Text(title ?? 'No title', style: TextStyles.lightBlackw600(_responsive.dp(2.25)), maxLines: 1, overflow: TextOverflow.ellipsis)
+                        child: Text(title ?? 'No title', style: TextStyles.blackSemiBold(_responsive.dp(2.25)), maxLines: 2, overflow: TextOverflow.visible, textAlign: TextAlign.center)
                       )
                     ),
                   ],

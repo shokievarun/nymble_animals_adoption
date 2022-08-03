@@ -86,9 +86,9 @@ class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTicker
                 Column(
                   children: [
                     CustomTextButton(
-                      backgroundColor: ThemeColors.grey,
+                      backgroundColor: ThemeColors.lightGrey,
                       text: 'Press to see all the animals',
-                      textColor: ThemeColors.middleDarkGrey,
+                      textColor: ThemeColors.lightBlack,
                       textSize: _responsive.dp(1.5),
                       onPressedCallback: () {
                         Navigator.push(

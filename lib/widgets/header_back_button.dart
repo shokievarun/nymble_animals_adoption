@@ -15,8 +15,8 @@ class HeaderBackButton extends StatelessWidget {
     return Container(
       height: _responsive.hp(5),
       // width: _responsive.wp(11.5),
-      decoration: const BoxDecoration(
-        color: ThemeColors.grey,
+      decoration: BoxDecoration(
+        color: ThemeColors.lightGrey.withOpacity(0.3),
         shape: BoxShape.circle
       ),
       child: IconButton(
@@ -25,10 +25,10 @@ class HeaderBackButton extends StatelessWidget {
           size: _responsive.dp(2)
         ), 
         splashRadius: _responsive.hp(3.5),
-        color: ThemeColors.middleDarkGrey,
+        color: ThemeColors.lightBlack,
         focusColor: Colors.transparent,
         hoverColor: Colors.transparent,
-        highlightColor: ThemeColors.grey.withOpacity(0.5),
+        highlightColor: ThemeColors.lightBlack.withOpacity(0.1),
         splashColor: Colors.transparent,
         disabledColor: Colors.transparent,
         onPressed: Navigator.of(context).pop,

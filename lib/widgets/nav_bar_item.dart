@@ -31,7 +31,7 @@ class NavBarItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isSelected! ? ThemeColors.accent.withOpacity(0.35) : Colors.transparent,
-          borderRadius: BorderRadius.circular(20)
+          borderRadius: BorderRadius.circular(15)
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,12 +42,12 @@ class NavBarItem extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               icon: Icon(icon),
-              color: isSelected! ? ThemeColors.accentForText : ThemeColors.middleDarkGrey, 
+              color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack, 
               onPressed: onPressCallback!
             ),
             Text(
               routeName.isEmpty ? 'Home' : routeName[0].toUpperCase() + routeName.substring(1), 
-              style: TextStyles.lightGreyw600(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.middleDarkGrey)
+              style: TextStyles.greyBold(_responsive.dp(1)).copyWith(color: isSelected! ? ThemeColors.accentForText : ThemeColors.lightBlack)
             ),
           ],
         ),

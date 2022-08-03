@@ -16,8 +16,8 @@ class MessagesContainer extends StatelessWidget {
       height: _responsive.hp(10),
       padding: EdgeInsets.symmetric(vertical: _responsive.hp(1), horizontal: _responsive.wp(2.5)),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        color: ThemeColors.white,
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.15),
@@ -44,16 +44,16 @@ class MessagesContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Francisco Rodríguez', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1.20))),
+                Text('Francisco Rodríguez', textAlign: TextAlign.center, style: TextStyles.blackSemiBold(_responsive.dp(1.20))),
                 SizedBox(height: _responsive.heightSeparator / 100),
-                Text('Jasper owner', textAlign: TextAlign.center, style: TextStyles.lightBlackw600(_responsive.dp(1.10))),
+                Text('Jasper owner', textAlign: TextAlign.center, style: TextStyles.blackSemiBold(_responsive.dp(1.10))),
                 SizedBox(height: _responsive.hp(0.5)),
                 Expanded(
                   flex: 2,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hello, this is a message!', textAlign: TextAlign.center, style: TextStyles.middleDarkGrayw500(_responsive.dp(1)), maxLines: 3, overflow: TextOverflow.ellipsis),
+                      Text('Hello, this is a message!', textAlign: TextAlign.center, style: TextStyles.greySemiBold(_responsive.dp(1)), maxLines: 3, overflow: TextOverflow.ellipsis),
                       const Spacer(),
                       CustomTextButton(
                         textColor: ThemeColors.accentForText, 
