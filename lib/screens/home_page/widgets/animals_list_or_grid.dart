@@ -81,25 +81,24 @@ class _AnimalsListOrGridState extends State<AnimalsListOrGrid> with SingleTicker
                 withHeroAnimation: true,
               );
             }
-            return Column(
-              children: [
-                Column(
-                  children: [
-                    CustomTextButton(
-                      backgroundColor: ThemeColors.lightGrey,
-                      text: 'Press to see all the animals',
-                      textColor: ThemeColors.lightBlack,
-                      textSize: _responsive.dp(1.5),
-                      onPressedCallback: () {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: widget.animals)))
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
+            return SizedBox(
+              height: widget.listViewHeight! / 2,
+              child: Column(
+                children: [
+                  CustomTextButton(
+                    backgroundColor: ThemeColors.lightGrey,
+                    text: 'Press to see all the animals',
+                    textColor: ThemeColors.lightBlack,
+                    textSize: _responsive.dp(1.5),
+                    onPressedCallback: () async {
+                      await Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: ((context) => ListOfAnimalsPage(animalsToShow: widget.animals)))
+                      );
+                    },
+                  ),
+                ],
+              ),
             );
           },
         ),

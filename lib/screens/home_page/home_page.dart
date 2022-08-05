@@ -66,8 +66,7 @@ class _HomePageState extends State<HomePage>
                 ),
               );
             }
-            final int animalsToShow =
-                state.animals.length > 5 ? 6 : state.animals.length;
+            final int animalsToShow = state.animals.length > 5 ? 6 : state.animals.length;
             return AnimalsListOrGrid(
               animals: state.animals,
               isListView: true,
@@ -124,9 +123,11 @@ class _HomePageState extends State<HomePage>
                       height: _responsive.hp(5),
                       child: Row(
                         children: [
-                          Text('Pet list:', style: TextStyles.blackSemiBold(_responsive.dp(2))),
-                          if (state.animals.isNotEmpty) ...[
-                            const Spacer(),
+                          Expanded(
+                            flex: 4,
+                            child: Text('Pet list:', style: TextStyles.blackSemiBold(_responsive.dp(2)))
+                          ),
+                          if (state.animals.isNotEmpty)
                             CustomTextButton(
                               text: 'View all',
                               textColor: ThemeColors.lightBlack,
@@ -139,7 +140,6 @@ class _HomePageState extends State<HomePage>
                                 ),
                               ),
                             ),
-                          ]
                         ],
                       ),
                     )
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 SizedBox(height: _responsive.heightSeparator),
                 _getAnimalList(),
-                SizedBox(height: _responsive.heightSeparator),
+                SizedBox(height: _responsive.heightSeparator * 2),
               ],
             );
           },

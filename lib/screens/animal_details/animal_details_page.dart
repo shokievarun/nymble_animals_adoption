@@ -135,104 +135,78 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                           children: [
                                   
                             // Name, location and favorite button
-                            Expanded(
-                              flex: 3,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    flex: 8,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(widget.animal.name, style: TextStyles.blackBold(_responsive.dp(3))),
+                                    Row(
                                       children: [
-                                        Text(widget.animal.name, style: TextStyles.blackBold(_responsive.dp(3))),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
-                                            Text(widget.animal.location, style: TextStyles.greySemiBold(_responsive.dp(1.25))),
-                                          ],
-                                        )
+                                        Icon(Icons.location_on_sharp, color: ThemeColors.accentForText, size: _responsive.dp(1.25)),
+                                        Text(widget.animal.location, style: TextStyles.greySemiBold(_responsive.dp(1.25))),
                                       ],
-                                    ),
-                                  ),
-                                  FavoriteButton(size: _responsive.dp(4))
-                                ],
-                              ),
-                            ),
-                                  
-                            // Data containers, sex, age and weight
-                            Expanded(
-                              flex: 2,
-                              child: Row(
-                                children: 
-                                  // Get and show props 
-                                  widget.animal.dataToShow.entries.map((e) 
-                                          => AnimalInfoItem(dataValue: e.value.toString(), dataName: e.key)).toList()
-                              )
-                            ),
-                                  
-                            // User data
-                            Expanded(
-                              flex: 3,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    flex: 4,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text('Francisco', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
-                                        Text('${widget.animal.name} owner.', style: TextStyles.greySemiBold(_responsive.dp(1.25))),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child:  Icon(Icons.message_rounded, color: ThemeColors.accentForText, size: _responsive.dp(2))
-                                  ),
-                                ],
-                              )
-                            ),
-                                  
-                            // Show description
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Description:', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
-                                  Text('Vaccinations up to date, spayed / neutered.', style: TextStyles.greySemiBold(_responsive.dp(1.25))),
-                                ],
-                              )
-                            ),
-                            Expanded(
-                              flex: 8,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Location:', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
-                                  SizedBox(height: _responsive.heightSeparator),
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: SizedBox(
-                                        width: _responsive.width,
-                                        child: Image.asset(
-                                          '$illustrationsPath/map_test.png',
-                                          fit: BoxFit.fitWidth,
-                                        )
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
+                                    )
+                                  ],
+                                ),
+                                const Spacer(),
+                                FavoriteButton(size: _responsive.dp(4))
+                              ],
                             ),
                             SizedBox(height: _responsive.heightSeparator),
+                                  
+                            // Data containers, sex, age and weight
+                            Row(
+                              children: 
+                                // Get and show props 
+                                widget.animal.dataToShow.entries.map((e) 
+                                        => Expanded(
+                                            child: TextDetailsInfo(
+                                              centered: true,
+                                              title: e.value.toString(), 
+                                              subTitle: e.key
+                                            )
+                                          )).toList()
+                            ),
+                            SizedBox(height: _responsive.heightSeparator),
+                                  
+                            // User data
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                TextDetailsInfo(title: 'Francisco', subTitle: '${widget.animal.name} owner.'),
+                                const  Spacer(),
+                                Icon(Icons.message_rounded, color: ThemeColors.accentForText, size: _responsive.dp(2)),
+                              ],
+                            ),
+                            SizedBox(height: _responsive.heightSeparator),
+                                  
+                            // Show description
+                            const TextDetailsInfo(title: 'Description', subTitle: 'Vaccinations up to date, spayed / neutered.'),
+                            SizedBox(height: _responsive.heightSeparator),
+
+                            // Location
+                            Text('Location:', style: TextStyles.blackSemiBold(_responsive.dp(1.5))),
+                            SizedBox(height: _responsive.heightSeparator),
+                            Expanded(
+                              flex: 2,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: SizedBox(
+                                  width: _responsive.width,
+                                  child: Image.asset(
+                                    '$illustrationsPath/map_test.png',
+                                    fit: BoxFit.fitWidth,
+                                  )
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: _responsive.heightSeparator),
+                            
                             CustomTextButton(
                               onPressedCallback: () => {},
                               textColor: ThemeColors.accentForText, 
@@ -241,7 +215,7 @@ class _AnimalDetailsPageState extends State<AnimalDetailsPage> with TickerProvid
                               textSize: _responsive.dp(1.25)
                             ),
                             const Expanded(
-                              flex: 25,
+                              flex: 8,
                               child: SizedBox(),
                             )
                           ],

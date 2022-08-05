@@ -24,18 +24,17 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Flexible(
-      flex: 0,
-      fit: FlexFit.loose,
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: backgroundColor.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(15)
-        ),
-        child: TextButton(
+      flex: 1,
+      child: GestureDetector(
+        onTap: onPressedCallback,
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: backgroundColor.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(15)
+          ),
           child: Text(text, style: TextStyles.greySemiBold(textSize).copyWith(color: textColor)),
-          onPressed: onPressedCallback
-        )
+        ),
       ),
     );
   }
