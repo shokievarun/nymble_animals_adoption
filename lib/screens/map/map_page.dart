@@ -1,26 +1,111 @@
-import 'package:animals_adoption_flutter/constants/assets_paths.dart';
 import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
 
-class MapPage extends StatelessWidget {
+class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
 
   @override
+  State<MapPage> createState() => _MapPageState();
+}
+
+class _MapPageState extends State<MapPage> {
+
+  final Location location = Location();
+
+  late MapController controller;
+  late final LatLng _currentLocation;
+  late bool _serviceEnabled;
+  late PermissionStatus _permissionGranted;
+  late LocationData _locationData;
+  
+  bool _locationIsLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = MapController();
+    _getLocation();
+  }
+
+  void _getLocation() async{
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationData = await location.getLocation();
+    setState(() {
+      _currentLocation = LatLng(_locationData.latitude!, _locationData.longitude!);
+      _locationIsLoaded = true;
+    });
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+
 
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
     
     return BaseScaffold(
       title: 'My location',
       withBackButton: true,
-      withBottomNavigator: true,
+      withBottomNavigator: false,
       body: [
-        SizedBox(height: _responsive.hp(20)),
-        SizedBox(
-          height: _responsive.hp(30),
-          width: _responsive.wp(100),
-          child: Image.asset(
-            '$illustrationsPath/map.png',
-            fit: BoxFit.contain,
+        ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          child: SizedBox(
+            height: _responsive.hp(80),
+            width: _responsive.wp(100),
+            child: _locationIsLoaded ? FlutterMap(
+              options: MapOptions(
+                minZoom: 3,
+                maxZoom: 18,
+                zoom: 13,
+                center: _currentLocation,
+                // controller: _controller
+              ),
+              layers: [
+                TileLayerOptions(
+                  backgroundColor: ThemeColors.white,
+                  urlTemplate:
+                      "https://api.mapbox.com/styles/v1/frankrdz/{styleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
+                  additionalOptions: {
+                    'styleId': 'cl6h78sq8007q15pqr3dj6xqp',
+                    'accessToken': 'sk.eyJ1IjoiZnJhbmtyZHoiLCJhIjoiY2w2aDV3eHNjMGtpeDNibXF4M2hmZWg2eCJ9.UhOwC7ygILwc-yDs_z0urw',
+                  },
+                ),
+                MarkerLayerOptions(
+                  markers: [
+                    Marker(
+                      point: _currentLocation, 
+                      builder: (context){
+                        return const Icon(Icons.location_pin, color: Colors.blue);
+                      }
+                    )
+                  ]
+                )
+              ],
+            ) : Stack(
+              alignment: Alignment.center,
+              children: [
+                CircularProgressIndicator(backgroundColor: ThemeColors.accent.withOpacity(0.5), color: ThemeColors.accent)
+              ],
+            )
           ),
         ),
       ],
