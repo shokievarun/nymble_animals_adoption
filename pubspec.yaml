@@ -39,6 +39,7 @@ dependencies:
   cached_network_image: ^3.2.1
   flutter_map: ^2.2.0
   location: ^4.4.0
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,7 @@ flutter:
     - assets/images/animal_categories/
     - assets/images/illustrations/
     - assets/fonts/
+    - .env
 
   fonts:
     - family: Montserrat

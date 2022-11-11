@@ -2,6 +2,7 @@ import 'package:animals_adoption_flutter/widgets/base_scaffold.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -86,7 +87,7 @@ class _MapPageState extends State<MapPage> {
                       "https://api.mapbox.com/styles/v1/frankrdz/{styleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
                   additionalOptions: {
                     'styleId': 'cl6h78sq8007q15pqr3dj6xqp',
-                    'accessToken': 'sk.eyJ1IjoiZnJhbmtyZHoiLCJhIjoiY2w2aDV3eHNjMGtpeDNibXF4M2hmZWg2eCJ9.UhOwC7ygILwc-yDs_z0urw',
+                    'accessToken': dotenv.env['MAPBOX_ACCESSTOKEN']!,
                   },
                 ),
                 MarkerLayerOptions(

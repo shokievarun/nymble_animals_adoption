@@ -8,8 +8,10 @@ import 'package:animals_adoption_flutter/screens/profile/profile_page.dart';
 import 'package:animals_adoption_flutter/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main(List<String> args){
+void main(List<String> args) async{
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
