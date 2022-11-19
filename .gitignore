@@ -8,9 +8,7 @@
 .buildlog/
 .history
 .svn/
-
-# ENV
-.env
+migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -33,9 +31,7 @@
 .pub-cache/
 .pub/
 /build/
-
-# Web related
-lib/generated_plugin_registrant.dart
+.env
 
 # Symbolication related
 app.*.symbols
