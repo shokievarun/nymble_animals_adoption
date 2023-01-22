@@ -1,10 +1,1 @@
-
-
-
-enum Category {
-  cats,
-  dogs,
-  fishes,
-  birds,
-  rabbits
-}
+// enum Category { cats, dogs, fishes, birds, rabbits }

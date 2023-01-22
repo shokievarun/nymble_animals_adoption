@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-abstract class ThemeColors{
-
+abstract class ThemeColors {
   // Normal Colors
   static const Color grey = Color.fromARGB(255, 180, 180, 180);
   static const Color lightGrey = Color.fromARGB(120, 206, 206, 206);
@@ -17,6 +15,7 @@ abstract class ThemeColors{
   static const Color accentForText = Color(0xff9599E2);
   static const Color redForBackground = Color(0xfff8cfdf);
   static const Color redForText = Color(0xFFFF6078);
+  static const Color greenColor = Colors.green;
 
   // Gradients
   static const LinearGradient blueGradient = LinearGradient(

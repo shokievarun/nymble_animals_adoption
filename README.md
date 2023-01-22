@@ -1,18 +1,16 @@
+# nymble_animals_adoption
 
-![Logo](https://i.imgur.com/xvUCGw5.png)
+A new Flutter project.
 
+## Getting Started
 
-# AdoptMe - App
+This project is a starting point for a Flutter application.
 
-Application for the adoption and location of lost animals.
+A few resources to get you started if this is your first Flutter project:
 
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-
-## Demos
-Home             |  Details and list
-:-------------------------:|:-------------------------:
-![](https://media.giphy.com/media/honGYtlPMIiEAIf7bt/giphy.gif)  |  ![](https://media1.giphy.com/media/hggUtPHUn6ZzMUpWhT/giphy.gif?cid=790b7611279e70cb769795339decf6738714412ae3e4cbc1&rid=giphy.gif&ct=g)
-
-Messages
-:-------------------------:
-![](https://media1.giphy.com/media/vuZJdbSazaMRNVdmjA/giphy.gif?cid=790b76117f787efe454526f599ee9e465519797870f3c606&rid=giphy.gif&ct=g)
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

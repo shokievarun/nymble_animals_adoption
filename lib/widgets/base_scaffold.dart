@@ -9,24 +9,27 @@ export 'package:animals_adoption_flutter/utils/responsive_util.dart';
 export 'package:animals_adoption_flutter/utils/text_styles.dart';
 export 'package:animals_adoption_flutter/utils/theme_colors.dart';
 
-class BaseScaffold extends StatelessWidget {
-
+class BaseScaffold extends StatefulWidget {
   final List<Widget> body;
   final bool? withBottomNavigator;
   final bool? withBackButton;
   final String? title;
 
-  const BaseScaffold({
-    Key? key,
-    required this.body,
-    this.withBottomNavigator,
-    this.withBackButton,
-    this.title
-  }) : super(key: key);
+  const BaseScaffold(
+      {Key? key,
+      required this.body,
+      this.withBottomNavigator,
+      this.withBackButton,
+      this.title})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<BaseScaffold> createState() => _BaseScaffoldState();
+}
 
+class _BaseScaffoldState extends State<BaseScaffold> {
+  @override
+  Widget build(BuildContext context) {
     final ResponsiveUtil _responsive = ResponsiveUtil.of(context);
 
     return SafeArea(
@@ -35,14 +38,16 @@ class BaseScaffold extends StatelessWidget {
           clipBehavior: Clip.none,
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.only(top: _responsive.tPadding, bottom: _responsive.bPadding, left: _responsive.sPadding, right: _responsive.sPadding),
+          padding: EdgeInsets.only(
+              top: _responsive.tPadding,
+              bottom: _responsive.bPadding,
+              left: _responsive.sPadding,
+              right: _responsive.sPadding),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              if(withBackButton ?? false)...[
-                
+              if (widget.withBackButton ?? false) ...[
                 // Back button
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,21 +64,26 @@ class BaseScaffold extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: _responsive.hp(5),
-                      width: _responsive.wp(33),
-                      child: Center(
-                        child: Text(title ?? 'No title', style: TextStyles.blackSemiBold(_responsive.dp(2.25)), maxLines: 2, overflow: TextOverflow.visible, textAlign: TextAlign.center)
-                      )
-                    ),
+                        height: _responsive.hp(5),
+                        width: _responsive.wp(33),
+                        child: Center(
+                            child: Text(widget.title ?? 'No title',
+                                style: TextStyles.blackSemiBold(
+                                    _responsive.dp(2.25)),
+                                maxLines: 2,
+                                overflow: TextOverflow.visible,
+                                textAlign: TextAlign.center))),
                   ],
                 ),
               ],
               SizedBox(height: _responsive.heightSeparator),
-              ...body
+              ...widget.body
             ],
           ),
         ),
-        bottomNavigationBar: withBottomNavigator ?? false ? CustomBottomNavigatorBar() : const SizedBox(),
+        bottomNavigationBar: widget.withBottomNavigator ?? false
+            ? CustomBottomNavigatorBar()
+            : const SizedBox(),
       ),
     );
   }

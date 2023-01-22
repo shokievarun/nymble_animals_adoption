@@ -1,6 +1,6 @@
 {
-    "name": "animals_adoption_flutter",
-    "short_name": "animals_adoption_flutter",
+    "name": "nymble_animals_adoption",
+    "short_name": "nymble_animals_adoption",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

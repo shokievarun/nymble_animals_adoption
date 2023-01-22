@@ -8,7 +8,6 @@ import 'package:animals_adoption_flutter/utils/responsive_util.dart';
 import 'package:animals_adoption_flutter/utils/text_styles.dart';
 
 class CategoryContainer extends StatefulWidget {
-
   final Function(CategoryModel) onTapFunction;
   final CategoryModel category;
 
@@ -27,8 +26,8 @@ class CategoryContainer extends StatefulWidget {
   State<CategoryContainer> createState() => _CategoryContainerState();
 }
 
-class _CategoryContainerState extends State<CategoryContainer> with SingleTickerProviderStateMixin {
-
+class _CategoryContainerState extends State<CategoryContainer>
+    with SingleTickerProviderStateMixin {
   BasicCustomAnimation? _animator;
 
   @override
@@ -50,7 +49,6 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
   void _animationListener() => setState(() {});
 
   void _animationStatusListener(final AnimationStatus status) {
-
     if (status == AnimationStatus.completed) {
       _animator!.controller!.reverse();
     } else if (status == AnimationStatus.dismissed && widget.isSelected) {
@@ -88,10 +86,9 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
               vertical: _responsive.hp(1),
             ),
             decoration: BoxDecoration(
-              color: ThemeColors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: containerShadows
-            ),
+                color: ThemeColors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: containerShadows),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,26 +110,28 @@ class _CategoryContainerState extends State<CategoryContainer> with SingleTicker
                   child: SizedBox(),
                 ),
                 Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.category.name,
-                        style: TextStyles.blackSemiBold(_responsive.dp(1.75)),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                      ),
-                      Text(
-                        widget.category.description,
-                        style: TextStyles.greySemiBold(_responsive.dp(1.15)),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                      ),
-                    ],
-                  )
-                )
+                    flex: 4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.category.name,
+                            style:
+                                TextStyles.blackSemiBold(_responsive.dp(1.75)),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                          ),
+                        ),
+                        Text(
+                          widget.category.description,
+                          style: TextStyles.greySemiBold(_responsive.dp(1.15)),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                        ),
+                      ],
+                    ))
               ],
             ),
           ),
