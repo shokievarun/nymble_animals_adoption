@@ -45,7 +45,7 @@ class CustomBottomNavigatorBar extends StatelessWidget {
 
     return kIsWeb
         ? Padding(
-            padding: EdgeInsets.only(left: 5),
+            padding: const EdgeInsets.only(left: 5),
             // padding: EdgeInsets.only(
             //     bottom: _responsive.bPadding / 2,
             //     left: _responsive.sPadding,
