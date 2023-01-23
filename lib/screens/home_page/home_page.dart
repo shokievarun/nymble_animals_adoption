@@ -122,14 +122,7 @@ class _HomePageState extends State<HomePage>
                       Switch(
                         value: isLightTheme,
                         onChanged: (val) {
-                          isLightTheme = val;
-                          if (!isLightTheme) {
-                            MyApp.of(context).changeTheme(ThemeMode.dark);
-                            box.put('isLightTheme', false);
-                          } else {
-                            MyApp.of(context).changeTheme(ThemeMode.light);
-                            box.put('isLightTheme', true);
-                          }
+                          switchOnChanged(val, context);
 
                           //  Hive.box(themeBox).put('darkMode', !value);
                         },
@@ -241,5 +234,16 @@ class _HomePageState extends State<HomePage>
         ],
       ),
     );
+  }
+
+  void switchOnChanged(bool val, BuildContext context) {
+    isLightTheme = val;
+    if (!isLightTheme) {
+      MyApp.of(context).changeTheme(ThemeMode.dark);
+      box.put('isLightTheme', false);
+    } else {
+      MyApp.of(context).changeTheme(ThemeMode.light);
+      box.put('isLightTheme', true);
+    }
   }
 }
